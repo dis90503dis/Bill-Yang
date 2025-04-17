@@ -1,7 +1,7 @@
 <template>
   <div :id="carouselId" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
     <!-- indicators（圓點樣式） -->
-    <div v-if="showIndicators" class="carousel-indicators dot-indicators">
+    <div v-if="showIndicators && images.length > 1" class="carousel-indicators dot-indicators">
       <button
         v-for="(img, index) in images"
         :key="index"

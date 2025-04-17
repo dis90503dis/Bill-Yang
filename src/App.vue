@@ -1,10 +1,23 @@
 <script setup>
 import Carousel from "./components/Carousel.vue"
+import FormSection from "./components/Form.vue"
+
 const p06img1 = [
   { src: new URL("./assets/p06/Group 87.png", import.meta.url).href },
-  { src: new URL("./assets/p06/Group 34.png", import.meta.url).href },
-  { src: new URL("./assets/p06/Group 35.png", import.meta.url).href },
-  { src: new URL("./assets/p06/Group 36.png", import.meta.url).href },
+  { src: new URL("./assets/p06/1-2.png", import.meta.url).href },
+  { src: new URL("./assets/p06/1-3.png", import.meta.url).href },
+  { src: new URL("./assets/p06/1-4.png", import.meta.url).href },
+]
+const p06img2 = [
+  { src: new URL("./assets/p06/2-1.png", import.meta.url).href },
+  { src: new URL("./assets/p06/2-2.png", import.meta.url).href },
+  { src: new URL("./assets/p06/2-3.png", import.meta.url).href },
+]
+const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href }]
+const p06img4 = [
+  { src: new URL("./assets/p06/4-1.png", import.meta.url).href },
+  { src: new URL("./assets/p06/4-2.png", import.meta.url).href },
+  { src: new URL("./assets/p06/4-3.png", import.meta.url).href },
 ]
 const p07img = [
   { src: new URL("./assets/p07/slider.png", import.meta.url).href },
@@ -47,15 +60,80 @@ const p07img = [
           <Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'690 / 460'" />
         </div>
       </div>
-      <div class="p06card"></div>
-      <div class="p06card"></div>
-      <div class="p06card"></div>
+      <div class="p06card reverse">
+        <div class="p06card-txt">
+          <div class="p06card-circle">
+            <img src="./assets/p06/Group 89.svg" alt="" />
+            <div class="p06card-number"><img src="./assets/p06/2.svg" alt="" /></div>
+          </div>
+          <div class="p06card-word">
+            <p>
+              全聯、7-11、市場、農會、電信局、<br />
+              郵局、行政中心、中興觀光美食街
+            </p>
+          </div>
+        </div>
+        <div class="p06card-car">
+          <Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'690 / 460'" />
+        </div>
+      </div>
+      <div class="p06card">
+        <div class="p06card-txt">
+          <div class="p06card-circle">
+            <img src="./assets/p06/Group 89.svg" alt="" />
+            <div class="p06card-number"><img src="./assets/p06/3.svg" alt="" /></div>
+          </div>
+          <div class="p06card-word">
+            <p>
+              全聯、7-11、市場、農會、電信局、<br />
+              郵局、行政中心、中興觀光美食街
+            </p>
+          </div>
+        </div>
+        <div class="p06card-car">
+          <Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'690 / 460'" />
+        </div>
+      </div>
+      <div class="p06card reverse">
+        <div class="p06card-txt">
+          <div class="p06card-circle">
+            <img src="./assets/p06/Group 89.svg" alt="" />
+            <div class="p06card-number"><img src="./assets/p06/4.svg" alt="" /></div>
+          </div>
+          <div class="p06card-word">
+            <p>
+              全聯、7-11、市場、農會、電信局、<br />
+              郵局、行政中心、中興觀光美食街
+            </p>
+          </div>
+        </div>
+        <div class="p06card-car">
+          <Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'690 / 460'" />
+        </div>
+      </div>
     </div>
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
       <img class="p07en" src="./assets/p07/en.svg" alt="" />
       <img class="p07txt" src="./assets/p07/txt.svg" alt="" />
       <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="1920 / 1374" />
+    </div>
+    <div class="p01">
+      <div class="p01-content">
+        <img class="logo" src="./assets/p01/logo.svg" alt="" />
+        <img class="t1" src="./assets/p01/t1.svg" alt="" />
+        <img class="wave" src="./assets/p01/wave2.svg" alt="" />
+        <FormSection />
+      </div>
+    </div>
+    <div class="google-map-container">
+      <iframe
+        class="google-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28927.07363247049!2d121.5170471!3d25.0477649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a974bd96dc9b%3A0x7e8454fcd3a67d1c!2z5Y-w5YyX5biC5Lit5aSu!5e0!3m2!1szh-TW!2stw!4v1713320000000!5m2!1szh-TW!2stw"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
     </div>
   </div>
 </template>
@@ -176,11 +254,15 @@ const p07img = [
   flex-direction: column;
   margin: auto;
 }
+
 .p06card {
   margin: auto;
   display: flex;
   box-sizing: border-box;
   height: 18%;
+}
+.p06card.reverse {
+  flex-direction: row-reverse;
 }
 .p06card-txt {
   height: 24vh;
@@ -207,8 +289,8 @@ const p07img = [
 }
 .p06card-number {
   position: absolute;
-  bottom: -20%; /* 控制數字在圈外稍下 */
-  left: 0; /* 微偏左 */
+  bottom: -30%; /* 控制數字在圈外稍下 */
+  left: 5%;
   transform: translate(-50%, 0);
   width: 36vw;
   z-index: 2;
@@ -217,6 +299,10 @@ const p07img = [
 .p06card-number img {
   width: 100%;
   height: auto;
+}
+
+.p06card-word {
+  margin-top: 5%;
 }
 
 .p06card-word p {
@@ -266,5 +352,17 @@ const p07img = [
   position: relative;
   width: 100%;
   margin-top: 20%;
+}
+.google-map-container {
+  width: 100vw;
+  height: 50vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.google-map {
+  border: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
