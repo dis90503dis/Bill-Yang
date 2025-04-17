@@ -3,17 +3,14 @@
     <div class="form">
       <div class="left">
         <label class="row">
-          <span>姓名<span class="required">(必填)</span></span>
           <input type="text" placeholder="姓名" class="input" :value="formData.name" @input="(event) => (formData.name = event.target.value)" />
         </label>
 
         <label class="row">
-          <span>手機<span class="required">(必填)</span></span>
           <input type="text" placeholder="手機" class="input" :value="formData.phone" @input="(event) => (formData.phone = event.target.value)" />
         </label>
 
         <label class="row">
-          <span>需求房型</span>
           <select class="select" v-model="formData.room_type">
             <option value="" disabled>請選擇房型</option>
             <option v-for="room in roomTypeList" :value="room" :key="room">
@@ -23,7 +20,6 @@
         </label>
 
         <label class="row">
-          <span>居住縣市</span>
           <select class="select" v-model="formData.city">
             <option value="" disabled>請選擇城市</option>
             <option v-for="city in cityList" :value="city.value" :key="city.value">
@@ -33,7 +29,6 @@
         </label>
 
         <label class="row">
-          <span>居住地區</span>
           <select class="select" v-model="formData.area">
             <option value="" disabled>請選擇地區</option>
             <option v-for="area in areaList" :value="area.value" :key="area.value">
@@ -44,7 +39,7 @@
       </div>
 
       <div class="right">
-        <textarea class="textarea" placeholder="請輸入您的留言" :value="formData.msg" @input="(event) => (formData.msg = event.target.value)"></textarea>
+        <textarea class="textarea" :value="formData.msg" @input="(event) => (formData.msg = event.target.value)"></textarea>
       </div>
     </div>
   </div>
@@ -76,6 +71,11 @@ watch(
 </script>
 
 <style scoped>
+.input::placeholder,
+.textarea::placeholder {
+  color: #000; /* 想要的顏色 */
+  opacity: 1; /* Safari 預設會降到 0.54，手動拉回 */
+}
 .form-container {
   width: 100%;
   display: flex;
@@ -89,7 +89,6 @@ watch(
   max-width: 1000px;
   width: 100%;
   margin: 20px auto;
-  border: 1px solid #ccc;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -122,15 +121,17 @@ watch(
 .select,
 .textarea {
   flex: 1;
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  font-size: 12px;
   box-sizing: border-box;
+  font-family: "Noto Sans JP", sans-serif;
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 6 00;
 }
 
 .textarea {
   min-height: 120px;
-  resize: vertical;
+  resize: none;
 }
 </style>

@@ -1,6 +1,9 @@
 <script setup>
 import Carousel from "./components/Carousel.vue"
 import FormSection from "./components/Form.vue"
+import PolicyAgreement from "./components/PolicyAgreement.vue"
+import SendButton from "./components/SendButton.vue"
+// import ContactInfo from "./info/contactInfo.vue"
 
 const p06img1 = [
   { src: new URL("./assets/p06/Group 87.png", import.meta.url).href },
@@ -118,12 +121,41 @@ const p07img = [
       <img class="p07txt" src="./assets/p07/txt.svg" alt="" />
       <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="1920 / 1374" />
     </div>
-    <div class="p01">
-      <div class="p01-content">
-        <img class="logo" src="./assets/p01/logo.svg" alt="" />
-        <img class="t1" src="./assets/p01/t1.svg" alt="" />
-        <img class="wave" src="./assets/p01/wave2.svg" alt="" />
-        <FormSection />
+    <div class="p08">
+      <div class="p08-box">
+        <div class="p08-content">
+          <div class="p08-title"><img src="./assets/p08/title.svg" alt="" /></div>
+          <div class="p08-subtitle"><img src="./assets/p08/subtitle.svg" alt="" /></div>
+          <div class="p08-txt">
+            <p class="p08-word">
+              看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與<br />
+              嚴密防水施作，成就出屹立不搖的百年傳家堡。
+            </p>
+          </div>
+          <div class="p08-circle">
+            <div><img src="./assets/p08/Group95.svg" alt="" /></div>
+            <div><img src="./assets/p08/Group96.svg" alt="" /></div>
+          </div>
+        </div>
+        <div class="p08-content"></div>
+      </div>
+    </div>
+    <div class="pform">
+      <div class="form-content">
+        <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
+        <div><img class="formlogo" src="./assets/p01/logo.svg" alt="" /></div>
+        <div><h2 class="formtxt">預約賞屋</h2></div>
+        <div class="form"><FormSection /></div>
+        <div><PolicyAgreement /></div>
+        <div class="button"><img src="./assets/form/booking.svg" alt="" /></div>
+        <div class="contact-button">
+          <div class="button"><img src="./assets/form/Frame 31.svg" alt="" /></div>
+          <div class="button"><img src="./assets/form/Frame 32.svg" alt="" /></div>
+          <div class="button"><img src="./assets/form/Frame 33.svg" alt="" /></div>
+        </div>
+        <div class="contact-adress">
+          <img src="./assets/form/Map.svg" alt="" />
+        </div>
       </div>
     </div>
     <div class="google-map-container">
@@ -183,7 +215,8 @@ const p07img = [
   transform: translate(-50%, -100%);
 }
 
-.wave {
+.wave,
+.formwave {
   position: absolute;
   top: 100%;
   left: 50%;
@@ -352,6 +385,106 @@ const p07img = [
   position: relative;
   width: 100%;
   margin-top: 20%;
+}
+.p08 {
+  width: 100vw;
+  background-image: url(./assets/p08/bg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: 1920 / 881;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+}
+.p08-box {
+  width: 85%;
+  aspect-ratio: 1666 / 680;
+  background-image: url(./assets/p08/box.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+.p08-content {
+  width: 50%;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  flex-direction: column;
+  gap: 1rem;
+}
+.p08-title {
+  margin-bottom: 1rem;
+}
+.p08-txt {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 600;
+}
+.p08-circle {
+  display: flex;
+}
+.pform {
+  width: 100vw;
+  background-image: url(./assets/p01/bg.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.form-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.form {
+  width: 100%;
+  position: relative;
+}
+.formlogo {
+  margin-top: 3.5vw;
+  width: 7vw;
+}
+.formtxt {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+}
+.formwave {
+  pointer-events: none;
+  z-index: 0;
+}
+.contact-button {
+  margin-top: 3.5rem;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.button img {
+  width: 15vw;
+  background-color: #ffe3bb;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.contact-adress img {
+  width: calc(45vw + 40px);
+  margin-bottom: 4rem;
+}
+.contact-button,
+.contact-adress {
+  position: relative; /* 使 z-index 生效 */
+  z-index: 2; /* 比 0 大即可 */
 }
 .google-map-container {
   width: 100vw;
