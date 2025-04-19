@@ -50,7 +50,9 @@ const props = defineProps({
   width: 100%;
   overflow: hidden;
 }
-
+.carousel-item {
+  height: 100%;
+}
 .carousel-img {
   width: 100%;
   height: 100%;

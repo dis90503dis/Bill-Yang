@@ -6,8 +6,10 @@ import PolicyAgreement from "./components/PolicyAgreement.vue"
 // import SendButton from "./components/SendButton.vue"
 // import ContactInfo from "./info/contactInfo.vue"
 import BsCarousel from "bootstrap/js/dist/carousel" // 只匯入 JS
+import fullview from "./components/fullview.vue"
+const cur = ref(0)
+const p03Ref = ref(null)
 
-const cur = ref(0) // ① 目前張數
 onMounted(() => {
   const el = document.getElementById("p10-carousel-1")
   const c = BsCarousel.getInstance(el) || new BsCarousel(el)
@@ -15,7 +17,12 @@ onMounted(() => {
   el.addEventListener("slide.bs.carousel", (e) => {
     cur.value = e.to // 0‑based index
   })
+  const ac = p03Ref.value
+  if (ac && window.innerWidth <= 768) {
+    ac.scrollLeft = (ac.scrollWidth - ac.clientWidth) / 2
+  }
 })
+
 const p06img1 = [
   { src: new URL("./assets/p06/Group 87.png", import.meta.url).href },
   { src: new URL("./assets/p06/1-2.png", import.meta.url).href },
@@ -78,12 +85,12 @@ const p10img = [
       </div>
     </div>
     <!-- <div class="p02"></div> -->
-    <div class="p03"></div>
+    <div class="p03" ref="p03Ref"><img class="p03-img" src="./assets/p03/03.png" alt="" /><fullview /></div>
     <div class="p04">
       <img class="p04bg" src="./assets/p04/100.png" alt="" />
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
     </div>
-    <div class="p05"></div>
+    <div class="p05" ref="p03Ref"><img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview /></div>
     <div class="p06">
       <div class="p06card">
         <div class="p06card-txt">
@@ -105,14 +112,11 @@ const p10img = [
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 89.svg" alt="" />
+            <img src="./assets/p06/Group 97.png" alt="" />
             <div class="p06card-number"><img src="./assets/p06/2.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
-            <p>
-              全聯、7-11、市場、農會、電信局、<br />
-              郵局、行政中心、中興觀光美食街
-            </p>
+            <p>運動公園、圖書館、175咖啡公路</p>
           </div>
         </div>
         <div class="p06card-car">
@@ -122,14 +126,11 @@ const p10img = [
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 89.svg" alt="" />
+            <img src="./assets/p06/Group 92.svg" alt="" />
             <div class="p06card-number"><img src="./assets/p06/3.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
-            <p>
-              全聯、7-11、市場、農會、電信局、<br />
-              郵局、行政中心、中興觀光美食街
-            </p>
+            <p>國3柳營交流道、國1新營交流道、台1線</p>
           </div>
         </div>
         <div class="p06card-car">
@@ -139,26 +140,51 @@ const p10img = [
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 89.svg" alt="" />
+            <img src="./assets/p06/Group 93.svg" alt="" />
             <div class="p06card-number"><img src="./assets/p06/4.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
-            <p>
-              全聯、7-11、市場、農會、電信局、<br />
-              郵局、行政中心、中興觀光美食街
-            </p>
+            <p>東山國小附設幼稚園、東山國中</p>
           </div>
         </div>
         <div class="p06card-car">
           <Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'690 / 460'" />
         </div>
       </div>
+      <div class="p06m">
+        <div class="p06m-box">
+          <div class="p06m-number"><img src="./assets/p06/1.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 89.svg" alt="" /></div>
+        </div>
+        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-box reverse">
+          <div class="p06m-number"><img src="./assets/p06/2.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 97.png" alt="" /></div>
+        </div>
+        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-box">
+          <div class="p06m-number"><img src="./assets/p06/3.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 92.svg" alt="" /></div>
+        </div>
+        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-box reverse">
+          <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 93.svg" alt="" /></div>
+        </div>
+        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
+      </div>
     </div>
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
       <img class="p07en" src="./assets/p07/en.svg" alt="" />
       <img class="p07txt" src="./assets/p07/txt.svg" alt="" />
-      <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="1920 / 1374" />
+      <img class="p07mtxt" src="./assets/p07/Group 98.png" alt="" />
+      <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="'1920 / 1374'" />
+      <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
     </div>
     <div class="p08">
       <div class="p08-box">
@@ -277,7 +303,6 @@ const p10img = [
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -320,22 +345,23 @@ const p10img = [
   background-color: #aaa;
 }
 .p03 {
+  position: relative;
   width: 100%;
   aspect-ratio: 1920 / 1185;
   background-image: url("./assets/p03/03.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow-x: auto; /* 啟用橫向滾動 */
+}
+.p03-img {
+  display: none; /* 預設不顯示（桌機版不顯示 img） */
 }
 .img03 {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
-.p04 {
-  width: 100%;
-  height: 100%;
 }
 .p04 {
   position: relative;
@@ -366,6 +392,8 @@ const p10img = [
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow-x: auto; /* 啟用橫向滾動 */
+  position: relative;
 }
 .p06 {
   width: 100%;
@@ -413,7 +441,7 @@ const p10img = [
 }
 .p06card-number {
   position: absolute;
-  bottom: -30%; /* 控制數字在圈外稍下 */
+  bottom: -30%;
   left: 5%;
   transform: translate(-50%, 0);
   width: 36vw;
@@ -426,6 +454,7 @@ const p10img = [
 }
 
 .p06card-word {
+  width: 100%;
   margin-top: 5%;
 }
 
@@ -448,7 +477,7 @@ const p10img = [
 .p07 {
   position: relative;
   width: 100%;
-  overflow: hidden; /* 確保內容不會溢出 */
+  overflow: hidden;
 }
 
 .p07bg,
@@ -818,7 +847,140 @@ const p10img = [
   width: 100%;
   height: 100%;
 }
+.reverse {
+  flex-direction: row-reverse;
+}
+.p06m {
+  display: none;
+}
+.p07carm {
+  display: none;
+}
+@media (max-width: 769px) {
+  .p01 {
+    aspect-ratio: 375 / 550;
+  }
+  .logo {
+    top: 55%;
+    width: 50%;
+    aspect-ratio: 183 / 204;
+  }
+  .t1 {
+    width: 80%;
+    top: 80%;
+  }
+  .wave {
+    top: auto;
+    bottom: 0; /* 🚀 用 bottom: 0 讓 wave 貼底 */
+    transform: translateX(-50%); /* 只左右置中，不再往上偏移 */
+  }
+  .p03,
+  .p05 {
+    background: none;
+    aspect-ratio: auto;
+  }
 
-@media (max-width: 768px) {
+  .p03-img {
+    display: block;
+    height: 667px;
+    width: auto;
+  }
+  .p04 {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .p04bg {
+    width: auto;
+    min-height: 325px;
+    object-fit: cover;
+    object-position: center;
+    transform: translateX(0);
+  }
+
+  .p04txt {
+    width: 60%;
+    height: 60%;
+  }
+  .p06card {
+    display: none;
+  }
+  .p06m {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+  }
+  .p06m-box {
+    display: flex;
+    position: relative;
+  }
+  .p06m-number {
+    width: 50%;
+  }
+  .p06m-number img {
+    width: 200%;
+    height: 200%;
+    object-fit: contain;
+    position: relative;
+    left: -80%;
+    top: -30%;
+  }
+  .p06m-circle {
+    width: 50%;
+  }
+  .p06m-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .p06m-txt {
+    width: 100%;
+  }
+  .p06m-txt p {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: clamp(16px, 2vw, 30px);
+    color: #fff;
+    font-weight: 500;
+    text-align: start;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .p06m-car {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+  .p07 {
+    width: 100vw;
+    height: auto;
+  }
+  .p07bg {
+    height: auto;
+  }
+  .p07car {
+    aspect-ratio: 375 / 449;
+    width: 100%;
+    height: auto;
+  }
+  .p07car {
+    display: none;
+  }
+  .p07carm {
+    display: block;
+    margin-top: 20%;
+  }
+  .p07txt {
+    display: none;
+  }
+
+  .p07mtxt {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
 }
 </style>
