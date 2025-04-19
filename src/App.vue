@@ -7,6 +7,7 @@ import PolicyAgreement from "./components/PolicyAgreement.vue"
 // import ContactInfo from "./info/contactInfo.vue"
 import BsCarousel from "bootstrap/js/dist/carousel" // 只匯入 JS
 import fullview from "./components/fullview.vue"
+import SidebarMenu from "./components/SidebarMenu.vue"
 const cur = ref(0)
 const p03Ref = ref(null)
 
@@ -74,8 +75,16 @@ const p10img = [
     src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
   },
 ]
+const showSidebar = ref(false)
+const selectedItem = ref("東山市心")
+const menuItems = ["年度鉅獻", "東山市心", "美好生活", "榮耀血統", "北歐寧靜", "全齡格局", "上選建材"]
+function handleSelect(item) {
+  selectedItem.value = item
+  showSidebar.value = false // 點選後自動關閉
+}
 </script>
 <template>
+  <SidebarMenu v-model="showSidebar" :items="menuItems" :selected="selectedItem" @select="handleSelect" />
   <div class="container">
     <div class="p01">
       <div class="p01-content">
@@ -199,7 +208,7 @@ const p10img = [
             <div class="p08-circle"><img src="./assets/p08/Group96.svg" alt="" /></div>
           </div>
         </div>
-        <div class="p08-content"></div>
+        <div class="p08-content p08-none"></div>
       </div>
     </div>
     <div class="p09">
@@ -210,6 +219,10 @@ const p10img = [
         <div class="p09-content">
           <img src="./assets/p09/txt.png" alt="" />
         </div>
+        <div class="p09m-content">
+          <img src="./assets/p09/Group 99.png" alt="" />
+        </div>
+        <div class="p09m-circle"><img src="./assets/p09/Groupm4.png" alt="" /></div>
       </div>
       <div class="p09-car">
         <Carousel class="p09car" :carouselId="'p09-carousel-1'" :images="p09img" :aspectRatio="1920 / 1194" />
@@ -217,15 +230,16 @@ const p10img = [
     </div>
     <div class="p10">
       <div class="p10-nav">
-        <div class="p10-content"></div>
+        <div class="p10-content pcno"></div>
         <div class="p10-content">
           <div class="p10-title"><img src="./assets/p10/p10title.png" alt="" /></div>
           <div class="p10-icon"><img src="./assets/p10/icon.png" alt="" /></div>
         </div>
       </div>
       <div class="p10-subtitle">
-        <div class="p10-subtitle-title"><img src="./assets/p10/title.png" alt="" /></div>
-        <div class="p10-subtitle-txt"><img src="./assets/p10/p10txt.png" alt="" /></div>
+        <div class="p10-subtitle-title pcno"><img src="./assets/p10/title.png" alt="" /></div>
+        <div class="p10m-subtitle-title mbno"><img src="./assets/p10/Group 82.png" alt="" /></div>
+        <div class="p10-subtitle-txt pcno"><img src="./assets/p10/p10txt.png" alt="" /></div>
       </div>
       <div class="p10-car-box">
         <div class="p10-btnbox">
@@ -248,8 +262,9 @@ const p10img = [
       <div class="p11-subtitle">
         <div class="p11-subtitle-title"><img src="./assets/p11/p11title.png" alt="" /></div>
         <div class="p11-subtitle-txt"><img src="./assets/p11/p11text.png" alt="" /></div>
+        <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
       </div>
-      <div class="p11-content-box">
+      <div class="p11-content-box pcno">
         <div class="p11-content"><img src="./assets/p11/Group 96.png" alt="" /></div>
         <div class="p11-content"></div>
       </div>
@@ -261,14 +276,15 @@ const p10img = [
         <div><h2 class="formtxt">預約賞屋</h2></div>
         <div class="form"><FormSection /></div>
         <div><PolicyAgreement /></div>
-        <div class="button"><img src="./assets/form/booking.svg" alt="" /></div>
+        <div class="button" style="width: 80%"><img src="./assets/form/booking.svg" alt="" /></div>
         <div class="contact-button">
           <div class="button"><img src="./assets/form/Frame 31.svg" alt="" /></div>
           <div class="button"><img src="./assets/form/Frame 32.svg" alt="" /></div>
           <div class="button"><img src="./assets/form/Frame 33.svg" alt="" /></div>
         </div>
-        <div class="contact-adress">
-          <img src="./assets/form/Map.svg" alt="" />
+        <div class="contact-adress button">
+          <img class="pcno" src="./assets/form/Map.svg" alt="" />
+          <img class="mbno" src="./assets/form/Group 101.png" alt="" />
         </div>
       </div>
     </div>
@@ -308,7 +324,20 @@ const p10img = [
   justify-content: center;
   position: relative;
 }
-
+.menu-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.menu-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .p01-content {
   width: 100%;
   height: 100%;
@@ -466,6 +495,7 @@ const p10img = [
   opacity: 80%;
   line-height: 1.5;
   padding-bottom: 0;
+  text-align: center;
 }
 .p06card-car {
   height: 24vh;
@@ -487,7 +517,7 @@ const p10img = [
   left: 0;
   width: 100%;
   height: auto;
-  z-index: 2; /* 確保圖層順序 */
+  z-index: 2;
 }
 
 .p07txt {
@@ -504,7 +534,6 @@ const p10img = [
   z-index: 1;
   position: relative;
   width: 100%;
-  margin-top: 20%;
 }
 .p08 {
   width: 100vw;
@@ -856,9 +885,19 @@ const p10img = [
 .p07carm {
   display: none;
 }
+.p09m-content,
+.p09m-circle {
+  display: none;
+}
+.mbno {
+  display: none;
+}
 @media (max-width: 769px) {
+  .mbno {
+    display: block;
+  }
   .p01 {
-    aspect-ratio: 375 / 550;
+    aspect-ratio: 375 / 667;
   }
   .logo {
     top: 55%;
@@ -940,7 +979,7 @@ const p10img = [
   }
   .p06m-txt p {
     font-family: "Noto Sans TC", sans-serif;
-    font-size: clamp(16px, 2vw, 30px);
+    font-size: 1rem;
     color: #fff;
     font-weight: 500;
     text-align: start;
@@ -957,7 +996,7 @@ const p10img = [
     height: auto;
   }
   .p07bg {
-    height: auto;
+    width: 100%;
   }
   .p07car {
     aspect-ratio: 375 / 449;
@@ -974,13 +1013,175 @@ const p10img = [
   .p07txt {
     display: none;
   }
-
+  .p07bg {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
   .p07mtxt {
+    width: 80%;
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+  }
+  .p08 {
+    aspect-ratio: 375 / 736;
+  }
+  .p08-box {
+    background-image: url(./assets/p08/Group99.png);
+    aspect-ratio: none;
+    margin: 0;
+    height: 80%;
+  }
+  .p08-txt {
+    width: 100%;
+  }
+  .p08-word {
+    font-size: 1rem;
+  }
+  .p08-content {
+    height: 80%;
+    width: auto;
+    padding-top: 0;
+  }
+  .p08-none {
+    display: none;
+  }
+  .p08-title {
+    margin: 0;
+  }
+  .p09 {
+    aspect-ratio: 375 / 773;
+  }
+  .p09-nav {
+    height: 70%;
+  }
+  .p09-car {
+    height: 30%;
+  }
+  .p09-circle,
+  .p09-content {
+    display: none;
+  }
+  .p09-nav {
+    flex-direction: column;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+  }
+  .p09m-content,
+  .p09m-circle {
+    display: block;
+  }
+  .p09m-content img,
+  .p09m-circle img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .p10-nav {
+    background-image: url(./assets/p10/Group81.png);
+    aspect-ratio: 375 / 390;
+    align-items: start;
+  }
+  .pcno {
+    display: none;
+  }
+  .p10-content {
+    justify-content: start;
+    width: 100%;
+    margin-top: 5%;
+  }
+  .p10-title img {
+    height: auto;
+    max-width: 80vw;
+    object-fit: cover;
+  }
+  .p10-icon img {
+    height: auto;
+    max-width: 80vw;
+    object-fit: cover;
+  }
+  .p10-subtitle {
+    padding: 0;
+    aspect-ratio: none;
+    background-size: 300%; /* 放大背景圖三倍，可依需求調整 */
+    background-position: center center; /* 僅顯示中間部分 */
+    background-repeat: no-repeat;
+  }
+  .p10-subtitle-title {
+    display: none;
+  }
+  .p10m-subtitle-title {
+    width: 80%;
+    aspect-ratio: 315 / 164;
+    object-fit: cover;
+  }
+  .p10m-subtitle-title img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    padding: 2rem;
+  }
+  .p10-btnbox {
+    flex-wrap: wrap;
+  }
+  .p10-btn {
+    box-sizing: border-box;
+    width: 32%;
+    margin: 0.5%;
+  }
+  .p10-btnbox h2 {
+    padding: 5%;
+  }
+  .p11-subtitle {
+    background-size: 500%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    aspect-ratio: 375 / 550;
+    justify-content: center;
+  }
+  .p11-subtitle-title {
+    margin-top: 10%;
+    width: 40%;
+  }
+  .p11-subtitle-txt {
+    width: 80%;
+  }
+  .p11m-img {
+    width: 100%;
+  }
+  .p11m-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .contact-button {
+    flex-direction: column;
+  }
+  .formlogo {
+    width: 50%;
+    margin-top: 10%;
+  }
+  .formtxt {
+    font-weight: 800;
+  }
+  .contact-button,
+  .contact-adress {
+    flex-direction: column;
+    width: 80%;
+  }
+  .button img {
+    width: 85%;
+    object-fit: cover;
+  }
+  .contact-adress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
   }
 }
 </style>

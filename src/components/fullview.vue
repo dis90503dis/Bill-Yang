@@ -1,5 +1,5 @@
 <template>
-  <div class="mask" ref="maskRef" v-if="!swiped">
+  <div class="mask" ref="maskRef" v-if="!swiped && isMobile">
     <img class="finger-icon" src="../assets/finger.png" alt="滑動提示" />
   </div>
 </template>
@@ -9,8 +9,11 @@ import { ref, onMounted } from "vue"
 
 const maskRef = ref(null)
 const swiped = ref(false)
+const isMobile = ref(window.innerWidth <= 768)
 
 onMounted(() => {
+  if (!isMobile.value) return // 桌機就直接不執行
+
   const maskEl = maskRef.value
   const container = maskEl?.parentElement
 

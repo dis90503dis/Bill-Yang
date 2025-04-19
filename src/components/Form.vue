@@ -121,17 +121,28 @@ watch(
 .select,
 .textarea {
   flex: 1;
-  padding: 12px;
+  padding: 1rem;
   border: 1px solid #ccc;
   font-size: 12px;
   box-sizing: border-box;
   font-family: "Noto Sans JP", sans-serif;
   background: rgba(255, 255, 255, 0.8);
-  font-weight: 6 00;
+  font-weight: 600;
+  width: 100%;
 }
 
 .textarea {
   min-height: 120px;
   resize: none;
+}
+@media (max-width: 769px) {
+  .form {
+    flex-direction: column;
+  }
+  .left,
+  .right {
+    width: 100%;
+    flex: none; /* 或 flex: 1 1 auto; 都可以 */
+  }
 }
 </style>
