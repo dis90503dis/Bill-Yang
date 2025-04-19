@@ -1,10 +1,21 @@
 <script setup>
+import { onMounted, ref } from "vue"
 import Carousel from "./components/Carousel.vue"
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
-import SendButton from "./components/SendButton.vue"
+// import SendButton from "./components/SendButton.vue"
 // import ContactInfo from "./info/contactInfo.vue"
+import BsCarousel from "bootstrap/js/dist/carousel" // 只匯入 JS
 
+const cur = ref(0) // ① 目前張數
+onMounted(() => {
+  const el = document.getElementById("p10-carousel-1")
+  const c = BsCarousel.getInstance(el) || new BsCarousel(el)
+
+  el.addEventListener("slide.bs.carousel", (e) => {
+    cur.value = e.to // 0‑based index
+  })
+})
 const p06img1 = [
   { src: new URL("./assets/p06/Group 87.png", import.meta.url).href },
   { src: new URL("./assets/p06/1-2.png", import.meta.url).href },
@@ -27,6 +38,34 @@ const p07img = [
   { src: new URL("./assets/p07/Group 41.png", import.meta.url).href },
   { src: new URL("./assets/p07/Group 42.png", import.meta.url).href },
   { src: new URL("./assets/p07/Group 43.png", import.meta.url).href },
+]
+const p09img = [
+  {
+    src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+  },
+]
+const p10img = [
+  {
+    src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
+  },
+  {
+    src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
+  },
 ]
 </script>
 <template>
@@ -127,17 +166,66 @@ const p07img = [
           <div class="p08-title"><img src="./assets/p08/title.svg" alt="" /></div>
           <div class="p08-subtitle"><img src="./assets/p08/subtitle.svg" alt="" /></div>
           <div class="p08-txt">
-            <p class="p08-word">
-              看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與<br />
-              嚴密防水施作，成就出屹立不搖的百年傳家堡。
-            </p>
+            <p class="p08-word">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
           </div>
-          <div class="p08-circle">
-            <div><img src="./assets/p08/Group95.svg" alt="" /></div>
-            <div><img src="./assets/p08/Group96.svg" alt="" /></div>
+          <div class="p08-circlebox">
+            <div class="p08-circle"><img src="./assets/p08/Group95.svg" alt="" /></div>
+            <div class="p08-circle"><img src="./assets/p08/Group96.svg" alt="" /></div>
           </div>
         </div>
         <div class="p08-content"></div>
+      </div>
+    </div>
+    <div class="p09">
+      <div class="p09-nav">
+        <div class="p09-circle">
+          <img src="./assets/p09/Group 4.png" alt="" />
+        </div>
+        <div class="p09-content">
+          <img src="./assets/p09/txt.png" alt="" />
+        </div>
+      </div>
+      <div class="p09-car">
+        <Carousel class="p09car" :carouselId="'p09-carousel-1'" :images="p09img" :aspectRatio="1920 / 1194" />
+      </div>
+    </div>
+    <div class="p10">
+      <div class="p10-nav">
+        <div class="p10-content"></div>
+        <div class="p10-content">
+          <div class="p10-title"><img src="./assets/p10/p10title.png" alt="" /></div>
+          <div class="p10-icon"><img src="./assets/p10/icon.png" alt="" /></div>
+        </div>
+      </div>
+      <div class="p10-subtitle">
+        <div class="p10-subtitle-title"><img src="./assets/p10/title.png" alt="" /></div>
+        <div class="p10-subtitle-txt"><img src="./assets/p10/p10txt.png" alt="" /></div>
+      </div>
+      <div class="p10-car-box">
+        <div class="p10-btnbox">
+          <button
+            v-for="(_, idx) in 6"
+            :key="idx"
+            :class="{ active: idx === cur }"
+            class="p10-btn"
+            type="button"
+            :data-bs-target="'#p10-carousel-1'"
+            :data-bs-slide-to="idx"
+          >
+            <h2>A13<span style="font-size: 1.5rem">戶</span></h2>
+          </button>
+        </div>
+        <div class="p10-car"><Carousel class="p10car" :carouselId="'p10-carousel-1'" :images="p10img" :aspectRatio="'256 / 125'" /></div>
+      </div>
+    </div>
+    <div class="p11">
+      <div class="p11-subtitle">
+        <div class="p11-subtitle-title"><img src="./assets/p11/p11title.png" alt="" /></div>
+        <div class="p11-subtitle-txt"><img src="./assets/p11/p11text.png" alt="" /></div>
+      </div>
+      <div class="p11-content-box">
+        <div class="p11-content"><img src="./assets/p11/Group 96.png" alt="" /></div>
+        <div class="p11-content"></div>
       </div>
     </div>
     <div class="pform">
@@ -171,6 +259,9 @@ const p07img = [
 </template>
 
 <style scoped>
+:global(html) {
+  font-size: clamp(14px, 0.8vw + 0.5rem, 18px);
+}
 .container {
   width: 100%;
   max-width: 100%;
@@ -392,19 +483,20 @@ const p07img = [
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  aspect-ratio: 1920 / 881;
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
 }
 .p08-box {
   width: 85%;
-  aspect-ratio: 1666 / 680;
+  aspect-ratio: 1666 / 680; /* 原圖寬高比 */
+  min-height: 450px;
   background-image: url(./assets/p08/box.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
+  margin: 10vh auto;
 }
 .p08-content {
   width: 50%;
@@ -413,18 +505,246 @@ const p07img = [
   align-items: center; /* 垂直置中 */
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem;
 }
 .p08-title {
+  margin-top: 1.5rem;
+  height: 3rem;
   margin-bottom: 1rem;
 }
+.p08-title img {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}
 .p08-txt {
+  width: 70%;
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1.2rem;
   color: #fff;
   font-weight: 600;
 }
-.p08-circle {
+.p08-word {
+  text-align: center;
+  margin-bottom: 0;
+}
+.p08-circlebox {
   display: flex;
+  justify-content: space-around;
+}
+.p08-circle {
+  width: 45%;
+}
+.p08-title img,
+.p08-subtitle img,
+.p08-circle img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.p09 {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  aspect-ratio: 1920 / 1593;
+}
+.p09-nav {
+  display: flex;
+  height: 25%;
+  background-image: url(./assets/p09/bg.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: row-reverse; /* 讓 DOM 最後一項跑到最右邊 */
+  align-items: flex-start; /* 垂直頂對齊 */
+}
+.p09-content {
+  display: flex;
+  height: 30%;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  align-self: center;
+}
+.p09-content img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.p09-circle {
+  position: relative; /* 脫離文件流、可自由疊放 */
+  top: 0; /* 貼到 .p09 的右上角；可依需求微調 */
+  right: 0;
+  z-index: 10;
+  width: 40vw;
+  height: auto;
+}
+.p09-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.p10 {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./assets/p10/p10bg2.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.p10-nav {
+  display: flex;
+  width: 100%;
+  background-image: url(./assets/p10/p10bg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  align-items: center;
+  aspect-ratio: 1920 / 491;
+}
+.p10-content {
+  width: 50%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  gap: 1rem;
+}
+.p10-title,
+.p10-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p10-title img {
+  height: auto;
+  max-width: 20vw;
+  object-fit: cover;
+}
+.p10-icon img {
+  height: auto;
+  max-width: 35vw;
+  object-fit: cover;
+}
+.p10-subtitle {
+  width: 100vw;
+  background-image: url(./assets/p10/Vector.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  gap: 1rem;
+  padding-bottom: 5%;
+  padding-top: 1rem;
+  aspect-ratio: 1920 / 322; /* 容器會自動算高度 */
+}
+.p10-subtitle-title {
+  width: 50%;
+}
+.p10-subtitle-txt {
+  width: 45%;
+}
+.p10-subtitle-title img,
+.p10-subtitle-txt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.p10-car-box {
+  width: 100vw;
+}
+.p10-btnbox {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-between; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+}
+.p10-btn {
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  width: 16%;
+  aspect-ratio: 232 / 62;
+  border: #0a5e84 solid 1px;
+  line-height: auto;
+  background: transparent; /* 取消背景（支援漸層/圖片時用 background） */
+}
+.p10-btn:hover,
+.p10-btn.active {
+  background-color: #ffe3bb;
+}
+.p10-btn h2 {
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #0a5e84;
+  font-weight: 700;
+}
+.p10-car {
+  width: 80%;
+  height: auto;
+  margin: 1rem auto;
+}
+.p11 {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./assets/p10/p10bg2.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.p11-subtitle {
+  width: 100vw;
+  background-image: url(./assets/p11/Vector.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  gap: 1rem;
+  padding-bottom: 2%;
+  aspect-ratio: 1920 / 322; /* 容器會自動算高度 */
+}
+.p11-subtitle-title {
+  width: 15%;
+}
+.p11-subtitle-txt {
+  width: 20%;
+}
+.p11-subtitle-title img,
+.p11-subtitle-txt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.p11-content-box {
+  width: 100%;
+  aspect-ratio: 1920 / 820;
+  background-image: url(./assets/p11/p11bg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+.p11-content {
+  width: 50%;
+  margin-left: 2rem;
+}
+.p11-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .pform {
   width: 100vw;
@@ -497,5 +817,8 @@ const p07img = [
   border: 0;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 768px) {
 }
 </style>
