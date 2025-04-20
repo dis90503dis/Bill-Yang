@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from "vue"
 import Carousel from "./components/Carousel.vue"
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
@@ -20,14 +20,14 @@ const handleScroll = () => {
   }
 }
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener("scroll", handleScroll)
 })
 const isMobile = computed(() => {
-  return window.innerWidth <= 769;
-});
+  return window.innerWidth <= 769
+})
 // -------------------------------
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener("scroll", handleScroll)
   const el = document.getElementById("p10-carousel-1")
   const c = BsCarousel.getInstance(el) || new BsCarousel(el)
 
@@ -116,18 +116,19 @@ function handleSelect(item) {
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
     </div>
 
-
-
-
     <div v-if="isMobile" class="phone-p05" ref="">
-      <strong class="phone-p05-text">東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong>
+      <strong class="phone-p05-text"
+        >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
+      >
       <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
     </div>
 
+    <div class="p05" ref="p03Ref">
+      <img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview />
 
-    <div class="p05" ref="p03Ref"><img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview />
-
-      <strong v-if="!isMobile" class="p05-text">東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong>
+      <strong v-if="!isMobile" class="p05-text"
+        >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
+      >
       <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
     </div>
     <div class="p06">
@@ -203,26 +204,6 @@ function handleSelect(item) {
         </div>
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
       <div class="p06m">
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/1.svg" alt="" /></div>
@@ -249,7 +230,7 @@ function handleSelect(item) {
             <img class="star-r" src="./assets/star.svg" alt="" />
           </div>
         </div>
-        <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線 </p></div>
+        <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
@@ -261,21 +242,12 @@ function handleSelect(item) {
         <div class="p06m-txt"><p>東山國小附設幼稚園、東山國中</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
       </div>
-
-
-
-
-
-
-
-
-
     </div>
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
       <img class="p07en" src="./assets/p07/en.svg" alt="" />
       <img class="p07txt" src="./assets/p07/txt.svg" alt="" />
-      <img class="p07mtxt" src="./assets/p07/Group 98.png" alt="" />
+      <img class="p07mtxt mbno" src="./assets/p07/Group 98.png" alt="" />
       <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="'1920 / 1374'" />
       <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
     </div>
@@ -395,19 +367,19 @@ function handleSelect(item) {
 </template>
 
 <style scoped>
-.phone-p05{
+.phone-p05 {
   position: relative;
   display: flex;
   flex-direction: row;
   z-index: 10;
   margin-bottom: -70px;
 }
-.phone-p05-text{
+.phone-p05-text {
   margin: 20px 0 0 10px;
   height: 50px;
   width: 70%;
 }
-.phone-p05-leaf-img{
+.phone-p05-leaf-img {
   top: 0;
   right: 0;
   position: absolute;
@@ -451,15 +423,21 @@ function handleSelect(item) {
   animation: counterRotate 5s linear infinite;
 }
 @keyframes rotateStar {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes counterRotate {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
 }
-
-
 
 .p08-circlebox {
   display: flex;
@@ -494,8 +472,6 @@ function handleSelect(item) {
     transform: rotate(360deg) translateX(135%) rotate(-360deg);
   }
 }
-
-
 
 :global(html) {
   font-size: clamp(14px, 0.8vw + 0.5rem, 18px);
@@ -624,7 +600,7 @@ function handleSelect(item) {
   overflow-x: auto; /* 啟用橫向滾動 */
   position: relative;
 }
-.p05-text{
+.p05-text {
   font-family: "Noto Sans TC", sans-serif;
   font-size: clamp(16px, 2vw, 36px);
   line-height: 1.5;
@@ -634,7 +610,7 @@ function handleSelect(item) {
   transform: translateX(-50%);
   top: 5%;
 }
-.p05-leaf-img{
+.p05-leaf-img {
   width: 20%;
   position: absolute;
   z-index: 10;
@@ -754,7 +730,7 @@ function handleSelect(item) {
 .p08-box {
   width: 85%;
   aspect-ratio: 1666 / 680; /* 原圖寬高比 */
-  min-height: 450px;
+  min-height: 500px;
   background-image: url(./assets/p08/box.png);
   background-size: cover;
   background-position: center;
@@ -1113,40 +1089,39 @@ function handleSelect(item) {
     }
   }
 
-
-  .star-wrapper-r{
-  position: absolute;
-  transform-origin: center;
-  animation: rotateStar 5s linear infinite;
+  .star-wrapper-r {
+    position: absolute;
+    transform-origin: center;
+    animation: rotateStar 5s linear infinite;
     top: 25%;
     left: 52%;
     width: 47%;
     height: 47%;
   }
   .star-r {
-  position: absolute;
-  top: 15%;
-  left: 85%;
-  width: 60px;
-  animation: counterRotate 5s linear infinite;
-  z-index: 20;
+    position: absolute;
+    top: 15%;
+    left: 85%;
+    width: 60px;
+    animation: counterRotate 5s linear infinite;
+    z-index: 20;
   }
-  .star-wrapper-l{
-  position: absolute;
-  transform-origin: center;
-  animation: rotateStar 5s linear infinite;
+  .star-wrapper-l {
+    position: absolute;
+    transform-origin: center;
+    animation: rotateStar 5s linear infinite;
     top: 25%;
     left: 2%;
     width: 47%;
     height: 47%;
   }
   .star-l {
-  position: absolute;
-  top: 15%;
-  left: 85%;
-  width: 60px;
-  animation: counterRotate 5s linear infinite;
-  z-index: 20;
+    position: absolute;
+    top: 15%;
+    left: 85%;
+    width: 60px;
+    animation: counterRotate 5s linear infinite;
+    z-index: 20;
   }
   @keyframes counterRotate {
     0% {
@@ -1156,15 +1131,6 @@ function handleSelect(item) {
       transform: translate(-50%, -50%) rotate(-360deg);
     }
   }
-
-
-
-
-
-
-
-
-
 
   .mbno {
     display: block;
