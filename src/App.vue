@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue"
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import Carousel from "./components/Carousel.vue"
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
@@ -10,8 +10,24 @@ import fullview from "./components/fullview.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
 const cur = ref(0)
 const p03Ref = ref(null)
-
+// -------------------------------
+const bgImage = ref(null)
+const handleScroll = () => {
+  const scrollY = window.scrollY
+  const scale = Math.min(1 + scrollY / 1600, 2)
+  if (bgImage.value) {
+    bgImage.value.style.transform = `scale(${scale})`
+  }
+}
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+const isMobile = computed(() => {
+  return window.innerWidth <= 769;
+});
+// -------------------------------
 onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
   const el = document.getElementById("p10-carousel-1")
   const c = BsCarousel.getInstance(el) || new BsCarousel(el)
 
@@ -96,15 +112,32 @@ function handleSelect(item) {
     <!-- <div class="p02"></div> -->
     <div class="p03" ref="p03Ref"><img class="p03-img" src="./assets/p03/03.png" alt="" /><fullview /></div>
     <div class="p04">
-      <img class="p04bg" src="./assets/p04/100.png" alt="" />
+      <img ref="bgImage" class="p04bg" src="./assets/p04/100.png" alt="" />
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
     </div>
-    <div class="p05" ref="p03Ref"><img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview /></div>
+
+
+
+
+    <div v-if="isMobile" class="phone-p05" ref="">
+      <strong class="phone-p05-text">東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong>
+      <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
+    </div>
+
+
+    <div class="p05" ref="p03Ref"><img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview />
+
+      <strong v-if="!isMobile" class="p05-text">東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong>
+      <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
+    </div>
     <div class="p06">
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 89.svg" alt="" />
+            <img class="circle" src="./assets/p06/Group 93.svg" alt="" />
+            <div class="star-wrapper">
+              <img class="star" src="./assets/star.svg" alt="" />
+            </div>
             <div class="p06card-number"><img src="./assets/p06/1.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -121,7 +154,10 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 97.png" alt="" />
+            <img class="circle" src="./assets/p06/Group 95.svg" alt="" />
+            <div class="star-wrapper">
+              <img class="star" src="./assets/star.svg" alt="" />
+            </div>
             <div class="p06card-number"><img src="./assets/p06/2.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -135,7 +171,10 @@ function handleSelect(item) {
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 92.svg" alt="" />
+            <img class="circle" src="./assets/p06/Group 94.svg" alt="" />
+            <div class="star-wrapper">
+              <img class="star" src="./assets/star.svg" alt="" />
+            </div>
             <div class="p06card-number"><img src="./assets/p06/3.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -149,7 +188,10 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img src="./assets/p06/Group 93.svg" alt="" />
+            <img class="circle" src="./assets/p06/Group 89.svg" alt="" />
+            <div class="star-wrapper">
+              <img class="star" src="./assets/star.svg" alt="" />
+            </div>
             <div class="p06card-number"><img src="./assets/p06/4.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -160,32 +202,74 @@ function handleSelect(item) {
           <Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'690 / 460'" />
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       <div class="p06m">
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/1.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 89.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 93.svg" alt="" /></div>
+          <div class="star-wrapper-r">
+            <img class="star-r" src="./assets/star.svg" alt="" />
+          </div>
         </div>
         <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/2.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 97.png" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 95.svg" alt="" /></div>
+          <div class="star-wrapper-l">
+            <img class="star-l" src="./assets/star.svg" alt="" />
+          </div>
         </div>
-        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-txt"><p>運動公園、圖書館、175咖啡公路</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/3.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 92.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 94.svg" alt="" /></div>
+          <div class="star-wrapper-r">
+            <img class="star-r" src="./assets/star.svg" alt="" />
+          </div>
         </div>
-        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線 </p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 93.svg" alt="" /></div>
+          <div class="p06m-circle"><img src="./assets/p06/Group 89.svg" alt="" /></div>
+          <div class="star-wrapper-l">
+            <img class="star-l" src="./assets/star.svg" alt="" />
+          </div>
         </div>
-        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-txt"><p>東山國小附設幼稚園、東山國中</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
       </div>
+
+
+
+
+
+
+
+
+
     </div>
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
@@ -204,8 +288,18 @@ function handleSelect(item) {
             <p class="p08-word">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
           </div>
           <div class="p08-circlebox">
-            <div class="p08-circle"><img src="./assets/p08/Group95.svg" alt="" /></div>
-            <div class="p08-circle"><img src="./assets/p08/Group96.svg" alt="" /></div>
+            <div class="p08-circle">
+              <img class="p08-img" src="./assets/p08/Group95.svg" alt="" />
+              <div class="p08-star-wrapper">
+                <img class="p08-star" src="./assets/star.svg" alt="" />
+              </div>
+            </div>
+            <div class="p08-circle">
+              <img class="p08-img" src="./assets/p08/Group96.svg" alt="" />
+              <div class="p08-star-wrapper">
+                <img class="p08-star" src="./assets/star.svg" alt="" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="p08-content p08-none"></div>
@@ -301,6 +395,108 @@ function handleSelect(item) {
 </template>
 
 <style scoped>
+.phone-p05{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+  margin-bottom: -70px;
+}
+.phone-p05-text{
+  margin: 20px 0 0 10px;
+  height: 50px;
+  width: 70%;
+}
+.phone-p05-leaf-img{
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 30%;
+}
+.wave {
+  animation: shimmer 2s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.6);
+  }
+}
+.p06card-circle {
+  position: relative;
+  height: 16vw;
+  width: 16vw;
+}
+.circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.star-wrapper {
+  position: absolute;
+  top: 13%;
+  left: 13%;
+  width: 74%;
+  height: 74%;
+  transform-origin: center;
+  animation: rotateStar 5s linear infinite;
+}
+.star {
+  position: absolute;
+  top: 15%;
+  left: 85%;
+  width: 100px;
+  animation: counterRotate 5s linear infinite;
+}
+@keyframes rotateStar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes counterRotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+
+
+.p08-circlebox {
+  display: flex;
+  justify-content: center;
+}
+.p08-circle {
+  position: relative;
+  width: 45%;
+}
+.p08-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.p08-star-wrapper {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  width: 15%;
+  height: 15%;
+  transform-origin: center;
+}
+.p08-star {
+  width: 60px;
+  animation: rotateStarOrbit 5s linear infinite;
+}
+@keyframes rotateStarOrbit {
+  0% {
+    transform: rotate(0deg) translateX(135%) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(135%) rotate(-360deg);
+  }
+}
+
+
+
 :global(html) {
   font-size: clamp(14px, 0.8vw + 0.5rem, 18px);
 }
@@ -350,6 +546,7 @@ function handleSelect(item) {
   left: 50%;
   width: 20%;
   transform: translate(-50%, -100%);
+  animation: shimmer 2s ease-in-out infinite alternate;
 }
 
 .t1 {
@@ -393,11 +590,14 @@ function handleSelect(item) {
   object-position: center;
 }
 .p04 {
+  overflow: hidden;
   position: relative;
   width: 100%;
 }
 
 .p04bg {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
   max-width: 100%;
   height: auto;
   display: block;
@@ -423,6 +623,23 @@ function handleSelect(item) {
   background-repeat: no-repeat;
   overflow-x: auto; /* 啟用橫向滾動 */
   position: relative;
+}
+.p05-text{
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: clamp(16px, 2vw, 36px);
+  line-height: 1.5;
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 5%;
+}
+.p05-leaf-img{
+  width: 20%;
+  position: absolute;
+  z-index: 10;
+  top: 0px;
+  right: 0px;
 }
 .p06 {
   width: 100%;
@@ -456,17 +673,6 @@ function handleSelect(item) {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-}
-.p06card-circle {
-  position: relative;
-
-  height: 16vw;
-  width: 16vw;
-}
-.p06card-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .p06card-number {
   position: absolute;
@@ -586,16 +792,9 @@ function handleSelect(item) {
   text-align: center;
   margin-bottom: 0;
 }
-.p08-circlebox {
-  display: flex;
-  justify-content: space-around;
-}
-.p08-circle {
-  width: 45%;
-}
+
 .p08-title img,
-.p08-subtitle img,
-.p08-circle img {
+.p08-subtitle img {
   width: 100%;
   object-fit: cover;
 }
@@ -893,6 +1092,80 @@ function handleSelect(item) {
   display: none;
 }
 @media (max-width: 769px) {
+  .p08-circle {
+    width: 70%;
+  }
+  .p08-star-wrapper {
+    top: 38%;
+    left: 38%;
+    width: 15%;
+    height: 15%;
+  }
+  .p08-star {
+    width: 36px;
+  }
+  @keyframes rotateStarOrbit {
+    0% {
+      transform: rotate(0deg) translateX(160%) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(160%) rotate(-360deg);
+    }
+  }
+
+
+  .star-wrapper-r{
+  position: absolute;
+  transform-origin: center;
+  animation: rotateStar 5s linear infinite;
+    top: 25%;
+    left: 52%;
+    width: 47%;
+    height: 47%;
+  }
+  .star-r {
+  position: absolute;
+  top: 15%;
+  left: 85%;
+  width: 60px;
+  animation: counterRotate 5s linear infinite;
+  z-index: 20;
+  }
+  .star-wrapper-l{
+  position: absolute;
+  transform-origin: center;
+  animation: rotateStar 5s linear infinite;
+    top: 25%;
+    left: 2%;
+    width: 47%;
+    height: 47%;
+  }
+  .star-l {
+  position: absolute;
+  top: 15%;
+  left: 85%;
+  width: 60px;
+  animation: counterRotate 5s linear infinite;
+  z-index: 20;
+  }
+  @keyframes counterRotate {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(-360deg);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   .mbno {
     display: block;
   }
@@ -910,7 +1183,7 @@ function handleSelect(item) {
   }
   .wave {
     top: auto;
-    bottom: 0; /* 🚀 用 bottom: 0 讓 wave 貼底 */
+    bottom: 0;
     transform: translateX(-50%); /* 只左右置中，不再往上偏移 */
   }
   .p03,
