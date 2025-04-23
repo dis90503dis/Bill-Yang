@@ -73,8 +73,8 @@ const scrollToSection = (id) => {
   position: fixed;
   top: 0;
   right: 0;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height:80px;
   background: transparent;
   border: none;
   z-index: 1001;
@@ -93,12 +93,12 @@ const scrollToSection = (id) => {
   right: 0;
   width: 20vw;
   height: 100vh;
-  background-color: #fce0b5;
+  background-color: #fce0b5cc;
   z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;backdrop-filter: blur(2px);
 }
 
 .menu {

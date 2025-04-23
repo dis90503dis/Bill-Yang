@@ -8,6 +8,8 @@ import BsCarousel from "bootstrap/js/dist/carousel"
 import SidebarMenu from "./components/SidebarMenu.vue"
 
 const formRef = ref(null)
+import AOS from "aos"
+
 const cur = ref(0)
 const p03Ref = ref(null)
 const p05Ref = ref(null)
@@ -42,6 +44,17 @@ onMounted(() => {
     })
   })
   window.addEventListener("resize", setScrollPositions)
+  const ac = p03Ref.value
+  if (ac && window.innerWidth <= 768) {
+    ac.scrollLeft = (ac.scrollWidth - ac.clientWidth) / 2
+  }
+  window.onload = function () {
+    isLoading.value = false
+    AOS.init({
+      offset: 0,
+      duration: 1500,
+    })
+  }
 })
 const setScrollPositions = () => {
   if (window.innerWidth <= 768) {
@@ -181,9 +194,9 @@ function handleSelect(item) {
   <div class="container">
     <div class="p01">
       <div class="p01-content">
-        <img class="logo" src="./assets/p01/logo.svg" alt="" />
-        <img class="t1" src="./assets/p01/t1.svg" alt="" />
-        <img class="wave" src="./assets/p01/wave2.svg" alt="" />
+        <img class="logo" src="./assets/p01/logo.svg" alt="" data-aos="fade-up" data-aos-delay="0" />
+        <img class="t1" src="./assets/p01/t1.svg" alt="" data-aos="fade-up" data-aos-delay="200" />
+        <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" />
       </div>
     </div>
     <!-- <div class="p02"></div> -->
@@ -198,8 +211,8 @@ function handleSelect(item) {
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
     </div>
 
-    <div v-if="isMobile" class="phone-p05">
-      <strong class="phone-p05-text"
+    <div v-if="isMobile" class="phone-p05" ref="">
+      <strong class="phone-p05-text" data-aos="fade-up" data-aos-delay="0"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
       <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
@@ -210,22 +223,20 @@ function handleSelect(item) {
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
         <img class="finger-icon" src="./assets/finger.png" alt="" />
       </div>
-      <strong v-if="!isMobile" class="p05-text"
+      <strong v-if="!isMobile" class="p05-text" data-aos="fade-up" data-aos-delay="0"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
       <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
     </div>
     <div class="p06">
+      <!-- <img src="./assets/p06/06m.jpg" class="t00"> -->
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img class="circle" src="./assets/p06/Group 93.svg" alt="" />
-            <div class="star-wrapper">
-              <img class="star" src="./assets/star.svg" alt="" />
-            </div>
+            <div class="circle-txt">市心<br />商圈</div>
             <div class="p06card-number"><img src="./assets/p06/1.svg" alt="" /></div>
           </div>
-          <div class="p06card-word">
+          <div class="p06card-word" data-aos="fade-up" data-aos-delay="200">
             <p>
               全聯、7-11、市場、農會、電信局、<br />
               郵局、行政中心、中興觀光美食街
@@ -239,10 +250,7 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img class="circle" src="./assets/p06/Group 95.svg" alt="" />
-            <div class="star-wrapper">
-              <img class="star" src="./assets/star.svg" alt="" />
-            </div>
+            <div class="circle-txt">樂活<br />休閒</div>
             <div class="p06card-number"><img src="./assets/p06/2.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -256,14 +264,11 @@ function handleSelect(item) {
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img class="circle" src="./assets/p06/Group 94.svg" alt="" />
-            <div class="star-wrapper">
-              <img class="star" src="./assets/star.svg" alt="" />
-            </div>
+            <div class="circle-txt">三大<br />交通</div>
             <div class="p06card-number"><img src="./assets/p06/3.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
-            <p>國3柳營交流道、國1新營交流道、台1線</p>
+            <p>國3柳營交流道、國1新營交流道、<br />台1線</p>
           </div>
         </div>
         <div class="p06card-car">
@@ -273,10 +278,7 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <img class="circle" src="./assets/p06/Group 89.svg" alt="" />
-            <div class="star-wrapper">
-              <img class="star" src="./assets/star.svg" alt="" />
-            </div>
+            <div class="circle-txt">12年<br />學區</div>
             <div class="p06card-number"><img src="./assets/p06/4.svg" alt="" /></div>
           </div>
           <div class="p06card-word">
@@ -291,37 +293,25 @@ function handleSelect(item) {
       <div class="p06m">
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/1.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 93.svg" alt="" /></div>
-          <div class="star-wrapper-r">
-            <img class="star-r" src="./assets/star.svg" alt="" />
-          </div>
+          <div class="p06m-circle-txt">市心<br />商圈</div>
         </div>
         <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/2.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 95.svg" alt="" /></div>
-          <div class="star-wrapper-l">
-            <img class="star-l" src="./assets/star.svg" alt="" />
-          </div>
+          <div class="p06m-circle-txt">樂活<br />休閒</div>
         </div>
         <div class="p06m-txt"><p>運動公園、圖書館、175咖啡公路</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/3.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 94.svg" alt="" /></div>
-          <div class="star-wrapper-r">
-            <img class="star-r" src="./assets/star.svg" alt="" />
-          </div>
+          <div class="p06m-circle-txt">三大<br />交通</div>
         </div>
         <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
-          <div class="p06m-circle"><img src="./assets/p06/Group 89.svg" alt="" /></div>
-          <div class="star-wrapper-l">
-            <img class="star-l" src="./assets/star.svg" alt="" />
-          </div>
+          <div class="p06m-circle-txt">12年<br />學區</div>
         </div>
         <div class="p06m-txt"><p>東山國小附設幼稚園、東山國中</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
@@ -330,8 +320,15 @@ function handleSelect(item) {
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
       <img class="p07en" src="./assets/p07/en.svg" alt="" />
-      <img class="p07txt" src="./assets/p07/txt.svg" alt="" />
-      <img class="p07mtxt mbno" src="./assets/p07/Group 98.png" alt="" />
+      <div class="p07-content">
+        <div class="p07-title">
+          傳承69年載卓越匠心，<br />
+          榮耀傳承，口碑見證非凡業績！
+        </div>
+        <div class="p07-subtitle">
+          「東南水泥集團」創立於1956年，是政府推動高鐵、捷運、南二高及各重大公共工程所採用水泥品牌之一。為追求永續企業使命，成立「東泥建設」，以品牌傳承、創新未來為信念，為城市開創美好生活願景。
+        </div>
+      </div>
       <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="'1920 / 1374'" />
       <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
     </div>
@@ -367,10 +364,13 @@ function handleSelect(item) {
           <img src="./assets/p09/Group 4.png" alt="" />
         </div>
         <div class="p09-content">
-          <img src="./assets/p09/txt.png" alt="" />
-        </div>
-        <div class="p09m-content">
-          <img src="./assets/p09/Group 99.png" alt="" />
+          <div class="p09-title">
+            格柵光影、綠植風景<br />
+            展現北歐人文之美
+          </div>
+          <div class="p09-subtitle">
+            「以人為本、取法自然」，融入北歐設計理念，透過光影層次形塑外觀立面，運用玻璃透光陽台，創造室內綠意景致，呈現出自然、機能的人文綠建築。
+          </div>
         </div>
         <div class="p09m-circle"><img src="./assets/p09/Groupm4.png" alt="" /></div>
       </div>
@@ -382,14 +382,19 @@ function handleSelect(item) {
       <div class="p10-nav">
         <div class="p10-content pcno"></div>
         <div class="p10-content">
-          <div class="p10-title"><img src="./assets/p10/p10title.png" alt="" /></div>
+          <div class="p10-title">
+            引光入室，簡約質感<br />
+            打造溫暖且實用的機能美學宅
+          </div>
           <div class="p10-icon"><img src="./assets/p10/icon.png" alt="" /></div>
         </div>
       </div>
       <div class="p10-subtitle">
-        <div class="p10-subtitle-title pcno"><img src="./assets/p10/title.png" alt="" /></div>
-        <div class="p10m-subtitle-title mbno"><img src="./assets/p10/Group 82.png" alt="" /></div>
-        <div class="p10-subtitle-txt pcno"><img src="./assets/p10/p10txt.png" alt="" /></div>
+        <div class="p10-subtitle-title">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
+        <div class="p10-subtitle-txt">
+          1樓客餐廳、多功能配置，可彈性規劃孝親房、客房、親子讀書室等，滿足不同家庭成員的生活需求。<br />
+          2樓以上規劃花園、雙主臥、雙次臥、雙大露臺，搭配衛浴乾濕分離設計，打造全齡友善的生活格局，<br />滿足三代家人舒適共居的理想空間。
+        </div>
       </div>
       <div class="p10-car-box">
         <div class="p10-btnbox">
@@ -402,8 +407,11 @@ function handleSelect(item) {
     </div>
     <div class="p11">
       <div class="p11-subtitle">
-        <div class="p11-subtitle-title"><img src="./assets/p11/p11title.png" alt="" /></div>
-        <div class="p11-subtitle-txt"><img src="./assets/p11/p11text.png" alt="" /></div>
+        <div class="p11-subtitle-title">
+          嚴選名品建材<br />
+          匠心打造非凡品味
+        </div>
+        <div class="p11-subtitle-txt">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
         <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
       </div>
       <div class="p11-content-box pcno">
@@ -474,8 +482,8 @@ function handleSelect(item) {
 }
 .p06card-circle {
   position: relative;
-  height: 16vw;
-  width: 16vw;
+  /*  height: 16vw; 
+  width: 16vw; */
 }
 .circle {
   width: 100%;
@@ -559,6 +567,8 @@ function handleSelect(item) {
   padding: 0;
   overflow-x: hidden;
   box-sizing: border-box;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: calc(100vw * 18 / 1920);
 }
 .p01 {
   width: 100%;
@@ -598,7 +608,8 @@ function handleSelect(item) {
   left: 50%;
   width: 20%;
   transform: translate(-50%, -100%);
-  animation: shimmer 2s ease-in-out infinite alternate;
+  /* animation: shimmer 2s ease-in-out infinite alternate;
+ */
 }
 
 .t1 {
@@ -694,27 +705,40 @@ function handleSelect(item) {
 .p06 {
   width: 100%;
   aspect-ratio: 1920 / 2660;
+  padding: 7vw 0;
+  /* 
+  background-image: url("./assets/p06/06.jpg");*/
   background-image: url("./assets/p06/bg.png");
   background-size: cover;
-  background-position: center;
+  background-position: 0 0;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   margin: auto;
+  position: relative;
+}
+.t00 {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .p06card {
   margin: auto;
   display: flex;
   box-sizing: border-box;
-  height: 18%;
+  align-items: center; /* 垂直置中 */
+  /* height: 18%; */
 }
 .p06card.reverse {
   flex-direction: row-reverse;
 }
 .p06card-txt {
-  height: 24vh;
-  width: 36vw;
+  /* height: 24vh; */
+  width: 28vw;
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
@@ -723,38 +747,73 @@ function handleSelect(item) {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  pointer-events: none;
+}
+.p06card-circle .circle-txt {
+  font-size: 3em;
+  color: #fff;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  aspect-ratio: 1/1;
+  background-image: url("./assets/p01/oo.svg");
+  background-position: 50% 50%;
+  background-size: cover;
+  width: 6.5em;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  margin: 0;
 }
 .p06card-number {
   position: absolute;
-  bottom: -30%;
-  left: 5%;
-  transform: translate(-50%, 0);
-  width: 36vw;
+  bottom: -6%;
+  left: -12%;
+  /* transform: translate(-50%, 0);
+  width: 36vw; */
+  height: calc(150 * 100vw / 1920);
   z-index: 2;
+  filter: drop-shadow(0px 0px 0.3em #fffc);
+}
+.p06card-number::before {
+  content: "";
+  position: absolute;
+  display: block;
+  left: -16.5em;
+  bottom: -35%;
+  height: 70%;
+  background: url("./assets/p06/light.png") center;
+  background-size: cover;
+  aspect-ratio: 824/115;
 }
 
-.p06card-number img {
-  width: 100%;
-  height: auto;
+.p06card-number img,
+.p06m-number img {
+  width: auto;
+  height: 100%;
 }
 
 .p06card-word {
   width: 100%;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .p06card-word p {
   margin-top: 2rem;
-  font-family: "Noto Sans TC", sans-serif;
+  /* font-family: "Noto Sans TC", sans-serif; */
   font-size: clamp(16px, 2vw, 30px);
   color: #fff;
   line-height: 1.5;
   padding-bottom: 0;
   text-align: center;
+  /* width: 26vw; */
 }
 .p06card-car {
-  height: 24vh;
+  height: auto;
   width: 36vw;
+  aspect-ratio: 690 / 460;
 }
 .p06car {
   object-fit: cover;
@@ -774,6 +833,42 @@ function handleSelect(item) {
   width: 100%;
   height: auto;
   z-index: 2;
+}
+.p07-content {
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  align-self: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 75%;
+  margin: auto;
+  z-index: 3;
+  top: 10%;
+}
+.p07-title {
+  font-size: 2.4em;
+  color: #0a5e84;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+.p07-title::before {
+  content: "";
+  display: block;
+  float: right;
+  width: 4em;
+  height: 1px;
+  transform-origin: 0 0;
+  transform: rotate(37deg);
+  margin: 0.3em 0em 0 3em;
+  background: #0a5e84;
+}
+.p07-subtitle {
+  width: calc(100vw * 650 / 1920);
+  line-height: 2;
 }
 
 .p07txt {
@@ -811,6 +906,7 @@ function handleSelect(item) {
   background-repeat: no-repeat;
   display: flex;
   margin: 10vh auto;
+  border: 1px solid #bf9261;
 }
 .p08-content {
   width: 50%;
@@ -871,11 +967,37 @@ function handleSelect(item) {
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
   align-self: center;
+  position: relative;
+}
+.p09-title {
+  font-size: 2.3em;
+  color: #0a5e84;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+.p09-title::before {
+  content: "";
+  display: block;
+  float: right;
+  width: 4em;
+  height: 1px;
+  transform-origin: 0 0;
+  transform: rotate(37deg);
+  margin: 0.3em -0.3em 0 0.3em;
+  background: #333;
+}
+.p09-subtitle {
+  width: calc(100vw * 500 / 1920);
+  line-height: 2;
 }
 .p09-content img {
   height: 100%;
-  width: 100%;
+  width: 1035px;
+  opacity: 0.3;
   object-fit: cover;
+  position: absolute;
 }
 
 .p09-circle {
@@ -920,6 +1042,13 @@ function handleSelect(item) {
   align-items: center; /* 垂直置中 */
   gap: 1rem;
 }
+.p10-title {
+  font-size: 2.3em;
+  color: #0a5e84;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  text-align: center;
+}
 .p10-title,
 .p10-icon {
   display: flex;
@@ -951,11 +1080,37 @@ function handleSelect(item) {
   padding-top: 1rem;
   aspect-ratio: 1920 / 322; /* 容器會自動算高度 */
 }
+/*
 .p10-subtitle-title {
   width: 50%;
 }
 .p10-subtitle-txt {
   width: 45%;
+}
+  */
+.p10-subtitle-title {
+  font-size: 1.44em;
+  color: #0a5e84;
+  letter-spacing: 0.06em;
+  /* font-family:'Noto Serif TC',serif ; */
+  font-weight: 700;
+  text-align: center;
+  /* width: 15%; */
+}
+.p10-subtitle-title::before,
+.p10-subtitle-title::after {
+  content: "";
+  width: 5.3em;
+  margin: 0 0.5em;
+  height: 1px;
+  display: inline-block;
+  background: currentColor;
+  vertical-align: middle;
+}
+.p10-subtitle-txt {
+  /* width: 23%; */
+  font-weight: 500;
+  text-align: center;
 }
 .p10-subtitle-title img,
 .p10-subtitle-txt img {
@@ -1024,10 +1179,17 @@ function handleSelect(item) {
   aspect-ratio: 1920 / 322; /* 容器會自動算高度 */
 }
 .p11-subtitle-title {
-  width: 15%;
+  font-size: 2.3em;
+  color: #0a5e84;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 700;
+  text-align: center;
+  /* width: 15%; */
 }
 .p11-subtitle-txt {
-  width: 20%;
+  width: 23%;
+  font-weight: 500;
+  text-align: center;
 }
 .p11-subtitle-title img,
 .p11-subtitle-txt img {
@@ -1178,6 +1340,9 @@ function handleSelect(item) {
   }
 }
 @media (max-width: 769px) {
+  .container {
+    font-size: calc(100vw * 13 / 375);
+  }
   .p08-circle {
     width: 70%;
   }
@@ -1300,6 +1465,9 @@ function handleSelect(item) {
   .p06card {
     display: none;
   }
+  .p06 {
+    padding: 0 0;
+  }
   .p06m {
     width: 100vw;
     display: flex;
@@ -1310,10 +1478,29 @@ function handleSelect(item) {
   .p06m-box {
     display: flex;
     position: relative;
+    width: 90%;
+    margin: auto;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    margin: 5em auto 0 auto;
   }
   .p06m-number {
-    width: 50%;
+    /*width: 50%;*/
+    position: relative;
+    height: calc(85 * 100vw / 375);
   }
+  .p06m-number::before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: -13.5em;
+    bottom: -35%;
+    height: 70%;
+    background: url("./assets/p06/light.png") center;
+    background-size: cover;
+    aspect-ratio: 824/115;
+  }
+  /*
   .p06m-number img {
     width: 200%;
     height: 200%;
@@ -1322,8 +1509,28 @@ function handleSelect(item) {
     left: -80%;
     top: -30%;
   }
+    */
   .p06m-circle {
     width: 50%;
+  }
+  .p06m-circle-txt {
+    font-size: 2em;
+    color: #fff;
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    aspect-ratio: 1/1;
+    background-image: url("./assets/p01/oo.svg");
+    background-position: 50% 50%;
+    background-size: cover;
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    line-height: 1.2;
+    width: 6.5em;
+    flex: 0 0 6.5em;
+    margin: -1.3em -0.5em 0 -0.5em;
   }
   .p06m-circle img {
     width: 100%;
@@ -1332,6 +1539,7 @@ function handleSelect(item) {
   }
   .p06m-txt {
     width: 100%;
+    margin: 0 auto 1em;
   }
   .p06m-txt p {
     font-family: "Noto Sans TC", sans-serif;
@@ -1346,6 +1554,13 @@ function handleSelect(item) {
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 2rem;
+    aspect-ratio: 690 / 460;
+  }
+  .p06m-car .slide {
+    height: 100%;
+  }
+  .p06m-car .carousel-indicators {
+    height: auto;
   }
   .p07 {
     width: 100vw;
@@ -1366,6 +1581,23 @@ function handleSelect(item) {
     display: block;
     margin-top: 20%;
   }
+  .p07-content {
+    flex-direction: column;
+    width: 85%;
+    top: 5%;
+  }
+  .p07-title {
+    font-size: 1.7em;
+    width: 100%;
+    margin: 0 0 0.3em;
+  }
+  .p07-subtitle {
+    width: 100%;
+  }
+  .p07-title::before {
+    display: none;
+  }
+
   .p07txt {
     display: none;
   }
@@ -1417,8 +1649,7 @@ function handleSelect(item) {
   .p09-car {
     height: 30%;
   }
-  .p09-circle,
-  .p09-content {
+  .p09-circle {
     display: none;
   }
   .p09-nav {
@@ -1426,6 +1657,21 @@ function handleSelect(item) {
     justify-content: center; /* 水平置中 */
     align-items: center; /* 垂直置中 */
   }
+  .p09-content {
+    flex-direction: column;
+  }
+  .p09-title {
+    font-size: 1.7em;
+    width: 90%;
+    margin: 0 0 0.3em;
+  }
+  .p09-subtitle {
+    width: 90%;
+  }
+  .p09-title::before {
+    display: none;
+  }
+
   .p09m-content,
   .p09m-circle {
     display: block;
@@ -1449,6 +1695,11 @@ function handleSelect(item) {
     width: 100%;
     margin-top: 5%;
   }
+  .p10-title {
+    font-size: 1.53em;
+    margin: 5% auto 0.1em;
+    /* width: 40%; */
+  }
   .p10-title img {
     height: auto;
     max-width: 80vw;
@@ -1462,13 +1713,24 @@ function handleSelect(item) {
   .p10-subtitle {
     padding: 0;
     aspect-ratio: none;
-    background-size: 300%; /* 放大背景圖三倍，可依需求調整 */
+    background-size: 340% auto; /* 放大背景圖三倍，可依需求調整 */
     background-position: center center; /* 僅顯示中間部分 */
     background-repeat: no-repeat;
   }
   .p10-subtitle-title {
+    font-size: 1.15em;
+    margin: 1.5em auto 0;
+  }
+  .p10-subtitle-title::before,
+  .p10-subtitle-title::after {
     display: none;
   }
+  .p10-subtitle-txt {
+    width: 80%;
+    line-height: 1.6;
+    margin: 0 auto 4em;
+  }
+  /*
   .p10m-subtitle-title {
     width: 80%;
     aspect-ratio: 315 / 164;
@@ -1480,6 +1742,7 @@ function handleSelect(item) {
     object-fit: cover;
     padding: 2rem;
   }
+    */
   .p10-btnbox {
     flex-wrap: wrap;
   }
@@ -1499,8 +1762,9 @@ function handleSelect(item) {
     justify-content: center;
   }
   .p11-subtitle-title {
+    font-size: 1.53em;
     margin-top: 10%;
-    width: 40%;
+    /* width: 40%; */
   }
   .p11-subtitle-txt {
     width: 80%;
