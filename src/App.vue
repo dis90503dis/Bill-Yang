@@ -817,7 +817,6 @@ function handleSelect(item) {
 }
 .p06car {
   object-fit: cover;
-  width: 90vw;
 }
 .p07 {
   position: relative;
