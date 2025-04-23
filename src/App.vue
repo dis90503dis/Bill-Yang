@@ -223,7 +223,7 @@ function handleSelect(item) {
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
         <img class="finger-icon" src="./assets/finger.png" alt="" />
       </div>
-      <strong v-if="!isMobile" class="p05-text" data-aos="fade-up" data-aos-delay="0"
+      <strong v-if="!isMobile" class="p05-text"  data-aos-delay="0"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
       <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
