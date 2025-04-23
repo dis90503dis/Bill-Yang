@@ -607,7 +607,7 @@ function handleSelect(item) {
   top: 50%;
   left: 50%;
   width: 20%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%) !important;
   /* animation: shimmer 2s ease-in-out infinite alternate;
  */
 }
@@ -617,7 +617,7 @@ function handleSelect(item) {
   top: 80%;
   left: 50%;
   width: 30%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%) !important;
 }
 
 .wave,
@@ -626,7 +626,7 @@ function handleSelect(item) {
   top: 100%;
   left: 50%;
   width: 100%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%) !important;
 }
 .p02 {
   width: 100%;
