@@ -48,7 +48,21 @@
 <script setup>
 import { ref, reactive, watch } from "vue"
 import { cityList, renderAreaList } from "../info/address.js"
+import { useToast } from "vue-toastification"
+const toast = useToast()
 
+const sending = ref(false)
+
+const bypass = ["msg"] // 只有 msg 是非必填
+
+const formDataRef = ref([
+  "姓名", // name
+  "手機", // phone
+  "房型", // room_type
+  "居住縣市", // city
+  "居住地區", // area
+  "備註", // msg
+])
 const formData = reactive({
   name: "",
   phone: "",
@@ -68,6 +82,74 @@ watch(
     formData.area = areaList.value.length > 0 ? areaList.value[0].value : ""
   }
 )
+
+const send = () => {
+  const urlParams = new URLSearchParams(window.location.search)
+  const utmSource = urlParams.get("utm_source")
+  const utmMedium = urlParams.get("utm_medium")
+  const utmContent = urlParams.get("utm_content")
+  const utmCampaign = urlParams.get("utm_campaign")
+  const time = new Date()
+  const date = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+
+  const presend = new FormData()
+  let pass = true
+  let unfill = []
+  let idx = 0
+
+  for (const [key, value] of Object.entries(formData)) {
+    if (!bypass.includes(key)) {
+      if (value === "") {
+        unfill.push(formDataRef.value[idx])
+      }
+    }
+    idx++
+    presend.append(key, value)
+  }
+
+  presend.append("utm_source", utmSource)
+  presend.append("utm_medium", utmMedium)
+  presend.append("utm_content", utmContent)
+  presend.append("utm_campaign", utmCampaign)
+
+  if (unfill.length > 0) {
+    pass = false
+    toast.error(`「${unfill.join(", ")}」為必填或必選`)
+    return
+  }
+
+  // 手機驗證
+  const MobileReg = /^(09)[0-9]{8}$/
+  if (!formData.phone.match(MobileReg)) {
+    pass = false
+    toast.error(`手機格式錯誤 (09開頭共10碼)`)
+    return
+  }
+
+  if (pass && !sending.value) {
+    sending.value = true
+
+    fetch(
+      `https://script.google.com/macros/s/AKfycbyQKCOhxPqCrLXWdxsAaAH06Zwz_p6mZ5swK80USQ/exec?name=${formData.name}&phone=${formData.phone}&msg=${formData.msg}&room_type=${formData.room_type}&cityarea=${formData.city}${formData.area}&utm_source=${utmSource}&utm_medium=${utmMedium}&utm_content=${utmContent}&utm_campaign=${utmCampaign}&date=${date}`,
+      {
+        method: "GET",
+      }
+    )
+
+    fetch("contact-form.php", {
+      method: "POST",
+      body: presend,
+    }).then((response) => {
+      if (response.status === 200) {
+        window.location.href = "formThanks"
+      }
+      sending.value = false
+    })
+  }
+}
+defineExpose({
+  send,
+})
 </script>
 
 <style scoped>
@@ -127,7 +209,7 @@ watch(
   box-sizing: border-box;
   font-family: "Noto Sans JP", sans-serif;
   background: rgba(255, 255, 255, 0.8);
-  font-weight: 600;
+  font-weight: 500;
   width: 100%;
 }
 

@@ -1,15 +1,18 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from "vue"
+import { onMounted, onUnmounted, ref, computed, nextTick } from "vue"
 import Carousel from "./components/Carousel.vue"
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
-// import SendButton from "./components/SendButton.vue"
-// import ContactInfo from "./info/contactInfo.vue"
-import BsCarousel from "bootstrap/js/dist/carousel" // 只匯入 JS
-import fullview from "./components/fullview.vue"
+import BsCarousel from "bootstrap/js/dist/carousel"
+// import fullview from "./components/fullview.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
+
+const formRef = ref(null)
 const cur = ref(0)
 const p03Ref = ref(null)
+const p05Ref = ref(null)
+const showHint = ref(true)
+
 // -------------------------------
 const bgImage = ref(null)
 const handleScroll = () => {
@@ -19,78 +22,152 @@ const handleScroll = () => {
     bgImage.value.style.transform = `scale(${scale})`
   }
 }
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll)
+const scrollConfig = ref({
+  p03PositionRatio: 0.5, // p03的scrollX 0.5表示中間，增加數值會更往右滾動
+  p05PositionRatio: 0.5, // p05
 })
+
 const isMobile = computed(() => {
   return window.innerWidth <= 769
 })
+function hideHint() {
+  showHint.value = false
+}
 // -------------------------------
 onMounted(() => {
   window.addEventListener("scroll", handleScroll)
-  const el = document.getElementById("p10-carousel-1")
-  const c = BsCarousel.getInstance(el) || new BsCarousel(el)
-
-  el.addEventListener("slide.bs.carousel", (e) => {
-    cur.value = e.to // 0‑based index
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      setScrollPositions()
+    })
   })
-  const ac = p03Ref.value
-  if (ac && window.innerWidth <= 768) {
-    ac.scrollLeft = (ac.scrollWidth - ac.clientWidth) / 2
-  }
+  window.addEventListener("resize", setScrollPositions)
 })
+const setScrollPositions = () => {
+  if (window.innerWidth <= 768) {
+    if (p03Ref.value) {
+      const basePosition = (p03Ref.value.scrollWidth - p03Ref.value.clientWidth) * scrollConfig.value.p03PositionRatio
+      p03Ref.value.scrollLeft = basePosition
 
+      const icon = document.querySelector(".p03 .finger-icon")
+      if (icon) {
+        const centerX = p03Ref.value.clientWidth / 2
+        icon.style.left = `${basePosition + centerX - 150}px`
+      }
+    }
+
+    if (p05Ref.value) {
+      const basePosition = (p05Ref.value.scrollWidth - p05Ref.value.clientWidth) * scrollConfig.value.p05PositionRatio
+      p05Ref.value.scrollLeft = basePosition
+    }
+  }
+}
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll)
+  window.removeEventListener("resize", setScrollPositions)
+})
 const p06img1 = [
-  { src: new URL("./assets/p06/Group 87.png", import.meta.url).href },
-  { src: new URL("./assets/p06/1-2.png", import.meta.url).href },
-  { src: new URL("./assets/p06/1-3.png", import.meta.url).href },
-  { src: new URL("./assets/p06/1-4.png", import.meta.url).href },
+  { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
 ]
 const p06img2 = [
-  { src: new URL("./assets/p06/2-1.png", import.meta.url).href },
-  { src: new URL("./assets/p06/2-2.png", import.meta.url).href },
-  { src: new URL("./assets/p06/2-3.png", import.meta.url).href },
+  { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
 ]
-const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href }]
+const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href, caption: "圖說" }]
 const p06img4 = [
-  { src: new URL("./assets/p06/4-1.png", import.meta.url).href },
-  { src: new URL("./assets/p06/4-2.png", import.meta.url).href },
-  { src: new URL("./assets/p06/4-3.png", import.meta.url).href },
+  { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "圖說" },
 ]
 const p07img = [
-  { src: new URL("./assets/p07/slider.png", import.meta.url).href },
-  { src: new URL("./assets/p07/Group 41.png", import.meta.url).href },
-  { src: new URL("./assets/p07/Group 42.png", import.meta.url).href },
-  { src: new URL("./assets/p07/Group 43.png", import.meta.url).href },
+  { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
 ]
 const p09img = [
   {
     src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+    caption: "圖說",
   },
   {
     src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
+    caption: "圖說",
   },
   {
     src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
+    caption: "圖說",
   },
   {
     src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+    caption: "圖說",
   },
 ]
-const p10img = [
-  {
-    src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
-  },
-  {
-    src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
-  },
-  {
-    src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
-  },
-  {
-    src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
-  },
+const p10ImageGroups = [
+  [
+    {
+      src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
+      caption: "圖說",
+    },
+  ],
+  [
+    {
+      src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
+      caption: "圖說",
+    },
+    {
+      src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+      caption: "圖說",
+    },
+  ],
+  [
+    { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
+  ],
+  [
+    { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
+  ],
+  [
+    { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
+  ],
+  [
+    { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "圖說" },
+    { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "圖說" },
+  ],
 ]
+const currentP10Images = computed(() => p10ImageGroups[cur.value])
 const showSidebar = ref(false)
 const selectedItem = ref("東山市心")
 const menuItems = ["年度鉅獻", "東山市心", "美好生活", "榮耀血統", "北歐寧靜", "全齡格局", "上選建材"]
@@ -110,22 +187,29 @@ function handleSelect(item) {
       </div>
     </div>
     <!-- <div class="p02"></div> -->
-    <div class="p03" ref="p03Ref"><img class="p03-img" src="./assets/p03/03.png" alt="" /><fullview /></div>
+    <div class="p03" ref="p03Ref">
+      <img class="p03-img" src="./assets/p03/03.png" alt="" @load="setScrollPositions" />
+      <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
+        <img class="finger-icon" src="./assets/finger.png" alt="" />
+      </div>
+    </div>
     <div class="p04">
       <img ref="bgImage" class="p04bg" src="./assets/p04/100.png" alt="" />
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
     </div>
 
-    <div v-if="isMobile" class="phone-p05" ref="">
+    <div v-if="isMobile" class="phone-p05">
       <strong class="phone-p05-text"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
       <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
     </div>
 
-    <div class="p05" ref="p03Ref">
-      <img class="p03-img" src="./assets/p05/05.png" alt="" /><fullview />
-
+    <div class="p05" ref="p05Ref">
+      <img class="p03-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
+      <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
+        <img class="finger-icon" src="./assets/finger.png" alt="" />
+      </div>
       <strong v-if="!isMobile" class="p05-text"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
@@ -213,7 +297,7 @@ function handleSelect(item) {
           </div>
         </div>
         <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/2.svg" alt="" /></div>
           <div class="p06m-circle"><img src="./assets/p06/Group 95.svg" alt="" /></div>
@@ -222,7 +306,7 @@ function handleSelect(item) {
           </div>
         </div>
         <div class="p06m-txt"><p>運動公園、圖書館、175咖啡公路</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box">
           <div class="p06m-number"><img src="./assets/p06/3.svg" alt="" /></div>
           <div class="p06m-circle"><img src="./assets/p06/Group 94.svg" alt="" /></div>
@@ -231,7 +315,7 @@ function handleSelect(item) {
           </div>
         </div>
         <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
           <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
           <div class="p06m-circle"><img src="./assets/p06/Group 89.svg" alt="" /></div>
@@ -240,7 +324,7 @@ function handleSelect(item) {
           </div>
         </div>
         <div class="p06m-txt"><p>東山國小附設幼稚園、東山國中</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
+        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
       </div>
     </div>
     <div class="p07">
@@ -309,19 +393,11 @@ function handleSelect(item) {
       </div>
       <div class="p10-car-box">
         <div class="p10-btnbox">
-          <button
-            v-for="(_, idx) in 6"
-            :key="idx"
-            :class="{ active: idx === cur }"
-            class="p10-btn"
-            type="button"
-            :data-bs-target="'#p10-carousel-1'"
-            :data-bs-slide-to="idx"
-          >
-            <h2>A13<span style="font-size: 1.5rem">戶</span></h2>
+          <button v-for="(images, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
+            <h2>A{{ idx + 1 }}<span style="font-size: 1.5rem">戶</span></h2>
           </button>
         </div>
-        <div class="p10-car"><Carousel class="p10car" :carouselId="'p10-carousel-1'" :images="p10img" :aspectRatio="'256 / 125'" /></div>
+        <div class="p10-car"><Carousel class="p10car" :carouselId="'p10-carousel-' + cur" :images="currentP10Images" :aspectRatio="'256 / 125'" /></div>
       </div>
     </div>
     <div class="p11">
@@ -340,9 +416,9 @@ function handleSelect(item) {
         <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
         <div><img class="formlogo" src="./assets/p01/logo.svg" alt="" /></div>
         <div><h2 class="formtxt">預約賞屋</h2></div>
-        <div class="form"><FormSection /></div>
+        <div class="form"><FormSection ref="formRef" /></div>
         <div><PolicyAgreement /></div>
-        <div class="button" style="width: 80%"><img src="./assets/form/booking.svg" alt="" /></div>
+        <div class="button" @click="formRef?.send()" style="width: 80%"><img src="./assets/form/booking.svg" alt="" /></div>
         <div class="contact-button">
           <div class="button"><img src="./assets/form/Frame 31.svg" alt="" /></div>
           <div class="button"><img src="./assets/form/Frame 32.svg" alt="" /></div>
@@ -554,7 +630,6 @@ function handleSelect(item) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow-x: auto; /* 啟用橫向滾動 */
 }
 .p03-img {
   display: none; /* 預設不顯示（桌機版不顯示 img） */
@@ -597,7 +672,6 @@ function handleSelect(item) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow-x: auto; /* 啟用橫向滾動 */
   position: relative;
 }
 .p05-text {
@@ -674,7 +748,6 @@ function handleSelect(item) {
   font-family: "Noto Sans TC", sans-serif;
   font-size: clamp(16px, 2vw, 30px);
   color: #fff;
-  opacity: 80%;
   line-height: 1.5;
   padding-bottom: 0;
   text-align: center;
@@ -685,6 +758,7 @@ function handleSelect(item) {
 }
 .p06car {
   object-fit: cover;
+  width: 90vw;
 }
 .p07 {
   position: relative;
@@ -1067,6 +1141,42 @@ function handleSelect(item) {
 .mbno {
   display: none;
 }
+.mask {
+  position: absolute;
+  background-color: rgba(0, 88, 144, 0.3);
+  z-index: 10;
+  aspect-ratio: 8 / 5;
+  min-width: 300vw;
+  height: 800px;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.finger-icon {
+  position: absolute;
+  height: 47px;
+  animation: swipe-move 1.2s infinite;
+  opacity: 0.9;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes swipe-move {
+  0% {
+    transform: translateX(-15px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(15px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-15px);
+    opacity: 0.8;
+  }
+}
 @media (max-width: 769px) {
   .p08-circle {
     width: 70%;
@@ -1156,12 +1266,19 @@ function handleSelect(item) {
   .p05 {
     background: none;
     aspect-ratio: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .p03-img {
+    position: relative;
     display: block;
-    height: 667px;
-    width: auto;
+    height: 800px;
+    /* 確保圖片足夠寬 */
+    min-width: 300vw;
+    z-index: 1;
+    aspect-ratio: 8 / 5;
   }
   .p04 {
     overflow: hidden;

@@ -1,6 +1,15 @@
 <template>
   <div :id="carouselId" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-    <!-- indicators（圓點樣式） -->
+    <!-- 左右箭頭（手機板專用） -->
+    <button class="carousel-control-prev mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="prev">
+      <img src="../assets/iCON.svg" alt="prev" class="arrow-icon flip-horizontal" />
+    </button>
+
+    <button class="carousel-control-next mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="next">
+      <img src="../assets/iCON.svg" alt="next" class="arrow-icon" />
+    </button>
+
+    <!-- indicators（圓點） -->
     <div v-if="showIndicators && images.length > 1" class="carousel-indicators dot-indicators">
       <button
         v-for="(img, index) in images"
@@ -17,6 +26,9 @@
     <div class="carousel-inner" :style="{ aspectRatio: aspectRatio }">
       <div v-for="(img, index) in images" :key="index" class="carousel-item" :class="{ active: index === 0 }">
         <img :src="img.src" class="d-block w-100 carousel-img" :alt="img.alt || ''" />
+        <div class="carousel-caption-box" v-if="img.caption">
+          <p class="carousel-caption-text">{{ img.caption }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -35,7 +47,7 @@ const props = defineProps({
     required: true,
   },
   aspectRatio: {
-    type: String,
+    type: [String, Number],
     default: "16 / 9",
   },
   showIndicators: {
@@ -49,9 +61,11 @@ const props = defineProps({
 .carousel-inner {
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 .carousel-item {
   height: 100%;
+  position: relative;
 }
 .carousel-img {
   width: 100%;
@@ -60,10 +74,10 @@ const props = defineProps({
   max-height: 100%;
   object-fit: cover;
   object-position: center;
-  image-rendering: auto; /* 保持圖片清晰 */
+  image-rendering: auto;
 }
 
-/* ✅ 改成圓點樣式的 indicators */
+/* indicators */
 .dot-indicators button {
   width: 10px;
   height: 10px;
@@ -74,9 +88,65 @@ const props = defineProps({
   transition: background-color 0.3s;
   opacity: 0.6;
 }
-
 .dot-indicators button.active {
   background-color: #fff;
   opacity: 1;
+}
+
+/* 圖說樣式 */
+.carousel-caption-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.carousel-caption-text {
+  margin: 0;
+}
+
+/* 手機箭頭按鈕樣式 */
+.mobile-only {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.carousel-control-prev.mobile-only {
+  left: 10px;
+}
+.carousel-control-next.mobile-only {
+  right: 10px;
+}
+
+.arrow-icon {
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+}
+.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 769px) {
+  .mobile-only {
+    display: flex;
+  }
+  .dot-indicators {
+    display: none;
+  }
 }
 </style>
