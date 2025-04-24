@@ -7,8 +7,13 @@ const emit = defineEmits(["verify", "expired"])
 
 // 這個套件在驗證成功時會觸發 load‑callback，
 // 回傳 g‑recaptcha‑response；我們把它當作 verify
-const onLoad = () => emit("verify")
-const onExp = () => emit("expired")
+const onLoad = (response) => {
+  emit("verify", response)
+}
+const onExp = () => {
+  console.log("recaptcha expired")
+  emit("expired")
+}
 </script>
 
 <template>

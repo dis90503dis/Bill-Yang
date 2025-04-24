@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from "vue"
+import Policy from "../section/form/policy.vue"
 const props = defineProps({
   /** v‑model */
   modelValue: { type: Boolean, default: false },
@@ -10,14 +12,22 @@ const toggle = (e) => emit("update:modelValue", e.target.checked)
 </script>
 
 <template>
-  <div class="policy-agreement">
-    <input type="checkbox" class="policy-checkbox" :checked="modelValue" @change="toggle" />
-    <p class="policy-text">
+  <!-- 這顆隱藏的 checkbox 控制 modal -->
+  <input id="policy-modal" type="checkbox" class="hidden peer" />
+
+  <!-- 同意條款區塊 -->
+  <div class="flex items-center gap-2">
+    <input type="checkbox" class="w-4 h-4 rounded border border-gray-300" :checked="modelValue" @change="toggle" />
+    <p class="text-white leading-10 mb-0">
       本人知悉並同意
-      <label for="policy-modal" class="policy-link"> 「個資告知事項聲明」 </label>內容
+      <!-- 這個 label = 開啟 modal -->
+      <label for="policy-modal" class="text-yellow-300 cursor-pointer hover:opacity-70">「個資告知事項聲明」</label>
+      內容
     </p>
-    <!-- 彈窗（維持原有功能） -->
   </div>
+
+  <!-- 把真正的 Modal 元件放這裡 -->
+  <Policy />
 </template>
 
 <style scoped>
@@ -25,7 +35,7 @@ const toggle = (e) => emit("update:modelValue", e.target.checked)
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem; /* 原本的 gap‑2 */
+  gap: 0.5rem;
   position: relative;
 }
 
@@ -33,7 +43,7 @@ const toggle = (e) => emit("update:modelValue", e.target.checked)
   width: 1rem;
   height: 1rem;
   border: 1px solid #ccc;
-  border-radius: 0.375rem; /* rounded-md */
+  border-radius: 0.375rem;
   background: #fff;
   cursor: pointer;
 }
@@ -49,6 +59,7 @@ const toggle = (e) => emit("update:modelValue", e.target.checked)
   align-self: center;
   margin-bottom: 0;
 }
+
 .policy-link {
   color: #ff0;
   cursor: pointer;

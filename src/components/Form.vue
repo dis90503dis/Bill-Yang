@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from "vue"
+import { ref, reactive, watch, inject } from "vue"
 import { cityList, renderAreaList } from "../info/address.js"
 import { useToast } from "vue-toastification"
 const toast = useToast()
@@ -74,7 +74,8 @@ const formData = reactive({
 
 const roomTypeList = ref(["一房一廳", "兩房一廳", "三房兩廳", "四房以上"])
 const areaList = ref([])
-
+const recaptchaToken = inject("recaptchaToken")
+const policyAgree = inject("policyAgree")
 watch(
   () => formData.city,
   (newVal) => {
@@ -84,6 +85,8 @@ watch(
 )
 
 const send = () => {
+  console.log("send() 被呼叫了") // ← 應該要看到
+
   const urlParams = new URLSearchParams(window.location.search)
   const utmSource = urlParams.get("utm_source")
   const utmMedium = urlParams.get("utm_medium")
@@ -91,12 +94,18 @@ const send = () => {
   const utmCampaign = urlParams.get("utm_campaign")
   const time = new Date()
   const date = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
-
   const presend = new FormData()
   let pass = true
   let unfill = []
   let idx = 0
-
+  if (!policyAgree.value) {
+    toast.error("請先勾選『個資告知事項聲明』")
+    return
+  }
+  if (!recaptchaToken.value) {
+    toast.error("請完成『我不是機器人』驗證")
+    return
+  }
   for (const [key, value] of Object.entries(formData)) {
     if (!bypass.includes(key)) {
       if (value === "") {
@@ -106,12 +115,12 @@ const send = () => {
     idx++
     presend.append(key, value)
   }
-
+  presend.append("g-recaptcha-response", recaptchaToken.value)
   presend.append("utm_source", utmSource)
   presend.append("utm_medium", utmMedium)
   presend.append("utm_content", utmContent)
   presend.append("utm_campaign", utmCampaign)
-
+  console.log(Object.fromEntries(presend.entries()))
   if (unfill.length > 0) {
     pass = false
     toast.error(`「${unfill.join(", ")}」為必填或必選`)
@@ -141,15 +150,16 @@ const send = () => {
       body: presend,
     }).then((response) => {
       if (response.status === 200) {
-        window.location.href = "formThanks"
+        toast.success("資料送出成功！我們已收到您的預約")
       }
+      formData.name = formData.phone = formData.msg = formData.room_type = formData.city = formData.area = ""
       sending.value = false
+      console.log(Object.fromEntries(presend.entries()))
+      console.log("Send payload ⇒", Object.fromEntries(presend.entries()))
     })
   }
 }
-defineExpose({
-  send,
-})
+defineExpose({ send })
 </script>
 
 <style scoped>

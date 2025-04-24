@@ -2,11 +2,13 @@ import { createApp } from "vue"
 import "./style.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
-import { install as RecaptchaPlugin } from "vue3-recaptcha-v2"
+import { install as recaptchaInstall } from "vue3-recaptcha-v2"
 import "vue-toastification/dist/index.css"
 import AOS from "aos"
 import "aos/dist/aos.css"
 import App from "./App.vue"
+import "vue-toastification/dist/index.css"
+import Toast from "vue-toastification"
 
 AOS.init()
 const app = createApp(App)
@@ -16,4 +18,9 @@ const smoothScroll = (selector) => {
   el.scrollIntoView({ behavior: "smooth" })
 }
 app.provide("smoothScroll", smoothScroll)
-createApp(App).use(RecaptchaPlugin, { sitekey: "YOUR_SITE_KEY" }).mount("#app")
+createApp(App)
+  .use(recaptchaInstall, { sitekey: "在這邊填上sitekey" })
+  .use(Toast, {
+    timeout: 3000,
+  })
+  .mount("#app")

@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import viteImagemin from 'vite-plugin-imagemin'
-import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import viteImagemin from "vite-plugin-imagemin"
+import { fileURLToPath, URL } from "node:url"
 
 // 使用 fileURLToPath + URL 可以更穩定處理路徑（尤其在 ESM 模式）
 export default defineConfig({
@@ -25,10 +25,10 @@ export default defineConfig({
       svgo: {
         plugins: [
           {
-            name: 'removeViewBox',
+            name: "removeViewBox",
           },
           {
-            name: 'removeEmptyAttrs',
+            name: "removeEmptyAttrs",
             active: false,
           },
         ],
@@ -37,7 +37,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)), // 這樣就能正常使用 "@/section/..." 了
+      "@": fileURLToPath(new URL("./src", import.meta.url)), // 這樣就能正常使用 "@/section/..." 了
     },
   },
   build: {
@@ -46,6 +46,6 @@ export default defineConfig({
     },
   },
   server: {
-    host: '0.0.0.0', // 開放 LAN 上的裝置存取，適合多人開發或手機測試
+    host: "0.0.0.0", // 開放 LAN 上的裝置存取，適合多人開發或手機測試
   },
 })

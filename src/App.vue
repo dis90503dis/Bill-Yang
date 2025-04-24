@@ -1,12 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, nextTick, provide } from "vue"
 import Carousel from "./components/Carousel.vue"
-import Order from "./section/order.vue"
-
+// import Order from "./section/order.vue"
+import RecaptchaField from "./components/RecaptchaField.vue"
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
-import BsCarousel from "bootstrap/js/dist/carousel"
-import fullview from "./components/fullview.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
 
 const formRef = ref(null)
@@ -17,7 +15,7 @@ const p03Ref = ref(null)
 const p05Ref = ref(null)
 const showHint = ref(true)
 const isLoading = ref(true)
-
+const policyAgree = ref(false)
 // -------------------------------
 const bgImage = ref(null)
 const handleScroll = () => {
@@ -38,6 +36,18 @@ const isMobile = computed(() => {
 function hideHint() {
   showHint.value = false
 }
+// 存放驗證完拿到的 token
+const recaptchaToken = ref("")
+
+// 接到 verify 事件時拿到 token
+function onVerify(token) {
+  recaptchaToken.value = token
+}
+function onExpired() {
+  recaptchaToken.value = ""
+}
+provide("recaptchaToken", recaptchaToken)
+provide("policyAgree", policyAgree)
 // -------------------------------
 onMounted(() => {
   window.addEventListener("scroll", handleScroll)
@@ -85,10 +95,10 @@ const setScrollPositions = () => {
 }
 function smoothScroll(target) {
   const el = document.querySelector(target)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  if (el) el.scrollIntoView({ behavior: "smooth" })
 }
 
-provide('smoothScroll', smoothScroll)
+provide("smoothScroll", smoothScroll)
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll)
   window.removeEventListener("resize", setScrollPositions)
@@ -136,7 +146,7 @@ const p09img = [
 ]
 const p10ImageGroups = [
   {
-    name: 'A13戶',
+    name: "A13戶",
     images: [
       {
         src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
@@ -157,7 +167,7 @@ const p10ImageGroups = [
     ],
   },
   {
-    name: 'B8戶',
+    name: "B8戶",
     images: [
       {
         src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
@@ -178,7 +188,7 @@ const p10ImageGroups = [
     ],
   },
   {
-    name: 'A3戶',
+    name: "A3戶",
     images: [
       { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
       { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
@@ -187,7 +197,7 @@ const p10ImageGroups = [
     ],
   },
   {
-    name: 'C5戶', // 假設的名稱
+    name: "C5戶", // 假設的名稱
     images: [
       { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
       { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
@@ -196,14 +206,14 @@ const p10ImageGroups = [
     ],
   },
   {
-    name: 'A7戶', // 假設的名稱
+    name: "A7戶", // 假設的名稱
     images: [
       { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
       { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
       { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
     ],
   },
-];
+]
 const currentP10Images = computed(() => p10ImageGroups[cur.value])
 const showSidebar = ref(false)
 const selectedItem = ref("東山市心")
@@ -243,11 +253,11 @@ function handleSelect(item) {
     </div>
 
     <div class="p05" ref="p05Ref">
-      <img class="p05-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
+      <img v-if="isMobile" class="p05-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
         <img class="finger-icon" src="./assets/finger.svg" alt="" />
       </div>
-      <strong v-if="!isMobile" class="p05-text"  data-aos-delay="0"
+      <strong v-if="!isMobile" class="p05-text" data-aos-delay="0"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
       >
       <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
@@ -357,7 +367,8 @@ function handleSelect(item) {
       <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
     </div>
     <div class="p08">
-      <div class="p08-box"><div class="highlight-border"></div>
+      <div class="p08-box">
+        <div class="highlight-border"></div>
         <div class="p08-content">
           <div class="p08-title"><img src="./assets/p08/title.svg" alt="" /></div>
           <div class="p08-subtitle"><img src="./assets/p08/subtitle.svg" alt="" /></div>
@@ -416,24 +427,12 @@ function handleSelect(item) {
       </div>
       <div class="p10-car-box">
         <div class="p10-btnbox">
-          <button
-            v-for="(group, idx) in p10ImageGroups"
-            :key="idx"
-            :class="{ active: idx === cur }"
-            class="p10-btn"
-            type="button"
-            @click="cur = idx"
-          >
+          <button v-for="(group, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
             <h2>{{ group.name }}</h2>
           </button>
         </div>
         <div class="p10-car">
-          <Carousel
-            class="p10car"
-            :carouselId="'p10-carousel-' + cur"
-            :images="p10ImageGroups[cur]?.images || []"
-            :aspectRatio="'256 / 125'"
-          />
+          <Carousel class="p10car" :carouselId="'p10-carousel-' + cur" :images="p10ImageGroups[cur]?.images || []" :aspectRatio="'256 / 125'" />
         </div>
       </div>
     </div>
@@ -452,25 +451,34 @@ function handleSelect(item) {
       </div>
     </div>
 
-    <Order />
-    
+    <!-- <Order /> -->
+
     <div class="pform">
       <div class="form-content">
         <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
         <div><img class="formlogo" src="./assets/p01/logo.svg" alt="" /></div>
         <div><h2 class="formtxt">預約賞屋</h2></div>
         <div class="form"><FormSection ref="formRef" /></div>
-        <div><PolicyAgreement /></div>
-        <div class="button" @click="formRef?.send()" style="width: 80%"><img src="./assets/form/booking.svg" alt="" /></div>
+        <div><PolicyAgreement v-model="policyAgree" /></div>
+        <div><RecaptchaField @verify="onVerify" @expired="onExpired" /></div>
+        <div class="button" @click="formRef.send()"><img class="mx-auto" src="./assets/form/booking.svg" alt="" /></div>
         <div class="contact-button">
-          <div class="button"><img src="./assets/form/Frame 31.svg" alt="" /></div>
-          <div class="button"><img src="./assets/form/Frame 32.svg" alt="" /></div>
-          <div class="button"><img src="./assets/form/Frame 33.svg" alt="" /></div>
+          <a target="_blank" rel="noopener noreferrer" href="">
+            <div class="button"><img class="mx-auto" src="./assets/form/Frame 31.svg" alt="" /></div>
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
+            <div class="button"><img class="mx-auto" src="./assets/form/Frame 32.svg" alt="" /></div
+          ></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
+            <div class="button"><img class="mx-auto" src="./assets/form/Frame 33.svg" alt="" /></div
+          ></a>
         </div>
-        <div class="contact-adress button">
-          <img class="pcno" src="./assets/form/Map.svg" alt="" />
-          <img class="mbno" src="./assets/form/Group 101.png" alt="" />
-        </div>
+        <a target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/9nnV8sdBdx6gms7B9">
+          <div class="contact-adress button">
+            <img class="pcno" src="./assets/form/Map.svg" alt="" />
+            <img class="mbno" src="./assets/form/Group 101.png" alt="" />
+          </div>
+        </a>
       </div>
     </div>
     <div class="google-map-container">
@@ -484,9 +492,6 @@ function handleSelect(item) {
     </div>
   </div>
 </template>
-
-
-
 
 <!-- 搜尋這個▼▼▼▼▼▼▼▼
 v class="button" @click="formRef?.send()" style="width: 80%"><img src="
@@ -586,44 +591,13 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
 
  -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style scoped>
 .phone-p05 {
   position: relative;
   z-index: 10;
-  margin-bottom: 0px;height: 10em;margin-bottom: -10em;
+  margin-bottom: 0px;
+  height: 10em;
+  margin-bottom: -10em;
 }
 .phone-p05-text {
   display: block;
@@ -643,11 +617,13 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
   width: 55%;
   animation: an 2s alternate infinite;
   transform: skewX(3deg);
-  transform-origin:0 0;
+  transform-origin: 0 0;
   z-index: 1;
 }
 @keyframes an {
-  to{transform: rotate(0);}
+  to {
+    transform: rotate(0);
+  }
 }
 
 @keyframes shimmer {
@@ -782,16 +758,18 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
 }
 .p01-content {
   width: 100%;
-  height:100%;
+  height: 100%;
   position: relative;
 }
 
 .logo {
   position: absolute;
   top: calc(45% - 16.5vw);
-  left: 0;right: 0;margin: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 20%;
-  filter:drop-shadow(5px 5px 4px #0009)
+  filter: drop-shadow(5px 5px 4px #0009);
 
   /* transform: translate(-50%, -100%) !important; */
   /* animation: shimmer 2s ease-in-out infinite alternate;
@@ -800,20 +778,25 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
 
 .t1 {
   position: absolute;
-  top:calc(70% - 3vw);
-  left: 0;right: 0;margin: auto;
+  top: calc(70% - 3vw);
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 30%;
-  filter:drop-shadow(2px 2px 2px #0009)
+  filter: drop-shadow(2px 2px 2px #0009);
   /* transform: translate(-50%, -100%) !important; */
 }
 
 .wave,
 .formwave {
-  position: absolute;bottom: 0;
-  left: 0;right: 0;margin: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 100%;
   height: calc(693 * 100vw / 1920);
- /* transform: translate(-50%, -100%) !important; */ 
+  /* transform: translate(-50%, -100%) !important; */
 }
 .p02 {
   width: 100%;
@@ -861,7 +844,8 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
   position: absolute;
   top: calc(50% - 9.3vw);
   left: 0;
-  right: 0;margin: auto;
+  right: 0;
+  margin: auto;
 }
 .p05 {
   width: 100%;
@@ -1096,18 +1080,28 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
   position: relative;
 }
 .highlight-border {
-  position: absolute;top: -2px;left:-2px;right:-2px;bottom:-2px;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   border: 3px solid transparent; /* 邊框設為透明，以便顯示後面的漸層 */
   border-image: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%) 1;
-  border-image-slice: 1; 
+  border-image-slice: 1;
   border-image-width: 3px;
   animation: borderShineBorder 2s linear infinite;
 }
 
 @keyframes borderShineBorder {
-  0% { border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%); }
-  50% { border-image-source: linear-gradient(30deg, #fea 20%, #fff0 50%, #fea 80%); } /* 調整漸層顏色或位置 */
-  100% { border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%); }
+  0% {
+    border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%);
+  }
+  50% {
+    border-image-source: linear-gradient(30deg, #fea 20%, #fff0 50%, #fea 80%);
+  } /* 調整漸層顏色或位置 */
+  100% {
+    border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%);
+  }
 }
 .p08-content {
   width: 50%;
@@ -1326,7 +1320,7 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
   margin: auto;
   width: 80%;
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
   gap: 1em;
 }
@@ -1614,9 +1608,9 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
     display: block;
   }
   .p01 {
-  height: calc(667 * 100vw / 375);
-  max-height: inherit;
-  min-height:0;
+    height: calc(667 * 100vw / 375);
+    max-height: inherit;
+    min-height: 0;
   }
   .logo {
     top: calc(45% - 40vw);
@@ -1625,12 +1619,13 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
   }
   .t1 {
     width: 80%;
-    top:calc(60% + 5vw);
+    top: calc(60% + 5vw);
   }
   .wave {
     bottom: 0;
     left: 0;
-    width: 125%;height: 53vw;
+    width: 125%;
+    height: 53vw;
     /*  transform: translateX(-50%);只左右置中，不再往上偏移 */
   }
   .p03,
@@ -1669,7 +1664,6 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
     top: calc(50% - 28vw);
   }
 
-  
   .p05-img {
     position: relative;
     display: block;
@@ -1966,7 +1960,7 @@ v class="button" @click="formRef?.send()" style="width: 80%"><img src="
     padding: 5%;
   }
 
-  .p10-car{
+  .p10-car {
     width: 100%;
   }
   .p11-subtitle {
