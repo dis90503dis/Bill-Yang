@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed, nextTick } from "vue"
+import { onMounted, onUnmounted, ref, computed, nextTick, provide } from "vue"
 import Carousel from "./components/Carousel.vue"
 import Order from "./section/order.vue"
 /*
@@ -16,6 +16,7 @@ const cur = ref(0)
 const p03Ref = ref(null)
 const p05Ref = ref(null)
 const showHint = ref(true)
+const isLoading = ref(true)
 
 // -------------------------------
 const bgImage = ref(null)
@@ -82,6 +83,12 @@ const setScrollPositions = () => {
     }
   }
 }
+function smoothScroll(target) {
+  const el = document.querySelector(target)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
+
+provide('smoothScroll', smoothScroll)
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll)
   window.removeEventListener("resize", setScrollPositions)

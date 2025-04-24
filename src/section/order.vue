@@ -8,52 +8,72 @@
       <!-- Form -->
       <div class="form mx-auto relative flex justify-center">
         <div class="left h-full flex flex-col justify-between items-center">
-          <label class="row"><span>姓名<span>(必填)</span></span>
-          <input type="text" placeholder="姓名" class="input w-full rounded-none" :value="formData.name"
-            @input="(event) => (formData.name = event.target.value)" /></label>
-            <label class="row"><span>手機<span>(必填)</span></span>
-              <input type="text" placeholder="手機" class="input w-full rounded-none" :value="formData.phone"
-            @input="(event) => (formData.phone = event.target.value)" /></label>
+          <label class="row"
+            ><span>姓名<span>(必填)</span></span>
+            <input
+              type="text"
+              placeholder="姓名"
+              class="input w-full rounded-none"
+              :value="formData.name"
+              @input="(event) => (formData.name = event.target.value)"
+          /></label>
+          <label class="row"
+            ><span>手機<span>(必填)</span></span>
+            <input
+              type="text"
+              placeholder="手機"
+              class="input w-full rounded-none"
+              :value="formData.phone"
+              @input="(event) => (formData.phone = event.target.value)"
+          /></label>
 
-          <label class="row" v-if="info.room_type"><span>需求房型</span>
+          <label class="row" v-if="info.room_type"
+            ><span>需求房型</span>
             <select class="select w-full rounded-none bg-white" v-model="formData.room_type">
-           <option value="" selected disabled>請選擇房型</option> 
-            <option v-for="room in info.room_type" :value="room" v-text="room" :key="room"></option>
-          </select></label>
-          <label class="row" v-if="info.budget"><span>購屋預算</span>
+              <option value="" selected disabled>請選擇房型</option>
+              <option v-for="room in info.room_type" :value="room" v-text="room" :key="room"></option></select
+          ></label>
+          <label class="row" v-if="info.budget"
+            ><span>購屋預算</span>
             <select class="select w-full rounded-none bg-white" v-model="formData.budget">
-           <option value="" selected disabled>請選擇預算</option>
-            <option v-for="budget in info.budget" :value="budget" v-text="budget" :key="budget"></option>
-          </select>
-        </label>
-          <label class="row"><span>居住縣市</span>
-          <select class="select w-full rounded-none" v-model="formData.city">
-            <option value="" selected disabled>請選擇城市</option>
-            <option v-for="city in cityList" :value="city.value" :key="city">
-              {{ city.label }}
-            </option>
-          </select></label>
-          <label class="row"><span>居住地區</span>
-          <select class="select w-full rounded-none" v-model="formData.area">
-            <option value="" selected disabled>請選擇地區</option>
-            <option v-for="area in areaList" :value="area.value" :key="area">
-              {{ area.label }}
-            </option>
-          </select></label>
+              <option value="" selected disabled>請選擇預算</option>
+              <option v-for="budget in info.budget" :value="budget" v-text="budget" :key="budget"></option>
+            </select>
+          </label>
+          <label class="row"
+            ><span>居住縣市</span>
+            <select class="select w-full rounded-none" v-model="formData.city">
+              <option value="" selected disabled>請選擇城市</option>
+              <option v-for="city in cityList" :value="city.value" :key="city">
+                {{ city.label }}
+              </option>
+            </select></label
+          >
+          <label class="row"
+            ><span>居住地區</span>
+            <select class="select w-full rounded-none" v-model="formData.area">
+              <option value="" selected disabled>請選擇地區</option>
+              <option v-for="area in areaList" :value="area.value" :key="area">
+                {{ area.label }}
+              </option>
+            </select></label
+          >
         </div>
         <div class="right">
-          <textarea :value="formData.msg" @input="(event) => (formData.msg = event.target.value)"
-            class="row textarea w-full h-full rounded-none" placeholder="請輸入您的留言"></textarea>
+          <textarea
+            :value="formData.msg"
+            @input="(event) => (formData.msg = event.target.value)"
+            class="row textarea w-full h-full rounded-none"
+            placeholder="請輸入您的留言"
+          ></textarea>
         </div>
       </div>
 
       <!-- Policy -->
       <div class="flex gap-2 items-center justify-center control">
-        <input type="checkbox" v-model="formData.policyChecked" :checked="formData.policyChecked"
-          class="checkbox bg-white rounded-md" />
+        <input type="checkbox" v-model="formData.policyChecked" :checked="formData.policyChecked" class="checkbox bg-white rounded-md" />
         <p class="text-[#fff]">
-          本人知悉並同意<label for="policy-modal"
-            class="modal-button text-[#ff0] cursor-pointer hover:opacity-70">「個資告知事項聲明」</label>內容
+          本人知悉並同意<label for="policy-modal" class="modal-button text-[#ff0] cursor-pointer hover:opacity-70">「個資告知事項聲明」</label>內容
         </p>
       </div>
       <Policy />
@@ -64,13 +84,12 @@
 
       <!-- Send -->
       <div class="send mt-8 mx-auto hover:scale-90 btn cursor-pointer" @click="send()">
-        {{ sending? '發送中..': '即刻預約' }}
+        {{ sending ? "發送中.." : "即刻預約" }}
       </div>
 
-      <!-- Contact Info
-      <ContactInfo /> -->
+      <!-- Contact Info -->
+      <ContactInfo />
     </div>
-
 
     <!-- Map -->
     <Map v-if="info.address" />
@@ -85,10 +104,10 @@
 
 .order-section {
   position: relative;
- // padding-top: size(406);
-   overflow: hidden;
-    min-height: size(500);
- background: transparent;
+  // padding-top: size(406);
+  overflow: hidden;
+  min-height: size(500);
+  background: transparent;
   .bg-image {
     position: absolute;
     width: 100%;
@@ -96,14 +115,12 @@
     bottom: size(50);
     vertical-align: middle;
   }
-
 }
 
 .order {
   position: relative;
   width: 100%;
   padding-top: 6vw;
-  
 
   .bird {
     @apply absolute;
@@ -119,7 +136,6 @@
 
       to {
         transform: skewX(10deg) skewY(3deg) translate(4%, -8%) rotate(0deg);
-
       }
     }
   }
@@ -127,18 +143,18 @@
   .order-title {
     font-size: size(45);
     font-weight: 700;
-    color: #EDC244;
-    padding-top:1.5em;
+    color: #edc244;
+    padding-top: 1.5em;
   }
 
   .order-title-img {
     width: size(1008);
     margin-bottom: size(155);
   }
-  .order-subTitle{
+  .order-subTitle {
     font-size: size(17);
     color: #fff;
-    padding-top:.8em;
+    padding-top: 0.8em;
     letter-spacing: 0em;
     font-weight: 500;
   }
@@ -147,7 +163,7 @@
     width: size(300);
     height: size(2);
     margin-bottom: size(50);
-    background-color: #055F76;
+    background-color: #055f76;
   }
 
   .form {
@@ -179,43 +195,56 @@
       background-color: #fff;
       position: absolute;
     }
-    .row{background: #ffffff;//border: 1px solid #CCC;//color: #000;
-    font-weight: 500;
-      display: flex;width: 100%;
-      
-    align-items:center;
-      > span{
+    .row {
+      background: #ffffff; //border: 1px solid #CCC;//color: #000;
+      font-weight: 500;
+      display: flex;
+      width: 100%;
+
+      align-items: center;
+      > span {
         color: #000;
         width: 5.5em;
-        text-align: left;padding-left:1em ;
-        > span{color: #F00;font-size: 12px;}
+        text-align: left;
+        padding-left: 1em;
+        > span {
+          color: #f00;
+          font-size: 12px;
+        }
       }
-      input,select{background:none;flex: 1;}
-      option{color: #666;}
-      select{background: url("//h35.banner.tw/img//select.svg") no-repeat calc(100% - .5em) 100%;
-      background-size:auto 200%;
-      transition: background .3s;
-      //filter: brightness(0) invert(1);
+      input,
+      select {
+        background: none;
+        flex: 1;
+      }
+      option {
+        color: #666;
+      }
+      select {
+        background: url("//h35.banner.tw/img//select.svg") no-repeat calc(100% - 0.5em) 100%;
+        background-size: auto 200%;
+        transition: background 0.3s;
+        //filter: brightness(0) invert(1);
 
-      &:focus{
-        background-position:calc(100% - .5em) 0%;
-      }
+        &:focus {
+          background-position: calc(100% - 0.5em) 0%;
+        }
       }
     }
   }
 
   .send {
-    font-size:20px;
+    font-size: 20px;
     letter-spacing: 0.9em;
     text-indent: 0.9em;
     color: #000;
-    background:#EDC244;
+    background: #edc244;
     //border: 1px solid #FFF9;
-    border:0;
+    border: 0;
     border-radius: 2em;
 
     width: 308px;
-    height:3.3em;
+    height: 3.3em;
     line-height: 3.3;
     z-index: 10;
     font-weight: 700;
@@ -229,7 +258,7 @@
   }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   /*
 .eggbg3{
     top: sizem(-10);right:sizem(-100);width:sizem(300);}
@@ -242,7 +271,7 @@
     min-height: sizem(800);
     position: relative;
     // overflow: hidden;
-   // padding-top: sizem(200);
+    // padding-top: sizem(200);
 
     .bg-image {
       position: absolute;
@@ -250,14 +279,13 @@
       left: -#{sizem(30)};
       bottom: sizem(590);
     }
-
   }
 
   .order {
     width: 100%;
     padding-bottom: sizem(63);
     // border-radius: sizem(68) sizem(68) 0 0;
-   /* padding-top: sizem(0);
+    /* padding-top: sizem(0);
     margin-top: sizem(0);
 */
 
@@ -266,7 +294,7 @@
       width: sizem(117);
       height: sizem(2);
       margin-bottom: sizem(25);
-      background-color: #055F76;
+      background-color: #055f76;
     }
 
     .order-title {
@@ -274,15 +302,14 @@
       //text-align: justify;
       width: sizem(310);
       margin: auto;
-      padding-top: .5em;
+      padding-top: 0.5em;
       // padding-top:4.5em;
     }
-    .order-subTitle{
+    .order-subTitle {
       font-size: sizem(12);
-      padding-top:0;
+      padding-top: 0;
       font-weight: 400;
     }
-
 
     .form {
       width: sizem(310);
@@ -296,15 +323,15 @@
       .left {
         width: 100%;
         gap: 0;
-        .row{
-         margin: 0 0 sizem(15);
+        .row {
+          margin: 0 0 sizem(15);
         }
       }
 
       .right {
         width: 100%;
         height: sizem(100);
-        .row{
+        .row {
           height: 7em;
         }
       }
@@ -329,7 +356,7 @@
 
 <script setup>
 import Policy from "@/section/form/policy.vue"
-// import ContactInfo from "@/section/form/contactInfo.vue"
+import ContactInfo from "./form/contactInfo.vue"
 import Map from "@/section/form/map.vue"
 import HouseInfo from "@/section/form/houseInfo.vue"
 
@@ -360,7 +387,7 @@ const formData = reactive({
 })
 
 //非必填
-const bypass = ["project", "msg", "people", "email", "room_type","budget", "city", "area"]
+const bypass = ["project", "msg", "people", "email", "room_type", "budget", "city", "area"]
 
 //中文對照
 const formDataRef = ref([
@@ -396,21 +423,21 @@ const onRecaptchaUnVerify = () => {
 }
 
 const send = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const utmSource = urlParams.get("utm_source");
-  const utmMedium = urlParams.get("utm_medium");
-  const utmContent = urlParams.get("utm_content");
-  const utmCampaign = urlParams.get("utm_campaign");
-  const time = new Date();
-  const year = time.getFullYear();
-  const month = time.getMonth() + 1;
-  const day = time.getDate();
-  const hour = time.getHours();
-  const min = time.getMinutes();
-  const sec = time.getSeconds();
-  const date = `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+  const urlParams = new URLSearchParams(window.location.search)
+  const utmSource = urlParams.get("utm_source")
+  const utmMedium = urlParams.get("utm_medium")
+  const utmContent = urlParams.get("utm_content")
+  const utmCampaign = urlParams.get("utm_campaign")
+  const time = new Date()
+  const year = time.getFullYear()
+  const month = time.getMonth() + 1
+  const day = time.getDate()
+  const hour = time.getHours()
+  const min = time.getMinutes()
+  const sec = time.getSeconds()
+  const date = `${year}-${month}-${day} ${hour}:${min}:${sec}`
 
-  const presend = new FormData();
+  const presend = new FormData()
   let pass = true
   let unfill = []
   let idx = 0
@@ -421,18 +448,17 @@ const send = () => {
       if (value == "" || value == false) {
         unfill.push(formDataRef.value[idx])
       }
-
     }
 
-    idx++;
+    idx++
 
-    presend.append(key, value);
+    presend.append(key, value)
   }
 
-  presend.append("utm_source", utmSource);
-  presend.append("utm_medium", utmMedium);
-  presend.append("utm_content", utmContent);
-  presend.append("utm_campaign", utmCampaign);
+  presend.append("utm_source", utmSource)
+  presend.append("utm_medium", utmMedium)
+  presend.append("utm_content", utmContent)
+  presend.append("utm_campaign", utmCampaign)
 
   //有未填寫
   if (unfill.length > 0) {
@@ -466,20 +492,19 @@ const send = () => {
       &date=${date}
       &campaign_name=${info.caseName}`,
       {
-        method: "GET"
+        method: "GET",
       }
-    );
+    )
 
     fetch("contact-form.php", {
       method: "POST",
       body: presend,
     }).then((response) => {
       if (response.status === 200) {
-        window.location.href = "formThanks";
+        window.location.href = "formThanks"
       }
       sending.value = false
-    });
-
+    })
 
     // toast.success(`表單已送出，感謝您的填寫`)
   }

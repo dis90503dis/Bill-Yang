@@ -9,4 +9,11 @@ import "aos/dist/aos.css"
 import App from "./App.vue"
 
 AOS.init()
+const app = createApp(App)
+const smoothScroll = (selector) => {
+  const el = document.querySelector(selector)
+  if (!el) return
+  el.scrollIntoView({ behavior: "smooth" })
+}
+app.provide("smoothScroll", smoothScroll)
 createApp(App).use(RecaptchaPlugin, { sitekey: "YOUR_SITE_KEY" }).mount("#app")
