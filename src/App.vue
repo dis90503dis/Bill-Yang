@@ -1,9 +1,11 @@
 <script setup>
 import { onMounted, onUnmounted, ref, computed, nextTick } from "vue"
 import Carousel from "./components/Carousel.vue"
+import Order from "./section/order.vue"
+/*
 import FormSection from "./components/Form.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
-import BsCarousel from "bootstrap/js/dist/carousel"
+import BsCarousel from "bootstrap/js/dist/carousel"*/
 // import fullview from "./components/fullview.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
 
@@ -25,8 +27,8 @@ const handleScroll = () => {
   }
 }
 const scrollConfig = ref({
-  p03PositionRatio: 0.5, // p03的scrollX 0.5表示中間，增加數值會更往右滾動
-  p05PositionRatio: 0.5, // p05
+  p03PositionRatio: 0.24, // p03的scrollX 0.5表示中間，增加數值會更往右滾動
+  p05PositionRatio: 0.63, // p05
 })
 
 const isMobile = computed(() => {
@@ -52,7 +54,7 @@ onMounted(() => {
     isLoading.value = false
     AOS.init({
       offset: 0,
-      duration: 1500,
+      duration: 2000,
     })
   }
 })
@@ -72,6 +74,11 @@ const setScrollPositions = () => {
     if (p05Ref.value) {
       const basePosition = (p05Ref.value.scrollWidth - p05Ref.value.clientWidth) * scrollConfig.value.p05PositionRatio
       p05Ref.value.scrollLeft = basePosition
+      const icon = document.querySelector(".p05 .finger-icon")
+      if (icon) {
+        const centerX = p03Ref.value.clientWidth / 2
+        icon.style.left = `${basePosition + centerX - 150}px`
+      }
     }
   }
 }
@@ -80,106 +87,116 @@ onUnmounted(() => {
   window.removeEventListener("resize", setScrollPositions)
 })
 const p06img1 = [
-  { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "7-11超商" },
+  { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "全聯" },
+  { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "東山區農會" },
 ]
 const p06img2 = [
-  { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "東山運動公園" },
+  { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "東山圖書館" },
 ]
-const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href, caption: "圖說" }]
+const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href, caption: "國三柳營東山交流道" }]
 const p06img4 = [
-  { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "東山國小" },
+  { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "東山國中" },
 ]
 const p07img = [
-  { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
-  { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
+  { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider2.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider3.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider4.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
 ]
 const p09img = [
   {
     src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
-    caption: "圖說",
+    caption: "現場實景拍攝",
   },
   {
     src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
-    caption: "圖說",
+    caption: "現場實景拍攝",
   },
   {
     src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
-    caption: "圖說",
+    caption: "現場實景拍攝",
   },
   {
     src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
-    caption: "圖說",
+    caption: "現場實景拍攝",
   },
 ]
 const p10ImageGroups = [
-  [
-    {
-      src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
-      caption: "圖說",
-    },
-  ],
-  [
-    {
-      src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
-      caption: "圖說",
-    },
-    {
-      src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
-      caption: "圖說",
-    },
-  ],
-  [
-    { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
-  ],
-  [
-    { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
-  ],
-  [
-    { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
-  ],
-  [
-    { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "圖說" },
-    { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "圖說" },
-  ],
-]
+  {
+    name: 'A13戶',
+    images: [
+      {
+        src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
+        caption: "客廳",
+      },
+      {
+        src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
+        caption: "客廳",
+      },
+      {
+        src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
+        caption: "臥房",
+      },
+      {
+        src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
+        caption: "臥房",
+      },
+    ],
+  },
+  {
+    name: 'B8戶',
+    images: [
+      {
+        src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+        caption: "圖說",
+      },
+    ],
+  },
+  {
+    name: 'A3戶',
+    images: [
+      { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
+    ],
+  },
+  {
+    name: 'C5戶', // 假設的名稱
+    images: [
+      { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
+    ],
+  },
+  {
+    name: 'A7戶', // 假設的名稱
+    images: [
+      { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
+      { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
+    ],
+  },
+];
 const currentP10Images = computed(() => p10ImageGroups[cur.value])
 const showSidebar = ref(false)
 const selectedItem = ref("東山市心")
@@ -194,21 +211,21 @@ function handleSelect(item) {
   <div class="container">
     <div class="p01">
       <div class="p01-content">
-        <img class="logo" src="./assets/p01/logo.svg" alt="" data-aos="fade-up" data-aos-delay="0" />
-        <img class="t1" src="./assets/p01/t1.svg" alt="" data-aos="fade-up" data-aos-delay="200" />
-        <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" />
+        <img class="logo" src="./assets/p01/logo.svg" alt="" data-aos="zoom-in" data-aos-delay="0" />
+        <img class="t1" src="./assets/p01/t1.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
+        <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-450" />
       </div>
     </div>
     <!-- <div class="p02"></div> -->
     <div class="p03" ref="p03Ref">
       <img class="p03-img" src="./assets/p03/03.png" alt="" @load="setScrollPositions" />
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
-        <img class="finger-icon" src="./assets/finger.png" alt="" />
+        <img class="finger-icon" src="./assets/finger.svg" alt="" />
       </div>
     </div>
     <div class="p04">
       <img ref="bgImage" class="p04bg" src="./assets/p04/100.png" alt="" />
-      <img class="p04txt" src="./assets/p04/txt.svg" alt="" />
+      <img class="p04txt" src="./assets/p04/txt.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
     </div>
 
     <div v-if="isMobile" class="phone-p05" ref="">
@@ -219,9 +236,9 @@ function handleSelect(item) {
     </div>
 
     <div class="p05" ref="p05Ref">
-      <img class="p03-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
+      <img class="p05-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
-        <img class="finger-icon" src="./assets/finger.png" alt="" />
+        <img class="finger-icon" src="./assets/finger.svg" alt="" />
       </div>
       <strong v-if="!isMobile" class="p05-text"  data-aos-delay="0"
         >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
@@ -333,7 +350,7 @@ function handleSelect(item) {
       <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
     </div>
     <div class="p08">
-      <div class="p08-box">
+      <div class="p08-box"><div class="highlight-border"></div>
         <div class="p08-content">
           <div class="p08-title"><img src="./assets/p08/title.svg" alt="" /></div>
           <div class="p08-subtitle"><img src="./assets/p08/subtitle.svg" alt="" /></div>
@@ -343,15 +360,9 @@ function handleSelect(item) {
           <div class="p08-circlebox">
             <div class="p08-circle">
               <img class="p08-img" src="./assets/p08/Group95.svg" alt="" />
-              <div class="p08-star-wrapper">
-                <img class="p08-star" src="./assets/star.svg" alt="" />
-              </div>
             </div>
             <div class="p08-circle">
               <img class="p08-img" src="./assets/p08/Group96.svg" alt="" />
-              <div class="p08-star-wrapper">
-                <img class="p08-star" src="./assets/star.svg" alt="" />
-              </div>
             </div>
           </div>
         </div>
@@ -398,11 +409,25 @@ function handleSelect(item) {
       </div>
       <div class="p10-car-box">
         <div class="p10-btnbox">
-          <button v-for="(images, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
-            <h2>A{{ idx + 1 }}<span style="font-size: 1.5rem">戶</span></h2>
+          <button
+            v-for="(group, idx) in p10ImageGroups"
+            :key="idx"
+            :class="{ active: idx === cur }"
+            class="p10-btn"
+            type="button"
+            @click="cur = idx"
+          >
+            <h2>{{ group.name }}</h2>
           </button>
         </div>
-        <div class="p10-car"><Carousel class="p10car" :carouselId="'p10-carousel-' + cur" :images="currentP10Images" :aspectRatio="'256 / 125'" /></div>
+        <div class="p10-car">
+          <Carousel
+            class="p10car"
+            :carouselId="'p10-carousel-' + cur"
+            :images="p10ImageGroups[cur]?.images || []"
+            :aspectRatio="'256 / 125'"
+          />
+        </div>
       </div>
     </div>
     <div class="p11">
@@ -419,6 +444,9 @@ function handleSelect(item) {
         <div class="p11-content"></div>
       </div>
     </div>
+
+    <Order />
+    <!--
     <div class="pform">
       <div class="form-content">
         <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
@@ -446,32 +474,41 @@ function handleSelect(item) {
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <style scoped>
 .phone-p05 {
   position: relative;
-  display: flex;
-  flex-direction: row;
   z-index: 10;
-  margin-bottom: -70px;
+  margin-bottom: 0px;height: 10em;margin-bottom: -10em;
 }
 .phone-p05-text {
-  margin: 20px 0 0 10px;
+  display: block;
+  margin: auto auto auto 2em;
+  padding: 1.8em 0;
   height: 50px;
-  width: 70%;
+  width: 65%;
+  text-align: justify;
+  line-height: 2;
+  position: relative;
+  z-index: 3;
 }
 .phone-p05-leaf-img {
-  top: 0;
-  right: 0;
+  top: -3%;
+  right: -15%;
   position: absolute;
-  width: 30%;
+  width: 55%;
+  animation: an 2s alternate infinite;
+  transform: skewX(3deg);
+  transform-origin:0 0;
+  z-index: 1;
 }
-.wave {
-  animation: shimmer 2s ease-in-out infinite alternate;
+@keyframes an {
+  to{transform: rotate(0);}
 }
+
 @keyframes shimmer {
   0% {
     filter: brightness(1);
@@ -530,6 +567,9 @@ function handleSelect(item) {
 .p08-circle {
   position: relative;
   width: 45%;
+  background-image: url("./assets/p01/oo.svg");
+  background-position: 50% 50%;
+  background-size: cover;
 }
 .p08-img {
   width: 100%;
@@ -572,7 +612,10 @@ function handleSelect(item) {
 }
 .p01 {
   width: 100%;
-  aspect-ratio: 1920 / 1080;
+  height: 100vh;
+  max-height: calc(1080 * 100vw / 1920);
+  min-height: calc(900 * 100vw / 1920);
+  /* aspect-ratio: 1920 / 1080;*/
   background-image: url(./assets/p01/bg.svg);
   background-size: cover;
   background-position: center;
@@ -598,35 +641,38 @@ function handleSelect(item) {
 }
 .p01-content {
   width: 100%;
-  height: 100%;
+  height:100%;
   position: relative;
 }
 
 .logo {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: calc(45% - 16.5vw);
+  left: 0;right: 0;margin: auto;
   width: 20%;
-  transform: translate(-50%, -100%) !important;
+  filter:drop-shadow(5px 5px 4px #0009)
+
+  /* transform: translate(-50%, -100%) !important; */
   /* animation: shimmer 2s ease-in-out infinite alternate;
  */
 }
 
 .t1 {
   position: absolute;
-  top: 80%;
-  left: 50%;
+  top:calc(70% - 3vw);
+  left: 0;right: 0;margin: auto;
   width: 30%;
-  transform: translate(-50%, -100%) !important;
+  filter:drop-shadow(2px 2px 2px #0009)
+  /* transform: translate(-50%, -100%) !important; */
 }
 
 .wave,
 .formwave {
-  position: absolute;
-  top: 100%;
-  left: 50%;
+  position: absolute;bottom: 0;
+  left: 0;right: 0;margin: auto;
   width: 100%;
-  transform: translate(-50%, -100%) !important;
+  height: calc(693 * 100vw / 1920);
+ /* transform: translate(-50%, -100%) !important; */ 
 }
 .p02 {
   width: 100%;
@@ -672,9 +718,9 @@ function handleSelect(item) {
   height: auto;
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: calc(50% - 9.3vw);
+  left: 0;
+  right: 0;margin: auto;
 }
 .p05 {
   width: 100%;
@@ -687,7 +733,7 @@ function handleSelect(item) {
 }
 .p05-text {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: clamp(16px, 2vw, 36px);
+  font-size: clamp(16px, 2vw, 30px);
   line-height: 1.5;
   position: absolute;
   text-align: center;
@@ -906,6 +952,21 @@ function handleSelect(item) {
   display: flex;
   margin: 10vh auto;
   border: 1px solid #bf9261;
+  position: relative;
+}
+.highlight-border {
+  position: absolute;top: -2px;left:-2px;right:-2px;bottom:-2px;
+  border: 3px solid transparent; /* 邊框設為透明，以便顯示後面的漸層 */
+  border-image: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%) 1;
+  border-image-slice: 1; 
+  border-image-width: 3px;
+  animation: borderShineBorder 2s linear infinite;
+}
+
+@keyframes borderShineBorder {
+  0% { border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%); }
+  50% { border-image-source: linear-gradient(30deg, #fea 20%, #fff0 50%, #fea 80%); } /* 調整漸層顏色或位置 */
+  100% { border-image-source: linear-gradient(30deg, #fff0 20%, #fea 50%, #fff0 80%); }
 }
 .p08-content {
   width: 50%;
@@ -1124,8 +1185,9 @@ function handleSelect(item) {
   margin: auto;
   width: 80%;
   display: flex;
-  justify-content: space-between; /* 水平置中 */
-  align-items: center; /* 垂直置中 */
+  justify-content:flex-start;
+  align-items: center;
+  gap: 1em;
 }
 .p10-btn {
   display: flex;
@@ -1262,6 +1324,7 @@ function handleSelect(item) {
 .button img {
   width: 15vw;
   background-color: #ffe3bb;
+  /* background-color: #a7843f; */
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -1318,10 +1381,10 @@ function handleSelect(item) {
 .finger-icon {
   position: absolute;
   height: 47px;
-  animation: swipe-move 1.2s infinite;
+  /* animation: swipe-move 1.2s infinite; */
   opacity: 0.9;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(0%, -50%);
 }
 
 @keyframes swipe-move {
@@ -1410,21 +1473,24 @@ function handleSelect(item) {
     display: block;
   }
   .p01 {
-    aspect-ratio: 375 / 667;
+  height: calc(667 * 100vw / 375);
+  max-height: inherit;
+  min-height:0;
   }
   .logo {
-    top: 55%;
+    top: calc(45% - 40vw);
     width: 50%;
     aspect-ratio: 183 / 204;
   }
   .t1 {
     width: 80%;
-    top: 80%;
+    top:calc(60% + 5vw);
   }
   .wave {
-    top: auto;
     bottom: 0;
-    transform: translateX(-50%); /* 只左右置中，不再往上偏移 */
+    left: 0;
+    width: 125%;height: 53vw;
+    /*  transform: translateX(-50%);只左右置中，不再往上偏移 */
   }
   .p03,
   .p05 {
@@ -1459,7 +1525,18 @@ function handleSelect(item) {
 
   .p04txt {
     width: 60%;
-    height: 60%;
+    top: calc(50% - 28vw);
+  }
+
+  
+  .p05-img {
+    position: relative;
+    display: block;
+    height: 800px;
+    /* 確保圖片足夠寬 */
+    /* min-width: 300vw; */
+    z-index: 1;
+    aspect-ratio: 19 / 10;
   }
   .p06card {
     display: none;
@@ -1499,16 +1576,6 @@ function handleSelect(item) {
     background-size: cover;
     aspect-ratio: 824/115;
   }
-  /*
-  .p06m-number img {
-    width: 200%;
-    height: 200%;
-    object-fit: contain;
-    position: relative;
-    left: -80%;
-    top: -30%;
-  }
-    */
   .p06m-circle {
     width: 50%;
   }
@@ -1553,7 +1620,7 @@ function handleSelect(item) {
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 2rem;
-    aspect-ratio: 690 / 460;
+    /* aspect-ratio: 690 / 460; */
   }
   .p06m-car .slide {
     height: 100%;
@@ -1561,6 +1628,7 @@ function handleSelect(item) {
   .p06m-car .carousel-indicators {
     height: auto;
   }
+
   .p07 {
     width: 100vw;
     height: auto;
@@ -1715,6 +1783,7 @@ function handleSelect(item) {
     background-size: 340% auto; /* 放大背景圖三倍，可依需求調整 */
     background-position: center center; /* 僅顯示中間部分 */
     background-repeat: no-repeat;
+    margin: auto 0 2em;
   }
   .p10-subtitle-title {
     font-size: 1.15em;
@@ -1744,14 +1813,20 @@ function handleSelect(item) {
     */
   .p10-btnbox {
     flex-wrap: wrap;
+    width: 90%;
+    gap: 0;
   }
   .p10-btn {
     box-sizing: border-box;
-    width: 32%;
-    margin: 0.5%;
+    width: 32.13%;
+    margin: 0.6%;
   }
   .p10-btnbox h2 {
     padding: 5%;
+  }
+
+  .p10-car{
+    width: 100%;
   }
   .p11-subtitle {
     background-size: 500%;

@@ -124,12 +124,22 @@ const props = defineProps({
   padding: 0;
 }
 
+.carousel-control-prev.mobile-only,
+.carousel-control-next.mobile-only {
+  opacity: 1;
+}
 .carousel-control-prev.mobile-only {
-  left: 10px;
+  left: 0px;
 }
 .carousel-control-next.mobile-only {
-  right: 10px;
+  right: 0px;
 }
+.p06m-car .carousel-control-prev.mobile-only {
+    left: -2.3rem;
+  }
+.p06m-car .carousel-control-next.mobile-only {
+    right: -2.3rem;
+  }
 
 .arrow-icon {
   width: 32px;
