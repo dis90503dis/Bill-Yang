@@ -19,7 +19,7 @@ const smoothScroll = (selector) => {
 }
 app.provide("smoothScroll", smoothScroll)
 createApp(App)
-  .use(recaptchaInstall, { sitekey: "在這邊填上sitekey" })
+  .use(recaptchaInstall, { sitekey: "6Lep-78UAAAAAMaZLtddpvpixEb8cqu7v7758gLz" })
   .use(Toast, {
     timeout: 3000,
   })
