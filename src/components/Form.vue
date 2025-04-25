@@ -49,7 +49,7 @@ const bypass = ["msg"] // 只有 msg 是非必填
 const formDataRef = ref([
   "姓名", // name
   "手機", // phone
-  "房型", // room_type
+  // "房型", // room_type
   "居住縣市", // city
   "居住地區", // area
   "備註", // msg
@@ -57,7 +57,7 @@ const formDataRef = ref([
 const formData = reactive({
   name: "",
   phone: "",
-  room_type: "",
+ //  room_type: "",
   city: "",
   area: "",
   msg: "",
@@ -143,7 +143,7 @@ const send = () => {
       if (response.status === 200) {
         toast.success("資料送出成功！我們已收到您的預約")
       }
-      formData.name = formData.phone = formData.msg = formData.room_type = formData.city = formData.area = ""
+      formData.name = formData.phone = formData.msg = formData.city = formData.area = ""
       sending.value = false
       console.log(Object.fromEntries(presend.entries()))
       console.log("Send payload ⇒", Object.fromEntries(presend.entries()))
