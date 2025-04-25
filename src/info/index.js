@@ -1,4 +1,4 @@
-const caseName = "聚丰景"
+const caseName = "東泥大院"
 
 export default {
     meta: {
@@ -8,12 +8,12 @@ export default {
     },
     address1: "接待中心",//按鈕區的--- 如空白會只呈現地址
     address2: "接待中心",//map點下確認的--- 如空白會顯示"導航地址"
-    address: "高雄市三民區大昌二路569號",
-    googleSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.04474077968!2d120.32676297602906!3d22.652120430049745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04d863ce75f7%3A0x4551d9d93554b732!2zODA3MDU26auY6ZuE5biC5LiJ5rCR5Y2A5aSn5piM5LqM6LevNTY56Jmf!5e0!3m2!1szh-TW!2stw!4v1736245033777!5m2!1szh-TW!2stw",
-    googleLink: "https://maps.app.goo.gl/UN2pFMz9Zr7FqRDu6",
-    phone: "07-398-6686",
-    fbLink: "https://www.facebook.com/61561344586140/",
-    fbMessage: "https://m.me/61561344586140/",
+    address: "733台南市東山區東仁街83號",
+    googleSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.8788198372845!2d120.40056159999999!3d23.320155099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e8f19157aeaad%3A0xcea1f82d1135ec56!2z5p2x5rOl5aSn6Zmi!5e0!3m2!1szh-TW!2stw!4v1745563836634!5m2!1szh-TW!2stw",
+    googleLink: "https://maps.app.goo.gl/qh6dNEtxRpyQc6sdA",
+    phone: "(06)6800-123",
+    fbLink: "https://www.facebook.com/61570915381930/",
+    fbMessage: "https://m.me/61570915381930/",
     caseName: caseName,
     houseInfos: [
         ["興建投資", "頂誠建設有限公司"],
@@ -24,7 +24,7 @@ export default {
         /*
         */
     ],
-    gtmCode: ["GTM-TV9XVPJL","GTM-56NNDV4J"], // 可放置多個 客戶提供
+    gtmCode: ["GTM-TV9XVPJL"], // 可放置多個 客戶提供
     recaptcha_site_key_v2: "6Lep-78UAAAAAMaZLtddpvpixEb8cqu7v7758gLz", //主1
     //recaptcha_site_key_v2: "6LfGUjEaAAAAANYvhZQx5imGm23pRt0V-rOvkpNC", //主2
     //recaptcha_site_key_v2: "6LdbrqAmAAAAAPj2D_6cBbflea1livK9Uud4FGmN", //主3

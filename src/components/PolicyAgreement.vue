@@ -1,33 +1,38 @@
 <script setup>
 import { ref } from "vue"
 import Policy from "../section/form/policy.vue"
+
 const props = defineProps({
-  /** v‑model */
   modelValue: { type: Boolean, default: false },
 })
 const emit = defineEmits(["update:modelValue"])
 
-/* 勾選切換 */
+const showModal = ref(false)
+
+/* 同意 checkbox 切換 */
 const toggle = (e) => emit("update:modelValue", e.target.checked)
 </script>
 
 <template>
-  <!-- 這顆隱藏的 checkbox 控制 modal -->
-  <input id="policy-modal" type="checkbox" class="hidden peer" />
-
-  <!-- 同意條款區塊 -->
-  <div class="flex items-center gap-2">
-    <input type="checkbox" class="w-4 h-4 rounded border border-gray-300" :checked="modelValue" @change="toggle" />
+  <div class="cccccc flex items-center gap-2 justify-center">
+    <input
+      type="checkbox"
+      class="w-4 h-4 rounded border border-gray-300"
+      :checked="modelValue"
+      @change="toggle"
+    />
     <p class="text-white leading-10 mb-0">
       本人知悉並同意
-      <!-- 這個 label = 開啟 modal -->
-      <label for="policy-modal" class="text-yellow-300 cursor-pointer hover:opacity-70">「個資告知事項聲明」</label>
+      <span
+        class="cursor-pointer hover:opacity-70"
+        @click="showModal = true"
+      >「個資告知事項聲明」</span>
       內容
     </p>
   </div>
 
-  <!-- 把真正的 Modal 元件放這裡 -->
-  <Policy />
+  <!-- 傳入 v-model 給 modal -->
+  <Policy v-model:show="showModal" />
 </template>
 
 <style scoped>
@@ -68,4 +73,14 @@ const toggle = (e) => emit("update:modelValue", e.target.checked)
 .policy-link:hover {
   opacity: 0.7;
 }
+
+#policy-modal {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.cccccc{display: flex;margin: auto;
+  justify-content: center;}
+  .cccccc span{ color: #ff0;}
 </style>

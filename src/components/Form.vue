@@ -11,15 +11,6 @@
         </label>
 
         <label class="row">
-          <select class="select" v-model="formData.room_type">
-            <option value="" disabled>請選擇房型</option>
-            <option v-for="room in roomTypeList" :value="room" :key="room">
-              {{ room }}
-            </option>
-          </select>
-        </label>
-
-        <label class="row">
           <select class="select" v-model="formData.city">
             <option value="" disabled>請選擇城市</option>
             <option v-for="city in cityList" :value="city.value" :key="city.value">
@@ -39,7 +30,7 @@
       </div>
 
       <div class="right">
-        <textarea class="textarea" :value="formData.msg" @input="(event) => (formData.msg = event.target.value)"></textarea>
+        <textarea class="textarea" placeholder="請輸入您的留言" :value="formData.msg" @input="(event) => (formData.msg = event.target.value)"></textarea>
       </div>
     </div>
   </div>
@@ -180,8 +171,8 @@ defineExpose({ send })
   gap: 40px;
   max-width: 1000px;
   width: 100%;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 0px auto 0px auto;
+  padding: 0px  20px  0px;
   box-sizing: border-box;
 }
 
@@ -198,6 +189,8 @@ defineExpose({ send })
   align-items: center;
   gap: 10px;
   font-weight: 500;
+    width: 100%;
+    margin: auto;
 }
 
 .row span {
@@ -222,7 +215,6 @@ defineExpose({ send })
   font-weight: 500;
   width: 100%;
 }
-
 .textarea {
   min-height: 120px;
   resize: none;
@@ -236,5 +228,6 @@ defineExpose({ send })
     width: 100%;
     flex: none; /* 或 flex: 1 1 auto; 都可以 */
   }
+  select{height: 45px;}
 }
 </style>

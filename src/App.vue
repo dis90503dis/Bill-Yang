@@ -4,6 +4,7 @@ import Carousel from "./components/Carousel.vue"
 // import Order from "./section/order.vue"
 import RecaptchaField from "./components/RecaptchaField.vue"
 import FormSection from "./components/Form.vue"
+import ContactInfo from "./components/contactInfo.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
 
@@ -104,117 +105,135 @@ onUnmounted(() => {
   window.removeEventListener("resize", setScrollPositions)
 })
 const p06img1 = [
-  { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "情境示意圖" },
-  { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "7-11超商" },
-  { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "全聯" },
-  { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "東山區農會" },
+  { src: new URL("./assets/p06/1-1.jpg", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/1-2.jpg", import.meta.url).href, caption: "7-11超商" },
+  { src: new URL("./assets/p06/1-3.jpg", import.meta.url).href, caption: "全聯" },
+  { src: new URL("./assets/p06/1-4.jpg", import.meta.url).href, caption: "東山區農會" },
 ]
 const p06img2 = [
-  { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "情境示意圖" },
-  { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "東山運動公園" },
-  { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "東山圖書館" },
+  { src: new URL("./assets/p06/2-1.jpg", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/2-2.jpg", import.meta.url).href, caption: "東山運動公園" },
+  { src: new URL("./assets/p06/2-3.jpg", import.meta.url).href, caption: "東山圖書館" },
 ]
-const p06img3 = [{ src: new URL("./assets/p06/3-1.png", import.meta.url).href, caption: "國三柳營東山交流道" }]
+const p06img3 = [{ src: new URL("./assets/p06/3-1.jpg", import.meta.url).href, caption: "國三柳營東山交流道" }]
 const p06img4 = [
-  { src: new URL("./assets/p06/4-1.png", import.meta.url).href, caption: "情境示意圖" },
-  { src: new URL("./assets/p06/4-2.png", import.meta.url).href, caption: "東山國小" },
-  { src: new URL("./assets/p06/4-3.png", import.meta.url).href, caption: "東山國中" },
+  { src: new URL("./assets/p06/4-1.jpg", import.meta.url).href, caption: "情境示意圖" },
+  { src: new URL("./assets/p06/4-2.jpg", import.meta.url).href, caption: "東山國小" },
+  { src: new URL("./assets/p06/4-3.jpg", import.meta.url).href, caption: "東山國中" },
 ]
 const p07img = [
-  { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
-  { src: new URL("./assets/p07/slider2.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
-  { src: new URL("./assets/p07/slider3.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
-  { src: new URL("./assets/p07/slider4.png", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider.jpg", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider2.jpg", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider3.jpg", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
+  { src: new URL("./assets/p07/slider4.jpg", import.meta.url).href, caption: "東尼大賦現場實景拍攝" },
 ]
 const p09img = [
   {
-    src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+    src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
     caption: "現場實景拍攝",
   },
   {
-    src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
+    src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
     caption: "現場實景拍攝",
   },
   {
-    src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
+    src: new URL("./assets/p09/Group-45.jpg", import.meta.url).href,
     caption: "現場實景拍攝",
   },
   {
-    src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+    src: new URL("./assets/p09/Group-46.jpg", import.meta.url).href,
     caption: "現場實景拍攝",
   },
 ]
 const p10ImageGroups = [
   {
-    name: "A13戶",
+    name: "A13",
     images: [
       {
-        src: new URL("./assets/p10/p10-1.png", import.meta.url).href,
+        src: new URL("./assets/p10/p10-1.jpg", import.meta.url).href,
         caption: "客廳",
       },
       {
-        src: new URL("./assets/p10/Group 47.png", import.meta.url).href,
+        src: new URL("./assets/p10/Group-47.jpg", import.meta.url).href,
         caption: "客廳",
       },
       {
-        src: new URL("./assets/p10/Group 48.png", import.meta.url).href,
+        src: new URL("./assets/p10/Group-48.jpg", import.meta.url).href,
         caption: "臥房",
       },
       {
-        src: new URL("./assets/p10/Group 49.png", import.meta.url).href,
+        src: new URL("./assets/p10/Group-49.jpg", import.meta.url).href,
         caption: "臥房",
       },
     ],
   },
   {
-    name: "B8戶",
+    name: "B6",
     images: [
       {
-        src: new URL("./assets/p09/p09-1.png", import.meta.url).href,
+        src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
         caption: "圖說",
       },
       {
-        src: new URL("./assets/p09/Group 44.png", import.meta.url).href,
-        caption: "圖說",
-      },
-      {
-        src: new URL("./assets/p09/Group 45.png", import.meta.url).href,
-        caption: "圖說",
-      },
-      {
-        src: new URL("./assets/p09/Group 46.png", import.meta.url).href,
+        src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
         caption: "圖說",
       },
     ],
   },
   {
-    name: "A3戶",
+    name: "D5",
     images: [
-      { src: new URL("./assets/p07/slider.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p07/Group 41.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p07/Group 42.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p07/Group 43.png", import.meta.url).href, caption: "圖說" },
+      {
+        src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
     ],
   },
   {
-    name: "C5戶", // 假設的名稱
+    name: "D9",
     images: [
-      { src: new URL("./assets/p06/1-1.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p06/1-2.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p06/1-3.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p06/1-4.png", import.meta.url).href, caption: "圖說" },
+      {
+        src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
     ],
   },
   {
-    name: "A7戶", // 假設的名稱
+    name: "A13",
     images: [
-      { src: new URL("./assets/p06/2-1.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p06/2-2.png", import.meta.url).href, caption: "圖說" },
-      { src: new URL("./assets/p06/2-3.png", import.meta.url).href, caption: "圖說" },
+      {
+        src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
+    ],
+  },
+  {
+    name: "B5",
+    images: [
+      {
+        src: new URL("./assets/p09/p09-1.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
+      {
+        src: new URL("./assets/p09/Group-44.jpg", import.meta.url).href,
+        caption: "圖說",
+      },
     ],
   },
 ]
-const currentP10Images = computed(() => p10ImageGroups[cur.value])
+const currentP10Images = computed(() => p10ImageGroups.value[cur.value]?.images || []);
 const showSidebar = ref(false)
 const selectedItem = ref("東山市心")
 const menuItems = ["年度鉅獻", "東山市心", "美好生活", "榮耀血統", "北歐寧靜", "全齡格局", "上選建材"]
@@ -233,15 +252,19 @@ function handleSelect(item) {
         <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-450" />
       </div>
     </div>
-    <!-- <div class="p02"></div> -->
+    <div class="p02">
+      <iframe src="https://www.youtube.com/embed/H94ntp93SGY?rel=0&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=H94ntp93SGY&amp;showinfo=0" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen="" name="fitvid0"></iframe>
+    
+    
+    </div>
     <div class="p03" ref="p03Ref">
-      <img class="p03-img" src="./assets/p03/03.png" alt="" @load="setScrollPositions" />
+      <img class="p03-img" src="./assets/p03/03.jpg" alt="" @load="setScrollPositions" />
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
         <img class="finger-icon" src="./assets/finger.svg" alt="" />
       </div>
     </div>
     <div class="p04">
-      <img ref="bgImage" class="p04bg" src="./assets/p04/100.png" alt="" />
+      <img class="p04bg" src="./assets/p04/100.jpg" alt="" data-aos="zoom-out" data-aos-delay="0" />
       <img class="p04txt" src="./assets/p04/txt.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
     </div>
 
@@ -253,7 +276,7 @@ function handleSelect(item) {
     </div>
 
     <div class="p05" ref="p05Ref">
-      <img v-if="isMobile" class="p05-img" src="./assets/p05/05.png" alt="" @load="setScrollPositions" />
+      <img v-if="isMobile" class="p05-img" src="./assets/p05/05.jpg" alt="" @load="setScrollPositions" />
       <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
         <img class="finger-icon" src="./assets/finger.svg" alt="" />
       </div>
@@ -267,10 +290,10 @@ function handleSelect(item) {
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <div class="circle-txt">市心<br />商圈</div>
-            <div class="p06card-number"><img src="./assets/p06/1.svg" alt="" /></div>
+            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
+            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
           </div>
-          <div class="p06card-word" data-aos="fade-up" data-aos-delay="200">
+          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
             <p>
               全聯、7-11、市場、農會、電信局、<br />
               郵局、行政中心、中興觀光美食街
@@ -284,10 +307,10 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <div class="circle-txt">樂活<br />休閒</div>
-            <div class="p06card-number"><img src="./assets/p06/2.svg" alt="" /></div>
+            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
+            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
           </div>
-          <div class="p06card-word">
+          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
             <p>運動公園、圖書館、175咖啡公路</p>
           </div>
         </div>
@@ -298,10 +321,10 @@ function handleSelect(item) {
       <div class="p06card">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <div class="circle-txt">三大<br />交通</div>
-            <div class="p06card-number"><img src="./assets/p06/3.svg" alt="" /></div>
+            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
+            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
           </div>
-          <div class="p06card-word">
+          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
             <p>國3柳營交流道、國1新營交流道、<br />台1線</p>
           </div>
         </div>
@@ -312,10 +335,10 @@ function handleSelect(item) {
       <div class="p06card reverse">
         <div class="p06card-txt">
           <div class="p06card-circle">
-            <div class="circle-txt">12年<br />學區</div>
-            <div class="p06card-number"><img src="./assets/p06/4.svg" alt="" /></div>
+            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
+            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
           </div>
-          <div class="p06card-word">
+          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
             <p>東山國小附設幼稚園、東山國中</p>
           </div>
         </div>
@@ -326,40 +349,40 @@ function handleSelect(item) {
 
       <div class="p06m">
         <div class="p06m-box">
-          <div class="p06m-number"><img src="./assets/p06/1.svg" alt="" /></div>
-          <div class="p06m-circle-txt">市心<br />商圈</div>
+          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
+          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
         </div>
-        <div class="p06m-txt"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
-          <div class="p06m-number"><img src="./assets/p06/2.svg" alt="" /></div>
-          <div class="p06m-circle-txt">樂活<br />休閒</div>
+          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
+          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
         </div>
-        <div class="p06m-txt"><p>運動公園、圖書館、175咖啡公路</p></div>
+        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>運動公園、圖書館、175咖啡公路</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box">
-          <div class="p06m-number"><img src="./assets/p06/3.svg" alt="" /></div>
-          <div class="p06m-circle-txt">三大<br />交通</div>
+          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
+          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
         </div>
-        <div class="p06m-txt"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
+        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
         <div class="p06m-box reverse">
-          <div class="p06m-number"><img src="./assets/p06/4.svg" alt="" /></div>
-          <div class="p06m-circle-txt">12年<br />學區</div>
+          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
+          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
         </div>
-        <div class="p06m-txt"><p>東山國小附設幼稚園、東山國中</p></div>
+        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>東山國小附設幼稚園、東山國中</p></div>
         <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
       </div>
     </div>
     <div class="p07">
       <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
-      <img class="p07en" src="./assets/p07/en.svg" alt="" />
+      <img class="p07en" src="./assets/p07/en.svg" alt="" data-aos="fade-up" data-aos-delay="0" />
       <div class="p07-content">
-        <div class="p07-title">
+        <div class="p07-title" data-aos="fade-up" data-aos-delay="200">
           傳承69年載卓越匠心，<br />
           榮耀傳承，口碑見證非凡業績！
         </div>
-        <div class="p07-subtitle">
+        <div class="p07-subtitle" data-aos="fade-up" data-aos-delay="400">
           「東南水泥集團」創立於1956年，是政府推動高鐵、捷運、南二高及各重大公共工程所採用水泥品牌之一。為追求永續企業使命，成立「東泥建設」，以品牌傳承、創新未來為信念，為城市開創美好生活願景。
         </div>
       </div>
@@ -370,12 +393,12 @@ function handleSelect(item) {
       <div class="p08-box">
         <div class="highlight-border"></div>
         <div class="p08-content">
-          <div class="p08-title"><img src="./assets/p08/title.svg" alt="" /></div>
-          <div class="p08-subtitle"><img src="./assets/p08/subtitle.svg" alt="" /></div>
+          <div class="p08-title" data-aos="fade-up" data-aos-delay="0"><img src="./assets/p08/title.svg" alt="" /></div>
+          <div class="p08-subtitle" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p08/subtitle.svg" alt="" /></div>
           <div class="p08-txt">
-            <p class="p08-word">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
+            <p class="p08-word" data-aos="fade-up" data-aos-delay="400">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
           </div>
-          <div class="p08-circlebox">
+          <div class="p08-circlebox" data-aos="fade-up" data-aos-delay="600">
             <div class="p08-circle">
               <img class="p08-img" src="./assets/p08/Group95.svg" alt="" />
             </div>
@@ -393,15 +416,15 @@ function handleSelect(item) {
           <img src="./assets/p09/Group 4.png" alt="" />
         </div>
         <div class="p09-content">
-          <div class="p09-title">
+          <div class="p09-title" data-aos="fade-up" data-aos-delay="0">
             格柵光影、綠植風景<br />
             展現北歐人文之美
           </div>
-          <div class="p09-subtitle">
+          <div class="p09-subtitle" data-aos="fade-up" data-aos-delay="200">
             「以人為本、取法自然」，融入北歐設計理念，透過光影層次形塑外觀立面，運用玻璃透光陽台，創造室內綠意景致，呈現出自然、機能的人文綠建築。
           </div>
         </div>
-        <div class="p09m-circle"><img src="./assets/p09/Groupm4.png" alt="" /></div>
+        <div class="p09m-circle" data-aos="fade-up" data-aos-delay="400"><img src="./assets/p09/Groupm4.png" alt="" /></div>
       </div>
       <div class="p09-car">
         <Carousel class="p09car" :carouselId="'p09-carousel-1'" :images="p09img" :aspectRatio="1920 / 1194" />
@@ -411,16 +434,16 @@ function handleSelect(item) {
       <div class="p10-nav">
         <div class="p10-content pcno"></div>
         <div class="p10-content">
-          <div class="p10-title">
+          <div class="p10-title" data-aos="fade-up" data-aos-delay="0">
             引光入室，簡約質感<br />
             打造溫暖且實用的機能美學宅
           </div>
-          <div class="p10-icon"><img src="./assets/p10/icon.png" alt="" /></div>
+          <div class="p10-icon" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p10/icon.png" alt="" /></div>
         </div>
       </div>
       <div class="p10-subtitle">
-        <div class="p10-subtitle-title">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
-        <div class="p10-subtitle-txt">
+        <div class="p10-subtitle-title" data-aos="fade-up" data-aos-delay="0">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
+        <div class="p10-subtitle-txt" data-aos="fade-up" data-aos-delay="200">
           1樓客餐廳、多功能配置，可彈性規劃孝親房、客房、親子讀書室等，滿足不同家庭成員的生活需求。<br />
           2樓以上規劃花園、雙主臥、雙次臥、雙大露臺，搭配衛浴乾濕分離設計，打造全齡友善的生活格局，<br />滿足三代家人舒適共居的理想空間。
         </div>
@@ -428,21 +451,23 @@ function handleSelect(item) {
       <div class="p10-car-box">
         <div class="p10-btnbox">
           <button v-for="(group, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
-            <h2>{{ group.name }}</h2>
+            <h2><span>{{ group.name }}</span>戶</h2>
           </button>
         </div>
         <div class="p10-car">
-          <Carousel class="p10car" :carouselId="'p10-carousel-' + cur" :images="p10ImageGroups[cur]?.images || []" :aspectRatio="'256 / 125'" />
+          <Carousel class="p10car" :key="cur"   :carouselId="'p10-carousel-' + cur" :images="p10ImageGroups[cur]?.images || []" :aspectRatio="'256 / 125'"
+/>
         </div>
-      </div>
+      </div><img src="./assets/p10/ss.png" alt="" class="bgs" />
+
     </div>
     <div class="p11">
       <div class="p11-subtitle">
-        <div class="p11-subtitle-title">
+        <div class="p11-subtitle-title" data-aos="fade-up" data-aos-delay="0">
           嚴選名品建材<br />
           匠心打造非凡品味
         </div>
-        <div class="p11-subtitle-txt">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
+        <div class="p11-subtitle-txt" data-aos="fade-up" data-aos-delay="200">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
         <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
       </div>
       <div class="p11-content-box pcno">
@@ -462,33 +487,8 @@ function handleSelect(item) {
         <div><PolicyAgreement v-model="policyAgree" /></div>
         <div><RecaptchaField @verify="onVerify" @expired="onExpired" /></div>
         <div class="button" @click="formRef.send()"><img class="mx-auto" src="./assets/form/booking.svg" alt="" /></div>
-        <div class="contact-button">
-          <a target="_blank" rel="noopener noreferrer" href="">
-            <div class="button"><img class="mx-auto" src="./assets/form/Frame 31.svg" alt="" /></div>
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
-            <div class="button"><img class="mx-auto" src="./assets/form/Frame 32.svg" alt="" /></div
-          ></a>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/">
-            <div class="button"><img class="mx-auto" src="./assets/form/Frame 33.svg" alt="" /></div
-          ></a>
-        </div>
-        <a target="_blank" rel="noopener noreferrer" href="https://maps.app.goo.gl/9nnV8sdBdx6gms7B9">
-          <div class="contact-adress button">
-            <img class="pcno" src="./assets/form/Map.svg" alt="" />
-            <img class="mbno" src="./assets/form/Group 101.png" alt="" />
-          </div>
-        </a>
+        <ContactInfo />
       </div>
-    </div>
-    <div class="google-map-container">
-      <iframe
-        class="google-map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28927.07363247049!2d121.5170471!3d25.0477649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a974bd96dc9b%3A0x7e8454fcd3a67d1c!2z5Y-w5YyX5biC5Lit5aSu!5e0!3m2!1szh-TW!2stw!4v1713320000000!5m2!1szh-TW!2stw"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
     </div>
   </div>
 </template>
@@ -540,6 +540,9 @@ function handleSelect(item) {
   position: relative;
   /*  height: 16vw; 
   width: 16vw; */
+}
+.p06card-word p {
+  font-size: calc(16 * 100vw / 375);
 }
 .circle {
   width: 100%;
@@ -617,7 +620,7 @@ function handleSelect(item) {
 }
 
 :global(html) {
-  font-size: clamp(14px, 0.8vw + 0.5rem, 18px);
+  font-size: calc(100vw * 18 / 1920);/* clamp(14px, 0.8vw + 0.5rem, 18px); */
 }
 .container {
   width: 100%;
@@ -701,15 +704,15 @@ function handleSelect(item) {
   /* transform: translate(-50%, -100%) !important; */
 }
 .p02 {
-  width: 100%;
-  height: 1080px;
-  background-color: #aaa;
+  width: 100%;aspect-ratio: 1920 / 1080;
+
 }
+.p02 iframe{ width: 100%;aspect-ratio: 1920 / 1080;}
 .p03 {
   position: relative;
   width: 100%;
   aspect-ratio: 1920 / 1185;
-  background-image: url("./assets/p03/03.png");
+  background-image: url("./assets/p03/03.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -752,7 +755,7 @@ function handleSelect(item) {
 .p05 {
   width: 100%;
   aspect-ratio: 1920 / 1185;
-  background-image: url("./assets/p05/05.png");
+  background-image: url("./assets/p05/05.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -760,7 +763,7 @@ function handleSelect(item) {
 }
 .p05-text {
   font-family: "Noto Sans TC", sans-serif;
-  font-size: clamp(16px, 2vw, 30px);
+  font-size: calc(30 * 100vw / 1920);
   line-height: 1.5;
   position: absolute;
   text-align: center;
@@ -782,9 +785,9 @@ function handleSelect(item) {
   /* 
   background-image: url("./assets/p06/06.jpg");*/
   background-image: url("./assets/p06/bg.png");
-  background-size: cover;
+  /* background-size: cover;
   background-position: 0 0;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;  */
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -876,7 +879,7 @@ function handleSelect(item) {
 .p06card-word p {
   margin-top: 2rem;
   /* font-family: "Noto Sans TC", sans-serif; */
-  font-size: clamp(16px, 2vw, 30px);
+  font-size: calc(30 * 100vw / 1920);/* clamp(16px, 2vw, 30px); */
   color: #fff;
   line-height: 1.5;
   padding-bottom: 0;
@@ -960,7 +963,7 @@ function handleSelect(item) {
 }
 .p08 {
   width: 100vw;
-  background-image: url(./assets/p08/bg.png);
+  background-image: url(./assets/p08/bg.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1115,15 +1118,23 @@ function handleSelect(item) {
   height: auto;
   display: flex;
   flex-direction: column;
-  background-image: url(./assets/p10/p10bg2.png);
+  background-image: url(./assets/p10/p10bg2.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;position: relative;
 }
+.p10 .bgs{position: absolute;top: 0;left:0;width: 110%;z-index: 5;
+
+  animation: an 2s infinite alternate;
+  transform: skewX(6deg);height: 26vw;
+
+}
+
 .p10-nav {
   display: flex;
   width: 100%;
-  background-image: url(./assets/p10/p10bg.png);
+  background-image: url(./assets/p10/p10bg.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1227,6 +1238,7 @@ function handleSelect(item) {
   gap: 1em;
 }
 .p10-btn {
+  
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
@@ -1243,9 +1255,11 @@ function handleSelect(item) {
 .p10-btn h2 {
   margin: 0 auto;
   text-align: center;
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Noto Serif TC", serif;
   color: #0a5e84;
-  font-weight: 700;
+  font-weight: 700;font-size:1.4em;
+}
+.p10-btn h2 span{font-size: 1.3em;
 }
 .p10-car {
   width: 80%;
@@ -1257,7 +1271,7 @@ function handleSelect(item) {
   height: auto;
   display: flex;
   flex-direction: column;
-  background-image: url(./assets/p10/p10bg2.png);
+  background-image: url(./assets/p10/p10bg2.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1298,7 +1312,7 @@ function handleSelect(item) {
 .p11-content-box {
   width: 100%;
   aspect-ratio: 1920 / 820;
-  background-image: url(./assets/p11/p11bg.png);
+  background-image: url(./assets/p11/p11bg.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1352,40 +1366,7 @@ function handleSelect(item) {
   pointer-events: none;
   z-index: 0;
 }
-.contact-button {
-  margin-top: 3.5rem;
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-}
-.button img {
-  width: 15vw;
-  background-color: #ffe3bb;
-  /* background-color: #a7843f; */
-  border-radius: 1rem;
-  cursor: pointer;
-}
-.contact-adress img {
-  width: calc(45vw + 40px);
-  margin-bottom: 4rem;
-}
-.contact-button,
-.contact-adress {
-  position: relative; /* 使 z-index 生效 */
-  z-index: 2; /* 比 0 大即可 */
-}
-.google-map-container {
-  width: 100vw;
-  height: 50vh;
-  overflow: hidden;
-  position: relative;
-}
 
-.google-map {
-  border: 0;
-  width: 100%;
-  height: 100%;
-}
 .reverse {
   flex-direction: row-reverse;
 }
@@ -1539,6 +1520,9 @@ function handleSelect(item) {
     -ms-overflow-style: none;
   }
 
+  .p05-text {
+  font-size: calc(16 * 100vw / 375);
+}
   .p03-img {
     position: relative;
     display: block;
@@ -1570,6 +1554,8 @@ function handleSelect(item) {
     position: relative;
     display: block;
     height: 800px;
+    width: auto;
+    max-width: inherit;
     /* 確保圖片足夠寬 */
     /* min-width: 300vw; */
     z-index: 1;
@@ -1787,13 +1773,16 @@ function handleSelect(item) {
     object-fit: cover;
   }
   .p10-nav {
-    background-image: url(./assets/p10/Group81.png);
+    background-image: url(./assets/p10/Group81.jpg);
     aspect-ratio: 375 / 390;
     align-items: start;
   }
   .pcno {
     display: none;
   }
+.p10 .bgs{height: 55vw;
+
+}
   .p10-content {
     justify-content: start;
     width: 100%;
@@ -1888,15 +1877,19 @@ function handleSelect(item) {
     height: 100%;
     object-fit: cover;
   }
+  :global(html) {
+  font-size: calc(100vw * 14 / 375);/* clamp(14px, 0.8vw + 0.5rem, 18px); */
+}
   .contact-button {
     flex-direction: column;
   }
   .formlogo {
     width: 50%;
-    margin-top: 10%;
+    margin-top: 10%;margin:20vw auto 5vw;
   }
   .formtxt {
-    font-weight: 800;
+    font-weight: 500;
+    margin: 0;
   }
   .contact-button,
   .contact-adress {
@@ -1904,7 +1897,7 @@ function handleSelect(item) {
     width: 80%;
   }
   .button img {
-    width: 85%;
+     width: 100%;
     object-fit: cover;
   }
   .contact-adress {
@@ -1913,6 +1906,10 @@ function handleSelect(item) {
     align-items: center;
     width: 80%;
     margin: 0 auto;
+  }
+
+  .pform{
+    margin-bottom: calc(63 * 100vw / 375);
   }
 }
 </style>

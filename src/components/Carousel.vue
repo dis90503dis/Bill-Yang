@@ -1,11 +1,11 @@
 <template>
   <div :id="carouselId" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
     <!-- 左右箭頭（手機板專用） -->
-    <button class="carousel-control-prev mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="prev">
+    <button  v-if="images.length > 1" class="carousel-control-prev mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="prev">
       <img src="../assets/iCON.svg" alt="prev" class="arrow-icon flip-horizontal" />
     </button>
 
-    <button class="carousel-control-next mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="next">
+    <button  v-if="images.length > 1" class="carousel-control-next mobile-only" type="button" :data-bs-target="`#${carouselId}`" data-bs-slide="next">
       <img src="../assets/iCON.svg" alt="next" class="arrow-icon" />
     </button>
 

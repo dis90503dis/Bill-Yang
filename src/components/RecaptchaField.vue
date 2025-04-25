@@ -28,7 +28,7 @@ const onExp = () => {
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 2rem; /* mt-8 */
+  margin-top: 0rem; /* mt-8 */
   z-index: 10;
 }
 </style>

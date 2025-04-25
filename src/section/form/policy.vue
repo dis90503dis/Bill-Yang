@@ -1,8 +1,23 @@
+<script setup>
+import info from "@/info"
+import { computed } from "vue"
+
+const props = defineProps({
+  show: Boolean,
+})
+const emit = defineEmits(["update:show"])
+
+const close = () => emit("update:show", false)
+</script>
+
 <template>
-  <div class="fixed inset-0 z-40 hidden peer-checked:flex items-start justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto overscroll-contain">
-    <div class="w-11/12 max-w-5xl bg-white rounded-xl shadow-xl p-6 text-gray-800">
-      <div class="text-3xl font-bold">個資告知事項聲明</div>
-      <h3 class="text-lg py-4">
+  <div
+    v-if="show"
+    class="moooooo fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-sm overflow-y-auto"
+  >
+    <div class="max-w-5xl bg-white rounded-xl shadow-xl p-6 text-gray-800">
+      <div class="text-3xl font-bold mb-4 t1">個資告知事項聲明</div>
+      <h3 class="text-lg py-4 t2">
         非常歡迎您光臨「{{
           info.caseName
         }}網站」（以下簡稱本網站），為了讓您能夠安心使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：
@@ -62,15 +77,61 @@
 
         <p>本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。</p>
       </div>
-      <div class="modal-action">
-        <label for="policy-modal" class="inline-block bg-gray-800 text-white px-5 py-2 rounded-lg cursor-pointer">關閉</label>
+      <div class="modal-action mt-6">
+        <button
+          @click="close"
+          class="block bg-gray-800 text-white px-5 py-2 rounded-lg cursor-pointer mx-auto hover:opacity-80"
+        >
+          關閉
+        </button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import info from "@/info"
-</script>
 
-<style scoped></style>
+<style scoped>
+.moooooo{
+  margin: 0;
+  padding: 2em;
+  font-size: 16px;
+}
+/* Modal 內容樣式 */
+
+.modal-content {
+  width: 91.666667%; /* w-11/12 */
+  max-width: 80rem;   /* max-w-5xl */
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  color: #1f2937; /* text-gray-800 */
+}/**/
+.inset-0{text-align: justify;
+  position: fixed;
+  z-index: 40;
+  overflow: hidden;
+}
+.modal-close-btn {
+  display: block;
+  background-color: #1f2937; /* bg-gray-800 */
+  color: white;
+  padding: 0.5rem 0;width: 8em;
+  text-align: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin: auto;
+}
+
+.modal-close-btn:hover {
+  opacity: 0.8;
+}
+.moooooo .t1{font-size: 2em;font-weight: 700;}
+.moooooo .t2{font-size: 1em;font-weight: 500;}
+.moooooo h3{font-size: 1.1em;font-weight: 700;}
+
+@media screen and (max-width:768px) {
+  .moooooo {padding-bottom:  calc(73 * 100vw / 375);font-size: 14px;}
+}
+</style>
