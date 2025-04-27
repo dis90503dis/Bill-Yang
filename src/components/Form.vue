@@ -40,6 +40,8 @@
 import { ref, reactive, watch, inject } from "vue"
 import { cityList, renderAreaList } from "../info/address.js"
 import { useToast } from "vue-toastification"
+const emit = defineEmits(['FormThanks'])
+
 const toast = useToast()
 
 const sending = ref(false)
@@ -77,7 +79,6 @@ watch(
 
 const send = () => {
   console.log("send() 被呼叫了") // ← 應該要看到
-
   const urlParams = new URLSearchParams(window.location.search)
   const utmSource = urlParams.get("utm_source")
   const utmMedium = urlParams.get("utm_medium")
@@ -142,6 +143,10 @@ const send = () => {
     }).then((response) => {
       if (response.status === 200) {
         toast.success("資料送出成功！我們已收到您的預約")
+        // emit('FormThanks','FormThanks')
+        emit('FormThanks','FormThanks')
+      }else if (response.status == 503 || response.status == 404 || response.status == 500) {
+        emit('FormThanks','404')
       }
       formData.name = formData.phone = formData.msg = formData.city = formData.area = ""
       sending.value = false

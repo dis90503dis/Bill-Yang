@@ -11,6 +11,10 @@ import SidebarMenu from "./components/SidebarMenu.vue"
 const formRef = ref(null)
 import AOS from "aos"
 
+const websiteStatus = ref('')
+const changeWebsiteStatus = (msg) =>{
+  websiteStatus.value = msg
+}
 const cur = ref(0)
 const p03Ref = ref(null)
 const p05Ref = ref(null)
@@ -243,251 +247,268 @@ function handleSelect(item) {
 }
 </script>
 <template>
-  <SidebarMenu v-model="showSidebar" :items="menuItems" :selected="selectedItem" @select="handleSelect" />
-  <div class="container">
-    <div class="p01">
-      <div class="p01-content">
-        <img class="logo" src="./assets/p01/logo.svg" alt="" data-aos="zoom-in" data-aos-delay="0" />
-        <img class="t1" src="./assets/p01/t1.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
-        <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-450" />
-      </div>
-    </div>
-    <div class="p02">
-      <iframe src="https://www.youtube.com/embed/H94ntp93SGY?rel=0&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=H94ntp93SGY&amp;showinfo=0" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen="" name="fitvid0"></iframe>
-    
-    
-    </div>
-    <div class="p03" ref="p03Ref">
-      <img class="p03-img" src="./assets/p03/03.jpg" alt="" @load="setScrollPositions" />
-      <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
-        <img class="finger-icon" src="./assets/finger.svg" alt="" />
-      </div>
-    </div>
-    <div class="p04">
-      <img class="p04bg" src="./assets/p04/100.jpg" alt="" data-aos="zoom-out" data-aos-delay="0" />
-      <img class="p04txt" src="./assets/p04/txt.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
-    </div>
+  <div class="bgcblabk d_flex" v-if="websiteStatus == 'FormThanks'">
+    <div>感謝您的預約</div>
+    <button @click="websiteStatus=''">回首頁</button>
+  </div>
+  <div class="bgcblabk d_flex" v-else-if="websiteStatus == 'PhoneThanks'">
+    <div>感謝您的來電</div>
+    <button @click="websiteStatus=''">回首頁</button>
+  </div>
+  <div class="bgcblabk d_flex" v-else-if="websiteStatus == '404'">
+    <div>網站出了點問題</div>
+    <div>團隊正在全力修復中!</div>
+  </div>
 
-    <div v-if="isMobile" class="phone-p05" ref="">
-      <strong class="phone-p05-text" data-aos="fade-up" data-aos-delay="0"
-        >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
-      >
-      <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
-    </div>
-
-    <div class="p05" ref="p05Ref">
-      <img v-if="isMobile" class="p05-img" src="./assets/p05/05.jpg" alt="" @load="setScrollPositions" />
-      <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
-        <img class="finger-icon" src="./assets/finger.svg" alt="" />
-      </div>
-      <strong v-if="!isMobile" class="p05-text" data-aos-delay="0"
-        >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
-      >
-      <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
-    </div>
-    <div class="p06">
-      <!-- <img src="./assets/p06/06m.jpg" class="t00"> -->
-      <div class="p06card">
-        <div class="p06card-txt">
-          <div class="p06card-circle">
-            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
-            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
-          </div>
-          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
-            <p>
-              全聯、7-11、市場、農會、電信局、<br />
-              郵局、行政中心、中興觀光美食街
-            </p>
-          </div>
-        </div>
-        <div class="p06card-car">
-          <Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'690 / 460'" />
+  <div v-else>
+    <SidebarMenu v-model="showSidebar" :items="menuItems" :selected="selectedItem" @select="handleSelect" />
+    <div class="container">
+      <div class="p01">
+        <div class="p01-content">
+          <img class="logo" src="./assets/p01/logo.svg" alt="" data-aos="zoom-in" data-aos-delay="0" />
+          <img class="t1" src="./assets/p01/t1.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
+          <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-450" />
         </div>
       </div>
-      <div class="p06card reverse">
-        <div class="p06card-txt">
-          <div class="p06card-circle">
-            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
-            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
-          </div>
-          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
-            <p>運動公園、圖書館、175咖啡公路</p>
-          </div>
-        </div>
-        <div class="p06card-car">
-          <Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'690 / 460'" />
+      <div class="p02">
+        <iframe src="https://www.youtube.com/embed/H94ntp93SGY?rel=0&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=H94ntp93SGY&amp;showinfo=0" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen="" name="fitvid0"></iframe>
+      
+      
+      </div>
+      <div class="p03" ref="p03Ref">
+        <img class="p03-img" src="./assets/p03/03.jpg" alt="" @load="setScrollPositions" />
+        <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
+          <img class="finger-icon" src="./assets/finger.svg" alt="" />
         </div>
       </div>
-      <div class="p06card">
-        <div class="p06card-txt">
-          <div class="p06card-circle">
-            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
-            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
-          </div>
-          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
-            <p>國3柳營交流道、國1新營交流道、<br />台1線</p>
-          </div>
-        </div>
-        <div class="p06card-car">
-          <Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'690 / 460'" />
-        </div>
-      </div>
-      <div class="p06card reverse">
-        <div class="p06card-txt">
-          <div class="p06card-circle">
-            <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
-            <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
-          </div>
-          <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
-            <p>東山國小附設幼稚園、東山國中</p>
-          </div>
-        </div>
-        <div class="p06card-car">
-          <Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'690 / 460'" />
-        </div>
+      <div class="p04">
+        <img class="p04bg" src="./assets/p04/100.jpg" alt="" data-aos="zoom-out" data-aos-delay="0" />
+        <img class="p04txt" src="./assets/p04/txt.svg" alt="" data-aos="zoom-in" data-aos-delay="200" />
       </div>
 
-      <div class="p06m">
-        <div class="p06m-box">
-          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
-          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
-        </div>
-        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
-        <div class="p06m-box reverse">
-          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
-          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
-        </div>
-        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>運動公園、圖書館、175咖啡公路</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
-        <div class="p06m-box">
-          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
-          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
-        </div>
-        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
-        <div class="p06m-box reverse">
-          <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
-          <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
-        </div>
-        <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>東山國小附設幼稚園、東山國中</p></div>
-        <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
+      <div v-if="isMobile" class="phone-p05" ref="">
+        <strong class="phone-p05-text" data-aos="fade-up" data-aos-delay="0"
+          >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
+        >
+        <img class="phone-p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
       </div>
-    </div>
-    <div class="p07">
-      <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
-      <img class="p07en" src="./assets/p07/en.svg" alt="" data-aos="fade-up" data-aos-delay="0" />
-      <div class="p07-content">
-        <div class="p07-title" data-aos="fade-up" data-aos-delay="200">
-          傳承69年載卓越匠心，<br />
-          榮耀傳承，口碑見證非凡業績！
+
+      <div class="p05" ref="p05Ref">
+        <img v-if="isMobile" class="p05-img" src="./assets/p05/05.jpg" alt="" @load="setScrollPositions" />
+        <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
+          <img class="finger-icon" src="./assets/finger.svg" alt="" />
         </div>
-        <div class="p07-subtitle" data-aos="fade-up" data-aos-delay="400">
-          「東南水泥集團」創立於1956年，是政府推動高鐵、捷運、南二高及各重大公共工程所採用水泥品牌之一。為追求永續企業使命，成立「東泥建設」，以品牌傳承、創新未來為信念，為城市開創美好生活願景。
-        </div>
+        <strong v-if="!isMobile" class="p05-text" data-aos-delay="0"
+          >東山區最熱鬧的美食大道， 擁有完善的生活機能。無論是日常採買、流行時尚，還是休閒娛樂，一應俱全，輕鬆享受便利與精彩的生活！</strong
+        >
+        <img v-if="!isMobile" class="p05-leaf-img" src="./assets/p05/leaf.png" alt="" />
       </div>
-      <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="'1920 / 1374'" />
-      <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
-    </div>
-    <div class="p08">
-      <div class="p08-box">
-        <div class="highlight-border"></div>
-        <div class="p08-content">
-          <div class="p08-title" data-aos="fade-up" data-aos-delay="0"><img src="./assets/p08/title.svg" alt="" /></div>
-          <div class="p08-subtitle" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p08/subtitle.svg" alt="" /></div>
-          <div class="p08-txt">
-            <p class="p08-word" data-aos="fade-up" data-aos-delay="400">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
-          </div>
-          <div class="p08-circlebox" data-aos="fade-up" data-aos-delay="600">
-            <div class="p08-circle">
-              <img class="p08-img" src="./assets/p08/Group95.svg" alt="" />
+      <div class="p06">
+        <!-- <img src="./assets/p06/06m.jpg" class="t00"> -->
+        <div class="p06card">
+          <div class="p06card-txt">
+            <div class="p06card-circle">
+              <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
+              <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
             </div>
-            <div class="p08-circle">
-              <img class="p08-img" src="./assets/p08/Group96.svg" alt="" />
+            <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
+              <p>
+                全聯、7-11、市場、農會、電信局、<br />
+                郵局、行政中心、中興觀光美食街
+              </p>
             </div>
           </div>
-        </div>
-        <div class="p08-content p08-none"></div>
-      </div>
-    </div>
-    <div class="p09">
-      <div class="p09-nav">
-        <div class="p09-circle">
-          <img src="./assets/p09/Group 4.png" alt="" />
-        </div>
-        <div class="p09-content">
-          <div class="p09-title" data-aos="fade-up" data-aos-delay="0">
-            格柵光影、綠植風景<br />
-            展現北歐人文之美
-          </div>
-          <div class="p09-subtitle" data-aos="fade-up" data-aos-delay="200">
-            「以人為本、取法自然」，融入北歐設計理念，透過光影層次形塑外觀立面，運用玻璃透光陽台，創造室內綠意景致，呈現出自然、機能的人文綠建築。
+          <div class="p06card-car">
+            <Carousel class="p06car" :carouselId="'p06-carousel-1'" :images="p06img1" :aspectRatio="'690 / 460'" />
           </div>
         </div>
-        <div class="p09m-circle" data-aos="fade-up" data-aos-delay="400"><img src="./assets/p09/Groupm4.png" alt="" /></div>
-      </div>
-      <div class="p09-car">
-        <Carousel class="p09car" :carouselId="'p09-carousel-1'" :images="p09img" :aspectRatio="1920 / 1194" />
-      </div>
-    </div>
-    <div class="p10">
-      <div class="p10-nav">
-        <div class="p10-content pcno"></div>
-        <div class="p10-content">
-          <div class="p10-title" data-aos="fade-up" data-aos-delay="0">
-            引光入室，簡約質感<br />
-            打造溫暖且實用的機能美學宅
+        <div class="p06card reverse">
+          <div class="p06card-txt">
+            <div class="p06card-circle">
+              <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
+              <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
+            </div>
+            <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
+              <p>運動公園、圖書館、175咖啡公路</p>
+            </div>
           </div>
-          <div class="p10-icon" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p10/icon.png" alt="" /></div>
+          <div class="p06card-car">
+            <Carousel class="p06car" :carouselId="'p06-carousel-2'" :images="p06img2" :aspectRatio="'690 / 460'" />
+          </div>
         </div>
-      </div>
-      <div class="p10-subtitle">
-        <div class="p10-subtitle-title" data-aos="fade-up" data-aos-delay="0">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
-        <div class="p10-subtitle-txt" data-aos="fade-up" data-aos-delay="200">
-          1樓客餐廳、多功能配置，可彈性規劃孝親房、客房、親子讀書室等，滿足不同家庭成員的生活需求。<br />
-          2樓以上規劃花園、雙主臥、雙次臥、雙大露臺，搭配衛浴乾濕分離設計，打造全齡友善的生活格局，<br />滿足三代家人舒適共居的理想空間。
+        <div class="p06card">
+          <div class="p06card-txt">
+            <div class="p06card-circle">
+              <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
+              <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
+            </div>
+            <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
+              <p>國3柳營交流道、國1新營交流道、<br />台1線</p>
+            </div>
+          </div>
+          <div class="p06card-car">
+            <Carousel class="p06car" :carouselId="'p06-carousel-3'" :images="p06img3" :aspectRatio="'690 / 460'" />
+          </div>
         </div>
-      </div>
-      <div class="p10-car-box">
-        <div class="p10-btnbox">
-          <button v-for="(group, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
-            <h2><span>{{ group.name }}</span>戶</h2>
-          </button>
+        <div class="p06card reverse">
+          <div class="p06card-txt">
+            <div class="p06card-circle">
+              <div class="circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
+              <div class="p06card-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
+            </div>
+            <div class="p06card-word" data-aos="fade-up" data-aos-delay="400">
+              <p>東山國小附設幼稚園、東山國中</p>
+            </div>
+          </div>
+          <div class="p06card-car">
+            <Carousel class="p06car" :carouselId="'p06-carousel-4'" :images="p06img4" :aspectRatio="'690 / 460'" />
+          </div>
         </div>
-        <div class="p10-car">
-          <Carousel class="p10car" :key="cur"   :carouselId="'p10-carousel-' + cur" :images="p10ImageGroups[cur]?.images || []" :aspectRatio="'256 / 125'"
-/>
-        </div>
-      </div><img src="./assets/p10/ss.png" alt="" class="bgs" />
 
-    </div>
-    <div class="p11">
-      <div class="p11-subtitle">
-        <div class="p11-subtitle-title" data-aos="fade-up" data-aos-delay="0">
-          嚴選名品建材<br />
-          匠心打造非凡品味
+        <div class="p06m">
+          <div class="p06m-box">
+            <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/1.svg" alt="" /></div>
+            <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">市心<br />商圈</div>
+          </div>
+          <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>全聯、7-11、市場、農會、電信局、郵局、行政中心、中興觀光美食街</p></div>
+          <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-1'" :images="p06img1" :aspectRatio="'375 / 210'" /></div>
+          <div class="p06m-box reverse">
+            <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/2.svg" alt="" /></div>
+            <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">樂活<br />休閒</div>
+          </div>
+          <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>運動公園、圖書館、175咖啡公路</p></div>
+          <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-2'" :images="p06img2" :aspectRatio="'375 / 210'" /></div>
+          <div class="p06m-box">
+            <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/3.svg" alt="" /></div>
+            <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">三大<br />交通</div>
+          </div>
+          <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>國3柳營交流道、國1新營交流道、台1線</p></div>
+          <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-3'" :images="p06img3" :aspectRatio="'375 / 210'" /></div>
+          <div class="p06m-box reverse">
+            <div class="p06m-number" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p06/4.svg" alt="" /></div>
+            <div class="p06m-circle-txt" data-aos="fade-up" data-aos-delay="0">12年<br />學區</div>
+          </div>
+          <div class="p06m-txt" data-aos="fade-up" data-aos-delay="400"><p>東山國小附設幼稚園、東山國中</p></div>
+          <div class="p06m-car"><Carousel class="p06car" :carouselId="'p06m-carousel-4'" :images="p06img4" :aspectRatio="'375 / 210'" /></div>
         </div>
-        <div class="p11-subtitle-txt" data-aos="fade-up" data-aos-delay="200">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
-        <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
       </div>
-      <div class="p11-content-box pcno">
-        <div class="p11-content"><img src="./assets/p11/Group 96.png" alt="" /></div>
-        <div class="p11-content"></div>
+      <div class="p07">
+        <img class="p07bg" src="./assets/p07/bg.svg" alt="" />
+        <img class="p07en" src="./assets/p07/en.svg" alt="" data-aos="fade-up" data-aos-delay="0" />
+        <div class="p07-content">
+          <div class="p07-title" data-aos="fade-up" data-aos-delay="200">
+            傳承69年載卓越匠心，<br />
+            榮耀傳承，口碑見證非凡業績！
+          </div>
+          <div class="p07-subtitle" data-aos="fade-up" data-aos-delay="400">
+            「東南水泥集團」創立於1956年，是政府推動高鐵、捷運、南二高及各重大公共工程所採用水泥品牌之一。為追求永續企業使命，成立「東泥建設」，以品牌傳承、創新未來為信念，為城市開創美好生活願景。
+          </div>
+        </div>
+        <Carousel class="p07car" :carouselId="'p07'" :images="p07img" :aspectRatio="'1920 / 1374'" />
+        <Carousel class="p07carm" :carouselId="'p07m'" :images="p07img" :aspectRatio="'375 / 449'" />
       </div>
-    </div>
+      <div class="p08">
+        <div class="p08-box">
+          <div class="highlight-border"></div>
+          <div class="p08-content">
+            <div class="p08-title" data-aos="fade-up" data-aos-delay="0"><img src="./assets/p08/title.svg" alt="" /></div>
+            <div class="p08-subtitle" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p08/subtitle.svg" alt="" /></div>
+            <div class="p08-txt">
+              <p class="p08-word" data-aos="fade-up" data-aos-delay="400">看不見的細節才是關鍵，東泥建設以媲美大樓的抗震基礎工程與嚴密防水施作，成就出屹立不搖的百年傳家堡。</p>
+            </div>
+            <div class="p08-circlebox" data-aos="fade-up" data-aos-delay="600">
+              <div class="p08-circle">
+                <img class="p08-img" src="./assets/p08/Group95.svg" alt="" />
+              </div>
+              <div class="p08-circle">
+                <img class="p08-img" src="./assets/p08/Group96.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="p08-content p08-none"></div>
+        </div>
+      </div>
+      <div class="p09">
+        <div class="p09-nav">
+          <div class="p09-circle">
+            <img src="./assets/p09/Group 4.png" alt="" />
+          </div>
+          <div class="p09-content">
+            <div class="p09-title" data-aos="fade-up" data-aos-delay="0">
+              格柵光影、綠植風景<br />
+              展現北歐人文之美
+            </div>
+            <div class="p09-subtitle" data-aos="fade-up" data-aos-delay="200">
+              「以人為本、取法自然」，融入北歐設計理念，透過光影層次形塑外觀立面，運用玻璃透光陽台，創造室內綠意景致，呈現出自然、機能的人文綠建築。
+            </div>
+          </div>
+          <div class="p09m-circle" data-aos="fade-up" data-aos-delay="400"><img src="./assets/p09/Groupm4.png" alt="" /></div>
+        </div>
+        <div class="p09-car">
+          <Carousel class="p09car" :carouselId="'p09-carousel-1'" :images="p09img" :aspectRatio="1920 / 1194" />
+        </div>
+      </div>
+      <div class="p10">
+        <div class="p10-nav">
+          <div class="p10-content pcno"></div>
+          <div class="p10-content">
+            <div class="p10-title" data-aos="fade-up" data-aos-delay="0">
+              引光入室，簡約質感<br />
+              打造溫暖且實用的機能美學宅
+            </div>
+            <div class="p10-icon" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p10/icon.png" alt="" /></div>
+          </div>
+        </div>
+        <div class="p10-subtitle">
+          <div class="p10-subtitle-title" data-aos="fade-up" data-aos-delay="0">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
+          <div class="p10-subtitle-txt" data-aos="fade-up" data-aos-delay="200">
+            1樓客餐廳、多功能配置，可彈性規劃孝親房、客房、親子讀書室等，滿足不同家庭成員的生活需求。<br />
+            2樓以上規劃花園、雙主臥、雙次臥、雙大露臺，搭配衛浴乾濕分離設計，打造全齡友善的生活格局，<br />滿足三代家人舒適共居的理想空間。
+          </div>
+        </div>
+        <div class="p10-car-box">
+          <div class="p10-btnbox">
+            <button v-for="(group, idx) in p10ImageGroups" :key="idx" :class="{ active: idx === cur }" class="p10-btn" type="button" @click="cur = idx">
+              <h2><span>{{ group.name }}</span>戶</h2>
+            </button>
+          </div>
+          <div class="p10-car">
+            <Carousel class="p10car" :key="cur"   :carouselId="'p10-carousel-' + cur" :images="p10ImageGroups[cur]?.images || []" :aspectRatio="'256 / 125'"
+  />
+          </div>
+        </div><img src="./assets/p10/ss.png" alt="" class="bgs" />
 
-    <!-- <Order /> -->
+      </div>
+      <div class="p11">
+        <div class="p11-subtitle">
+          <div class="p11-subtitle-title" data-aos="fade-up" data-aos-delay="0">
+            嚴選名品建材<br />
+            匠心打造非凡品味
+          </div>
+          <div class="p11-subtitle-txt" data-aos="fade-up" data-aos-delay="200">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
+          <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
+        </div>
+        <div class="p11-content-box pcno">
+          <div class="p11-content"><img src="./assets/p11/Group 96.png" alt="" /></div>
+          <div class="p11-content"></div>
+        </div>
+      </div>
 
-    <div class="pform">
-      <div class="form-content">
-        <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
-        <div><img class="formlogo" src="./assets/p01/logo.svg" alt="" /></div>
-        <div><h2 class="formtxt">預約賞屋</h2></div>
-        <div class="form"><FormSection ref="formRef" /></div>
-        <div><PolicyAgreement v-model="policyAgree" /></div>
-        <div><RecaptchaField @verify="onVerify" @expired="onExpired" /></div>
-        <div class="button" @click="formRef.send()"><img class="mx-auto" src="./assets/form/booking.svg" alt="" /></div>
-        <ContactInfo />
+      <!-- <Order /> -->
+
+      <div class="pform">
+        <div class="form-content">
+          <img class="formwave" src="./assets/p01/wave2.svg" alt="" />
+          <div><img class="formlogo" src="./assets/p01/logo.svg" alt="" /></div>
+          <div><h2 class="formtxt">預約賞屋</h2></div>
+          <div class="form">
+            <FormSection @FormThanks="changeWebsiteStatus" ref="formRef" />
+          </div>
+          <div><PolicyAgreement v-model="policyAgree" /></div>
+          <div><RecaptchaField @verify="onVerify" @expired="onExpired" /></div>
+          <div class="button" @click="formRef.send()"><img class="mx-auto" src="./assets/form/booking.svg" alt="" /></div>
+          <ContactInfo @FormThanks="changeWebsiteStatus" />
+        </div>
       </div>
     </div>
   </div>
@@ -1911,5 +1932,19 @@ function handleSelect(item) {
   .pform{
     margin-bottom: calc(63 * 100vw / 375);
   }
+}
+.bgcblabk{
+  width: 100vw;
+  height: 100vh;
+  background-color: #aaa;
+}
+.d_flex{
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 </style>

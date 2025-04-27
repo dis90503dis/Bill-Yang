@@ -35,7 +35,7 @@
 <!-- 案扭區 -->
          <div class="contact-info">
          <div class="contact-button">
-      <div class="button phone" @click="modalOpen = true; modalType = 'phone'" v-if="info.phone">
+      <div class="button phone" @click="modalOpen=true; modalType='phone'" v-if="info.phone">
         <img src="//h35.banner.tw/img/form/phone.svg" alt="電話" srcset="" />
         <div>{{ info.phone }}</div>
       </div>
@@ -138,14 +138,15 @@ import info from "@/info"
 import { inject, ref } from "vue";
 const modalOpen = ref(false);
 const modalType = ref('');
+const emit = defineEmits(['FormThanks'])
 
 const go = () => {
   console.log('go triggered, modalType:', modalType.value);
   if (modalType.value == 'phone') {
+    setTimeout(() => {
+      emit('FormThanks','PhoneThanks')
+    }, 1000);
     window.location.href = `tel:${info.phone.replace("-", "")}`;
-     setTimeout(() => {
-       window.location.href = "phoneThanks";
-     }, 1000);
   } else if (modalType.value == 'messenger') {
     window.open(info.fbMessage);
   } else if (modalType.value == 'fb') {
@@ -157,7 +158,6 @@ const go = () => {
 
   }
 }
-
 
 const smoothScroll = inject('smoothScroll')
 const scrollTo = (el) => {
