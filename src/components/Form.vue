@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="form-container order">
     <div class="form">
       <div class="left">
         <label class="row">

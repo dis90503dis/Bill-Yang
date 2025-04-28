@@ -17,10 +17,10 @@
       <img src="//h35.banner.tw/img/form/fb.svg" alt="粉絲專頁" srcset="" />
       <div>粉絲專頁</div>
     </div>
-    <div class="button" @click="scrollTo('.order')">
+    <a class="button" href="#order" > <!--  @click="scrollTo('.order')"> -->
       <img src="//h35.banner.tw/img/form/pen.svg" alt="即刻預約" srcset="" />
       <div>即刻預約</div>
-    </div>
+    </a>
     <div class="button"
       @click="modalOpen = true; modalType = 'gmap'"  v-if="info.address" >
       <img src="//h35.banner.tw/img/form/gmap.svg" alt="地圖導航" srcset="" />
@@ -189,6 +189,8 @@ const scrollTo = (el) => {
 .mo-contact-info .button{
   display: flex; flex-direction:column;justify-content:center;align-items:center;
   flex: 1;
+  color:#fff ;
+  text-decoration: none;
   border-left:1px solid #FFF6;
 }
 .mo-contact-info .button:first-child{
@@ -214,6 +216,7 @@ const scrollTo = (el) => {
   border-radius:.5em;overflow:hidden;
   background:#ffe3bb;
   display: flex;
+  cursor: pointer;
 flex: 1;height: 3.5em;
 
 }
