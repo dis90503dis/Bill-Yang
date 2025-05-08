@@ -215,11 +215,12 @@ const scrollTo = (el) => {
 .contact-info .button{justify-content:center;align-items:center;
   border-radius:.5em;overflow:hidden;
   background:#ffe3bb;
-  display: flex;
+  display: flex;transition:background .3s;
   cursor: pointer;
 flex: 1;height: 3.5em;
 
 }
+.contact-info .button:hover{background:#ffefd9;}
 .contact-info .button img{height: 1.4em;
   filter: brightness(0) invert(.4); 
   margin-right: 1.5em;}

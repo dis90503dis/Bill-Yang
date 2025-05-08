@@ -1370,6 +1370,9 @@ function handleSelect(item) {
   gap: 2rem;
   position: relative;
 }
+.form-content .button{cursor: pointer;} 
+.form-content .button img{transition:transform .3s;} 
+.form-content .button:hover img{transform: scale(.9);} 
 
 .form {
   width: 100%;
