@@ -270,11 +270,11 @@ function handleSelect(item) {
           <img class="wave" src="./assets/p01/wave2.svg" alt="" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-450" />
         </div>
       </div>
-      <div class="p02">
+    <!--  <div class="p02">
         <iframe src="https://www.youtube.com/embed/H94ntp93SGY?rel=0&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=H94ntp93SGY&amp;showinfo=0" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen="" name="fitvid0"></iframe>
       
       
-      </div>
+      </div> -->
       <div class="p03" ref="p03Ref">
         <img class="p03-img" src="./assets/p03/03.jpg" alt="" @load="setScrollPositions" />
         <div v-if="isMobile && showHint" @click="hideHint" @touchstart="hideHint" class="mask">
@@ -459,6 +459,7 @@ function handleSelect(item) {
             <div class="p10-icon" data-aos="fade-up" data-aos-delay="200"><img src="./assets/p10/icon.png" alt="" /></div>
           </div>
         </div>
+        <!--  
         <div class="p10-subtitle">
           <div class="p10-subtitle-title" data-aos="fade-up" data-aos-delay="0">戶戶大器尺度，室內藏風納光，窗映露臺綠景</div>
           <div class="p10-subtitle-txt" data-aos="fade-up" data-aos-delay="200">
@@ -477,7 +478,7 @@ function handleSelect(item) {
   />
           </div>
         </div><img src="./assets/p10/ss.png" alt="" class="bgs" />
-
+-->
       </div>
       <div class="p11">
         <div class="p11-subtitle">

@@ -27,7 +27,7 @@ const toggleMenu = () => (isOpen.value = !isOpen.value)
 
 // Menu 名稱與目標對應區塊 ID
 const menuItems = [
-  { label: "年度鉅獻", target: "p02" },
+ // { label: "年度鉅獻", target: "p02" },
   { label: "東山市心", target: "p03" },
   { label: "美好生活", target: "p04" },
   { label: "榮耀血統", target: "p07" },
