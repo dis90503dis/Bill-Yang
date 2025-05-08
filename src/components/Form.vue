@@ -137,7 +137,7 @@ const send = () => {
       }
     )
 
-    fetch("contact-form.php", {
+    fetch("https://service-sys.lixin.com.tw/reserve/d981d280-ee08-403b-99cc-9c7e74fe765d", {
       method: "POST",
       body: presend,
     }).then((response) => {
