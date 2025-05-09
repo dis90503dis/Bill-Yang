@@ -487,10 +487,23 @@ function handleSelect(item) {
             匠心打造非凡品味
           </div>
           <div class="p11-subtitle-txt" data-aos="fade-up" data-aos-delay="200">以美學為信仰，堅持每一寸空間的高質感，上選國內外知名的優質建材，用心雕琢別墅的超凡價值。</div>
-          <div class="p11m-img mbno"><img src="./assets/p11/Group 100.png" alt="" /></div>
         </div>
-        <div class="p11-content-box pcno">
-          <div class="p11-content"><img src="./assets/p11/Group 96.png" alt="" /></div>
+        
+        <div class="p11-content-box">
+        <div class="box">
+          <img src="./assets/p11/icon.png" class="icon" alt="" />
+        <div class="pics">
+          <div class="pic">
+          <img src="./assets/p11/1.jpg" alt="" />
+          <div class="c">情境示意圖</div>
+        </div>
+          <div class="pic">
+          <img src="./assets/p11/2.jpg" alt="" />
+          <div class="c">情境示意圖</div>
+        </div>
+      </div>
+        </div>
+         
           <div class="p11-content"></div>
         </div>
       </div>
@@ -1338,17 +1351,25 @@ function handleSelect(item) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
+  position: relative;
 }
 .p11-content {
-  width: 50%;
-  margin-left: 2rem;
+  width: 50%;position: relative;
+  margin-left: 2rem;opacity: .3;
 }
 .p11-content img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+.p11 .box{background: #0A5E84;position: absolute;top: 7.5vw;left: 2vw;text-align: center;padding:2.2vw 0 0 0 ;
+  width:calc(860 * 100vw / 1920);aspect-ratio: 860 / 467;}
+.p11 .box .icon{width: 87%;margin:0 auto 1.6vw;}
+.p11 .pics{display: flex;position: relative;margin: 0 0 -4vw 2.6vw;gap: 1vw;width: 45.5vw;}
+.p11 .pic{position: relative;}
+.p11 .pic img{height: 17.6vw;}
+.p11 .pic .c{position: absolute;left: 0.5em;bottom: 0.5em;color: #fff;}
+
 .pform {
   width: 100vw;
   background-image: url(./assets/p01/bg.svg);
@@ -1883,7 +1904,6 @@ function handleSelect(item) {
     background-size: 500%;
     background-position: top center;
     background-repeat: no-repeat;
-    aspect-ratio: 375 / 550;
     justify-content: center;
   }
   .p11-subtitle-title {
@@ -1902,6 +1922,24 @@ function handleSelect(item) {
     height: 100%;
     object-fit: cover;
   }
+.p11-content-box {
+  width: 100%;
+  height: 120vw;
+  aspect-ratio:initial;
+  background-color: #ffe3bb;
+  background-size: auto 85vw;
+  background-position: 95% 100%;
+}
+.p11 .box{top: 6vw;left: 0;right: 0;
+  margin: auto;padding:4.4vw 0 0 0 ;
+  width:calc(315 * 100vw / 375);aspect-ratio: 315 / 173;}
+.p11 .box .icon{margin:0 auto 3.2vw;}
+.p11 .pics{display: flex;position: relative;margin: 0 0 -8vw 5vw;gap: 1vw;width: 87vw;}
+.p11 .pic{position: relative;}
+.p11 .pic img{height: 35vw;}
+.p11 .pic .c{position: absolute;left: 0.5em;bottom: 0.5em;color: #fff;}
+
+
   :global(html) {
   font-size: calc(100vw * 14 / 375);/* clamp(14px, 0.8vw + 0.5rem, 18px); */
 }
