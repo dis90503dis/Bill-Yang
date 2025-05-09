@@ -64,7 +64,7 @@ const formData = reactive({
   area: "",
   msg: "",
 })
-
+const caseName = "東泥大院"
 const roomTypeList = ref(["一房一廳", "兩房一廳", "三房兩廳", "四房以上"])
 const areaList = ref([])
 const recaptchaToken = inject("recaptchaToken")
@@ -132,7 +132,18 @@ const send = () => {
     sending.value = true
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbyQKCOhxPqCrLXWdxsAaAH06Zwz_p6mZ5swK80USQ/exec?name=${formData.name}&phone=${formData.phone}&msg=${formData.msg}&room_type=${formData.room_type}&cityarea=${formData.city}${formData.area}&utm_source=${utmSource}&utm_medium=${utmMedium}&utm_content=${utmContent}&utm_campaign=${utmCampaign}&date=${date}`,
+      `https://script.google.com/macros/s/AKfycbyQKCOhxPqCrLXWdxsAaAH06Zwz_p6mZ5swK80USQ/exec
+      ?name=${formData.name}
+      &phone=${formData.phone}
+      &msg=${formData.msg}
+      &room_type=${formData.room_type}
+      &cityarea=${formData.city}${formData.area}
+      &utm_source=${utmSource}
+      &utm_medium=${utmMedium}
+      &utm_content=${utmContent}
+      &utm_campaign=${utmCampaign}
+      &date=${date}
+      &campaign_name=${caseName}`,
       {
         method: "GET",
       }
