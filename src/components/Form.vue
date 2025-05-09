@@ -112,6 +112,7 @@ const send = () => {
   presend.append("utm_medium", utmMedium)
   presend.append("utm_content", utmContent)
   presend.append("utm_campaign", utmCampaign)
+  presend.append("case_code", "hm03")
   console.log(Object.fromEntries(presend.entries()))
   if (unfill.length > 0) {
     pass = false
