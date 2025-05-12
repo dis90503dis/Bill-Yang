@@ -24,7 +24,7 @@ export default {
         /*
         */
     ],
-    gtmCode: ["GTM-TV9XVPJL"], // 可放置多個 客戶提供
+    gtmCode: ["GTM-T6SMKHM"], // 可放置多個 客戶提供
     recaptcha_site_key_v2: "6Lep-78UAAAAAMaZLtddpvpixEb8cqu7v7758gLz", //主1
     //recaptcha_site_key_v2: "6LfGUjEaAAAAANYvhZQx5imGm23pRt0V-rOvkpNC", //主2
     //recaptcha_site_key_v2: "6LdbrqAmAAAAAPj2D_6cBbflea1livK9Uud4FGmN", //主3

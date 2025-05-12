@@ -64,7 +64,6 @@ const formData = reactive({
   area: "",
   msg: "",
 })
-const caseName = "東泥大院"
 const roomTypeList = ref(["一房一廳", "兩房一廳", "三房兩廳", "四房以上"])
 const areaList = ref([])
 const recaptchaToken = inject("recaptchaToken")
@@ -113,6 +112,7 @@ const send = () => {
   presend.append("utm_content", utmContent)
   presend.append("utm_campaign", utmCampaign)
   presend.append("case_code", "hm03")
+  presend.append("message", formData.msg)
   console.log(Object.fromEntries(presend.entries()))
   if (unfill.length > 0) {
     pass = false
@@ -132,8 +132,7 @@ const send = () => {
     sending.value = true
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbyQKCOhxPqCrLXWdxsAaAH06Zwz_p6mZ5swK80USQ/exec
-      ?name=${formData.name}
+      `https://script.google.com/macros/s/AKfycbyQKCOhxPqCrLXWdxsAaAH06Zwz_p6mZ5swK80USQ/exec?name=${formData.name}
       &phone=${formData.phone}
       &msg=${formData.msg}
       &room_type=${formData.room_type}
@@ -143,13 +142,13 @@ const send = () => {
       &utm_content=${utmContent}
       &utm_campaign=${utmCampaign}
       &date=${date}
-      &campaign_name=${caseName}`,
+      &campaign_name=東泥大院`,
       {
         method: "GET",
       }
     )
 
-    fetch("https://service-sys.lixin.com.tw/reserve/d981d280-ee08-403b-99cc-9c7e74fe765d", {
+    fetch("https://service-sys.lixin.com.tw/reserve/f0c632c9-2185-4148-9801-e6322e173e5c", {
       method: "POST",
       body: presend,
     }).then((response) => {

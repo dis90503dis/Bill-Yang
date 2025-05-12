@@ -8,6 +8,22 @@ import ContactInfo from "./components/contactInfo.vue"
 import PolicyAgreement from "./components/PolicyAgreement.vue"
 import SidebarMenu from "./components/SidebarMenu.vue"
 
+/*
+import { createApp } from 'vue'
+import App from './App.vue'
+import VueGtm from 'vue-gtm'
+
+const app = createApp(App)
+
+app.use(VueGtm, {
+  id: 'GTM-T6SMKHM', // 替換為你的 GTM ID
+  enabled: true,
+  debug: false,
+  vueRouter: router, // 若有使用 Vue Router，提供以支援 SPA 路由追蹤
+})
+
+app.mount('#app')
+*/
 const formRef = ref(null)
 import AOS from "aos"
 
@@ -247,6 +263,7 @@ function handleSelect(item) {
 }
 </script>
 <template>
+  <div ref="gtmNoScript" ></div>
   <div class="bgcblabk d_flex" v-if="websiteStatus == 'FormThanks'">
     <div>感謝您的預約</div>
     <button @click="websiteStatus=''">回首頁</button>
