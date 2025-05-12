@@ -146,7 +146,8 @@ const go = () => {
     setTimeout(() => {
       emit('FormThanks','PhoneThanks')
     }, 1000);
-    window.location.href = `tel:${info.phone.replace("-", "")}`;
+   // window.location.href = `tel:${info.phone.replace("-", "")}`;
+    window.open(info.phone);
   } else if (modalType.value == 'messenger') {
     window.open(info.fbMessage);
   } else if (modalType.value == 'fb') {

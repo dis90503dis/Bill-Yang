@@ -10,10 +10,10 @@ export default {
     address2: "接待中心",//map點下確認的--- 如空白會顯示"導航地址"
     address: "733台南市東山區東仁街83號",
     googleSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.8788198372845!2d120.40056159999999!3d23.320155099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e8f19157aeaad%3A0xcea1f82d1135ec56!2z5p2x5rOl5aSn6Zmi!5e0!3m2!1szh-TW!2stw!4v1745563836634!5m2!1szh-TW!2stw",
-    googleLink: "https://maps.app.goo.gl/qh6dNEtxRpyQc6sdA",
-    phone: "(06)6800-123",
-    fbLink: "https://www.facebook.com/61570915381930/",
-    fbMessage: "https://m.me/61570915381930/",
+    googleLink: "https://hw-dm.com/dndl_gmp_edm",
+    phone: "https://hw-dm.com/dndl_tel_edm",
+    fbLink: "https://hw-dm.com/dndl-fb-edm",
+    fbMessage: "https://hw-dm.com/dndl_fbms_edm",
     caseName: caseName,
     houseInfos: [
         ["興建投資", "頂誠建設有限公司"],
